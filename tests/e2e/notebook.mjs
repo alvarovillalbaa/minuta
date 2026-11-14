@@ -97,6 +97,19 @@ try {
     navigator.mediaDevices.getUserMedia = async (...args) => { const stream = await original(...args); window.__minutaProbe.tracks.push(...stream.getTracks()); return stream; };
   });
   const page = await open(ctx);
+  await run('Exact anonymous production assets', async () => {
+    const manifest = JSON.parse(await readFile('tests/fixtures/production-manifest.json', 'utf8'));
+    for (const expected of manifest) {
+      const path = expected.path === 'index.html' ? '/' : `/${expected.path}`;
+      const response = await ctx.request.get(origin + path), bytes = await response.body();
+      assert.equal(response.status(), 200, path); assert.equal(bytes.length, expected.bytes, path); assert.equal(sha(bytes), expected.sha256, path);
+      const type = response.headers()['content-type'] || '';
+      const row = { path, status: response.status(), type, bytes: bytes.length, sha256: sha(bytes), explicitAnonymousAssetCheck: true };
+      if (/text|javascript|json|svg/.test(type)) { const name = sha(Buffer.from(path)).slice(0, 16) + '.body.gz'; await writeFile(join(out, 'http', name), gzipSync(bytes, { mtime: 0 })); row.body = name; }
+      bodies.set(path, row); await response.dispose();
+    }
+    return { files: manifest.length, bytes: manifest.reduce((sum, row) => sum + row.bytes, 0) };
+  });
   await run('B04 authored fake microphone through actual worklet', async () => {
     await page.locator('#record').click(); await page.waitForFunction(() => window.__minutaProbe.contexts.some(c => c.state === 'running'));
     await page.waitForTimeout(2500); await page.locator('#stop-record').click(); await page.locator('#audio-ready').waitFor();
@@ -215,7 +228,9 @@ finally {
   result.requests = requests;
   const uploads = requests.filter(r => !['GET', 'HEAD'].includes(r.method) || r.bodyBytes);
   result.noUploadRequests = uploads.length === 0;
-  if (uploads.length || result.errors.length) result.passed = false;
+  const unexpectedModelRevisions = requests.filter(r => r.url.includes('huggingface.co/') && r.url.includes('/resolve/') && !modelManifest.models.some(m => r.url.includes(`/${m.id}/resolve/${m.revision}/`)));
+  result.pinnedModelRequests = unexpectedModelRevisions.length === 0;
+  if (uploads.length || result.errors.length || unexpectedModelRevisions.length) result.passed = false;
   for (const ctx of contexts) { try { await ctx.close(); } catch (error) { result.teardown.contextError = String(error); } }
   if (browser) { await browser.close(); result.teardown.browserDisconnected = !browser.isConnected(); }
   result.teardown.contextsClosed = contexts.length;
