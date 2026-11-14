@@ -67,7 +67,14 @@ async function records(page) { return page.evaluate(() => new Promise((resolve, 
 async function openSaved(page, title) { await page.locator('.meeting-open').filter({ has: page.getByText(title, { exact: true }) }).click(); if (await page.locator('#replace-dialog').isVisible()) await page.locator('#replace-current').click(); await assert.doesNotReject(() => page.waitForFunction(title => document.querySelector('#meeting-title').value === title, title)); }
 async function run(name, action) {
   const row = { name, passed: false, started: new Date().toISOString() }; result.cases.push(row); console.log(`START ${name}`);
-  try { Object.assign(row, await action()); row.passed = true; } catch (error) { row.error = String(error.stack || error); throw error; }
+  try { Object.assign(row, await action()); row.passed = true; } catch (error) {
+    row.error = String(error.stack || error);
+    row.ui = [];
+    for (const ctx of contexts) for (const page of ctx.pages()) {
+      try { row.ui.push(await page.evaluate(() => ({ url: location.origin + location.pathname, status: document.querySelector('#status')?.textContent, diagnostic: document.querySelector('#ai-detail')?.textContent, recording: !document.querySelector('#stop-record')?.hidden }))); await page.screenshot({ path: join(out, `failure-${result.cases.length}-${row.ui.length}.png`), fullPage: true }); } catch {}
+    }
+    throw error;
+  }
   finally { row.finished = new Date().toISOString(); await writeFile(join(out, 'browser-result.json'), JSON.stringify(result, null, 2)); console.log(JSON.stringify(row)); }
 }
 const words = text => text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\p{L}\p{N}]+/gu, ' ').trim().split(/\s+/);
@@ -93,8 +100,10 @@ try {
     window.Worker = class extends WorkerBase { constructor(...args) { super(...args); this.addEventListener('message', event => { if (event.data?.type === 'result' || event.data?.type === 'error') window.__minutaProbe.events.push(event.data); }); } };
     const ContextBase = window.AudioContext;
     window.AudioContext = class extends ContextBase { constructor(...args) { super(...args); window.__minutaProbe.contexts.push(this); } };
-    const original = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
-    navigator.mediaDevices.getUserMedia = async (...args) => { const stream = await original(...args); window.__minutaProbe.tracks.push(...stream.getTracks()); return stream; };
+    if (navigator.mediaDevices?.getUserMedia) {
+      const original = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
+      navigator.mediaDevices.getUserMedia = async (...args) => { const stream = await original(...args); window.__minutaProbe.tracks.push(...stream.getTracks()); return stream; };
+    }
   });
   const page = await open(ctx);
   await run('Exact anonymous production assets', async () => {
@@ -111,7 +120,7 @@ try {
     return { files: manifest.length, bytes: manifest.reduce((sum, row) => sum + row.bytes, 0) };
   });
   await run('B04 authored fake microphone through actual worklet', async () => {
-    await page.locator('#record').click(); await page.waitForFunction(() => window.__minutaProbe.contexts.some(c => c.state === 'running'));
+    await page.locator('#record').click(); await page.waitForFunction(() => document.querySelector('#status').textContent.includes('Grabando.'));
     await page.waitForTimeout(2500); await page.locator('#stop-record').click(); await page.locator('#audio-ready').waitFor();
     await page.locator('#open-downloads').click(); const bytes = await exportFile(page, '#export-audio', 'captured-microphone.wav'); await page.locator('#downloads-dialog .close-dialog').click();
     const decoded = decodeWav(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength));

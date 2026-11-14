@@ -1,0 +1,153 @@
+{
+  "passed": false,
+  "deployment": {
+    "url": "https://minuta-liard.vercel.app",
+    "sha": "c8aade654d08859295de48673ba4719daf73090d"
+  },
+  "cases": [
+    {
+      "name": "Exact anonymous production assets",
+      "passed": true,
+      "started": "2026-11-14T09:11:43.560Z",
+      "files": 11,
+      "bytes": 55346708,
+      "finished": "2026-11-14T09:11:45.805Z"
+    },
+    {
+      "name": "B04 authored fake microphone through actual worklet",
+      "passed": false,
+      "started": "2026-11-14T09:11:45.815Z",
+      "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#stop-record')\n    - locator resolved to <button hidden=\"\" id=\"stop-record\" class=\"button stop-button\">■ Terminar grabación</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    52 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n    - waiting for element to be visible, enabled and stable\n\n    at /private/var/folders/2s/vty41l455yv698g4xkgfv7z00000gn/T/minuta-qualification-rm4emzde/source/tests/e2e/notebook.mjs:115:73\n    at async run (/private/var/folders/2s/vty41l455yv698g4xkgfv7z00000gn/T/minuta-qualification-rm4emzde/source/tests/e2e/notebook.mjs:70:28)\n    at async file:///private/var/folders/2s/vty41l455yv698g4xkgfv7z00000gn/T/minuta-qualification-rm4emzde/source/tests/e2e/notebook.mjs:113:3",
+      "finished": "2026-11-14T09:12:18.969Z"
+    }
+  ],
+  "models": [],
+  "requests": [
+    {
+      "url": "https://minuta-liard.vercel.app/",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://minuta-liard.vercel.app/assets/index-DoIO3eFk.js",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://minuta-liard.vercel.app/assets/index-DD0htT_G.css",
+      "method": "GET",
+      "bodyBytes": 0
+    }
+  ],
+  "errors": [
+    "TypeError: Cannot read properties of undefined (reading 'getUserMedia')"
+  ],
+  "console": [],
+  "publicBodies": [
+    {
+      "path": "/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 10559,
+      "sha256": "a909b71932d731179e990846994498d5006a07f7bd98fb15a7c068d6eac68790",
+      "explicitAnonymousAssetCheck": true,
+      "body": "8a5edab282632443.body.gz"
+    },
+    {
+      "path": "/assets/index-DD0htT_G.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 11738,
+      "sha256": "258e6bf10c861b799644fb904d92d47c88face1077c8eabfbb151e31fd548196",
+      "explicitAnonymousAssetCheck": true,
+      "body": "8003eca9660fe623.body.gz"
+    },
+    {
+      "path": "/assets/index-DoIO3eFk.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 28891,
+      "sha256": "5d486c1672746bfc56c39b5bbe049e142d8caaa8d42e30646b75190d50be74e7",
+      "explicitAnonymousAssetCheck": true,
+      "body": "40d018152f9cfa20.body.gz"
+    },
+    {
+      "path": "/assets/ai.worker-8R4t3x6d.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 892020,
+      "sha256": "d45fc8ec18ab7eab811e14bc4de776d5e05d11ebd1069f3a779f1255281a25ea",
+      "explicitAnonymousAssetCheck": true,
+      "body": "f33b6bb1788e1e0a.body.gz"
+    },
+    {
+      "path": "/assets/ort-wasm-simd-threaded.jsep-B0T3yYHD.wasm",
+      "status": 200,
+      "type": "application/wasm",
+      "bytes": 21596019,
+      "sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39",
+      "explicitAnonymousAssetCheck": true
+    },
+    {
+      "path": "/icon.svg",
+      "status": 200,
+      "type": "image/svg+xml",
+      "bytes": 194,
+      "sha256": "dfdf6dd5113591d8210063fbe39d42280d626f1e097966be8022dfc37fcbf15e",
+      "explicitAnonymousAssetCheck": true,
+      "body": "a2e3916dbd95d51c.body.gz"
+    },
+    {
+      "path": "/third-party-licenses.txt",
+      "status": 200,
+      "type": "text/plain; charset=utf-8",
+      "bytes": 12521,
+      "sha256": "905e9cd2a32e62f5f647a1cb7431e7cb92047b99403b2019249a108d36c920bf",
+      "explicitAnonymousAssetCheck": true,
+      "body": "8d677d9bf083fe03.body.gz"
+    },
+    {
+      "path": "/wasm/ort-wasm-simd-threaded.jsep.mjs",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 44484,
+      "sha256": "08fb86ec433c78bfb032c5d84a68b8e8e5a8d81268fa39e24314179a5767a5b9",
+      "explicitAnonymousAssetCheck": true,
+      "body": "73fee1a0908d784d.body.gz"
+    },
+    {
+      "path": "/wasm/ort-wasm-simd-threaded.jsep.wasm",
+      "status": 200,
+      "type": "application/wasm",
+      "bytes": 21596019,
+      "sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39",
+      "explicitAnonymousAssetCheck": true
+    },
+    {
+      "path": "/wasm/ort-wasm-simd-threaded.mjs",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 20856,
+      "sha256": "43c25054b6b9ac000f786c65545ff83a45f871e0e310e8c2f4d48a363bb66db4",
+      "explicitAnonymousAssetCheck": true,
+      "body": "0d235e724fdc3f10.body.gz"
+    },
+    {
+      "path": "/wasm/ort-wasm-simd-threaded.wasm",
+      "status": 200,
+      "type": "application/wasm",
+      "bytes": 11133407,
+      "sha256": "f061472c6e77d6d50d079aacdc0ff9b63fee287ddd2cbf46cf62438d3891de2b",
+      "explicitAnonymousAssetCheck": true
+    }
+  ],
+  "teardown": {
+    "browserDisconnected": true,
+    "contextsClosed": 1
+  },
+  "browser": "141.0.7390.37",
+  "node": "v24.22.2",
+  "failure": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('#stop-record')\n    - locator resolved to <button hidden=\"\" id=\"stop-record\" class=\"button stop-button\">■ Terminar grabación</button>\n  - attempting click action\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n    - waiting 20ms\n    2 × waiting for element to be visible, enabled and stable\n      - element is not visible\n    - retrying click action\n      - waiting 100ms\n    52 × waiting for element to be visible, enabled and stable\n       - element is not visible\n     - retrying click action\n       - waiting 500ms\n    - waiting for element to be visible, enabled and stable\n\n    at /private/var/folders/2s/vty41l455yv698g4xkgfv7z00000gn/T/minuta-qualification-rm4emzde/source/tests/e2e/notebook.mjs:115:73\n    at async run (/private/var/folders/2s/vty41l455yv698g4xkgfv7z00000gn/T/minuta-qualification-rm4emzde/source/tests/e2e/notebook.mjs:70:28)\n    at async file:///private/var/folders/2s/vty41l455yv698g4xkgfv7z00000gn/T/minuta-qualification-rm4emzde/source/tests/e2e/notebook.mjs:113:3",
+  "noUploadRequests": true,
+  "pinnedModelRequests": true
+}

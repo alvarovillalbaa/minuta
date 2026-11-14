@@ -1,0 +1,30 @@
+{
+  "cohort": "authored-speech-v1",
+  "voices": [
+    {
+      "id": "english",
+      "voice": "Albert",
+      "locale": "en_US",
+      "bytes": 420036,
+      "sha256": "45c98b2789f89f042d2de8180b82ba88bae7c77c563ba17387c0f498b7d75751",
+      "sampleRate": 16000,
+      "channels": 1,
+      "sampleWidth": 2,
+      "frames": 207970,
+      "seconds": 12.998125
+    },
+    {
+      "id": "spanish",
+      "voice": "Eddy (Spanish (Spain))",
+      "locale": "es_ES",
+      "bytes": 375250,
+      "sha256": "e757ecb442137b4704887ffa6d2fbfc37bf65d704d9ac2d4b0082c987a11c969",
+      "sampleRate": 16000,
+      "channels": 1,
+      "sampleWidth": 2,
+      "frames": 185577,
+      "seconds": 11.5985625
+    }
+  ],
+  "completedBeforeInference": true
+}

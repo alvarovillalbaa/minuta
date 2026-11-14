@@ -4,10 +4,22 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import wave
 
 output = Path(os.environ["MINUTA_OUTPUT"])
+frozen = Path("tests/fixtures/speech-v1")
+if (frozen / "speech-manifest.json").exists():
+    manifest = json.loads((frozen / "speech-manifest.json").read_text())
+    for item in manifest["voices"]:
+        path = frozen / (item["id"] + ".wav")
+        assert path.stat().st_size == item["bytes"] and hashlib.sha256(path.read_bytes()).hexdigest() == item["sha256"]
+        shutil.copyfile(path, output / path.name)
+    for name in ("speech-manifest.json", "voice-catalog.txt"):
+        shutil.copyfile(frozen / name, output / name)
+    print(json.dumps({"reusedFrozenOriginals": True, "manifest": manifest}))
+    raise SystemExit(0)
 catalog = subprocess.check_output(["/usr/bin/say", "-v", "?"]).decode()
 (output / "voice-catalog.txt").write_text(catalog)
 fixtures = json.loads(Path("tests/fixtures/speech.json").read_text())
