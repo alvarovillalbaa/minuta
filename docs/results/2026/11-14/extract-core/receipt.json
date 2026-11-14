@@ -1,0 +1,8 @@
+{
+  "argv": [
+    "node",
+    "--test",
+    "tests/unit/extract.test.mjs"
+  ],
+  "exit": 1
+}

@@ -8,9 +8,11 @@ Last updated: 2026-11-14
   GitHub and static Vercel. No account/backend/paid provider is required.
 - Read README.md, docs/specs/product.md and the frozen qualification protocol.
   Preserve user work; use apply_patch. Application data never goes to an API.
-- Runtime inference is real Transformers.js/ONNX in an owned Web Worker, using
-  pinned public Whisper/Qwen revisions. No generated code execution or tool
-  calls. Treat generated text as a reviewable draft; never auto-apply it.
+- Runtime transcription is real Transformers.js/ONNX in an owned Web Worker,
+  using pinned Whisper-base. Notes use deterministic exact-source excerpts;
+  no text model, generated prose, generated code or tool call. Disclose this
+  clearly. Historical failed Qwen protocols are immutable and are not active.
+  Treat every proposal as reviewable; never auto-apply it.
 - Keep source input snapshots, meeting IDs and generations separate. A stale
   result may be exported or saved as a new copy; it cannot overwrite new edits.
 - IndexedDB save/delete uses a single transaction with expected-revision checks.

@@ -132,7 +132,8 @@ function askAI(kind) {
   if (job || proposal || captureBusy) return;
   try { readFields(); if (kind === 'voice' && !audio) throw new Error('Graba o abre un WAV antes de transcribir.'); if (kind === 'notes' && !meeting.notes.trim() && !meeting.transcript.trim()) throw new Error('Escribe unas notas o añade una transcripción.'); }
   catch (error) { message(error.message, true); return; }
-  if (!consent) { pendingConsent = kind; show($('consent-dialog')); } else startAI(kind);
+  if (kind === 'notes') startAI(kind);
+  else if (!consent) { pendingConsent = kind; show($('consent-dialog')); } else startAI(kind);
 }
 $('transcribe').addEventListener('click', () => askAI('voice')); $('generate-notes').addEventListener('click', () => askAI('notes'));
 $('cancel-consent').addEventListener('click', () => { pendingConsent = null; $('consent-dialog').close(); });
@@ -165,7 +166,7 @@ $('cancel-job').addEventListener('click', () => cancelJob('IA cancelada. El cuad
 function openProposal() {
   if (!proposal) return;
   $('proposal-text').value = proposal.text;
-  $('proposal-description').textContent = proposal.kind === 'voice' ? 'Transcripción propuesta. Comprueba nombres y palabras antes de copiarla a tu conversación.' : 'Notas propuestas a partir del texto que había al empezar. Revisa acuerdos, responsables y fechas.';
+  $('proposal-description').textContent = proposal.kind === 'voice' ? 'Transcripción propuesta. Comprueba nombres y palabras antes de copiarla a tu conversación.' : `Extracto literal de ${proposal.meta.selectedCount} de ${proposal.meta.totalUnits} fragmentos. La clasificación usa reglas; revisa el contexto y conserva la fuente completa.`;
   const stale = invalidFields || editGeneration !== proposal.editGeneration || meeting.id !== proposal.snapshot.id || stamp() !== proposal.stamp;
   $('apply-proposal').disabled = stale;
   $('proposal-state').textContent = stale ? 'La conversación cambió mientras trabajaba la IA. El borrador no puede sustituir tus cambios; puedes descargarlo o guardarlo como una copia.' : 'Solo se aplicará el texto que tú ves y revisas aquí.';
@@ -180,7 +181,7 @@ $('apply-proposal').addEventListener('click', () => {
 $('copy-proposal').addEventListener('click', async () => {
   if (!proposal) return;
   const captured = proposal, field = captured.kind === 'voice' ? 'transcript' : 'summary', now = new Date().toISOString();
-  try { const next = validateMeeting({ ...captured.snapshot, id: crypto.randomUUID(), revision: 0, title: `${captured.snapshot.title.slice(0, 98)} — borrador IA`, createdAt: now, updatedAt: now, [field]: $('proposal-text').value }); await saveMeeting(next, captured.snapshotAudio, null); await refreshLibrary(); message('Copia guardada. El borrador abierto no cambia.'); } catch (error) { message(error.message, true); }
+  try { const next = validateMeeting({ ...captured.snapshot, id: crypto.randomUUID(), revision: 0, title: `${captured.snapshot.title.slice(0, 98)} — ${captured.kind === 'voice' ? 'transcripción' : 'extracto'}`, createdAt: now, updatedAt: now, [field]: $('proposal-text').value }); await saveMeeting(next, captured.snapshotAudio, null); await refreshLibrary(); message('Copia guardada. El borrador abierto no cambia.'); } catch (error) { message(error.message, true); }
 });
 $('download-proposal').addEventListener('click', () => { if (proposal) download(new Blob([$('proposal-text').value], { type: 'text/plain;charset=utf-8' }), `minuta-borrador-${proposal.kind}.txt`); });
 $('discard-proposal').addEventListener('click', () => { proposal = null; $('proposal-dialog').close(); refresh(); message('Borrador de IA descartado. Tus notas no cambian.'); });

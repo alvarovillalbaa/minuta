@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "node",
+    "--test",
+    "--test-name-pattern",
+    "E01|E02|E03",
+    "tests/unit/extract.test.mjs"
+  ],
+  "exit": 0,
+  "reason": "Unicode word boundary in accented Spanish verbs; only classification cases repeated"
+}

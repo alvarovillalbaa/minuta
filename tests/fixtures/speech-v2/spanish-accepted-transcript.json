@@ -1,0 +1,16 @@
+{
+  "schema": "minuta.notes",
+  "version": 1,
+  "includesAudio": false,
+  "meeting": {
+    "id": "3709ade0-657f-4bf0-bd98-c0dfea21544f",
+    "revision": 1,
+    "title": "Speech spanish",
+    "createdAt": "2026-11-14T09:29:18.353Z",
+    "updatedAt": "2026-11-14T09:29:26.741Z",
+    "language": "spanish",
+    "notes": "Revisar las entregas.",
+    "transcript": "El equipo publicará el informe del martes, clara revisar a las cifras, Pedro comprobará la versión móvil, el presupuesto todavía no está aprobado.",
+    "summary": ""
+  }
+}

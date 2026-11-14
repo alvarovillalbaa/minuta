@@ -2,7 +2,6 @@ export const LIMITS = Object.freeze({ audioBytes: 128 * 1024 * 1024, seconds: 36
 export const MODEL_CACHE = 'minuta-models-v1';
 export const MODELS = Object.freeze({
   voice: { id: 'Xenova/whisper-base', revision: '64da57285918e20ea79ea5c88eed7197933abaa8', dtype: 'q8' },
-  notes: { id: 'onnx-community/Qwen2.5-0.5B-Instruct', revision: '22942cb7d7ba4cc81bb4673549ca4d4614469b5e', dtype: 'q8' },
 });
 export const PROMPT_VERSION = 'meeting-draft-v1';
 export const clone = value => JSON.parse(JSON.stringify(value));
@@ -56,6 +55,8 @@ export function chunkText(text, limit = 2600) {
   if (remaining.length) result.push(remaining);
   return result;
 }
+// Historical v1 prompt contract, retained for its frozen tests/receipts only.
+// Production notes use extract.mjs and never call this prompt or a text model.
 export function generationMessages(language, notes, transcript, phase = 'final') {
   if (!['spanish', 'english'].includes(language) || typeof notes !== 'string' || typeof transcript !== 'string') throw new Error('La entrada de IA no es válida.');
   return [

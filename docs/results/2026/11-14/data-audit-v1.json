@@ -1,0 +1,77 @@
+{
+  "archives": [
+    {
+      "archive": "docs/results/2026/11-14/browser-43579346484/original.zip",
+      "bytes": 836636,
+      "sha256": "1023f59056f1662f5073b032f71096bc850b97c6ea3c70d75dbdaa094587e982",
+      "originalPassed": false,
+      "streamsVerified": 12,
+      "gzipHttpBodiesVerified": 8,
+      "sourceGuard": true,
+      "ownedCleanup": true
+    },
+    {
+      "archive": "docs/results/2026/11-14/browser-43579983642/original.zip",
+      "bytes": 1049023,
+      "sha256": "85e57c214b8a6bc5f75dc880794137de85c3e7e8ac48be5fc0dfec3f6b3425fa",
+      "originalPassed": false,
+      "streamsVerified": 12,
+      "gzipHttpBodiesVerified": 9,
+      "sourceGuard": true,
+      "ownedCleanup": true
+    },
+    {
+      "archive": "docs/results/2026/11-14/build-43578230691/original.zip",
+      "bytes": 20266,
+      "sha256": "ba6f661689c31ce3a71157fd0aedd49343aa73418a6e5480559127ce8c879ef6",
+      "originalPassed": false,
+      "streamsVerified": 8,
+      "gzipHttpBodiesVerified": 0,
+      "sourceGuard": true,
+      "ownedCleanup": true
+    },
+    {
+      "archive": "docs/results/2026/11-14/build-43578713893/original.zip",
+      "bytes": 21988,
+      "sha256": "768582bfb76d1fffe4828b1fadefb9453dbfe57bab3c923c4af048d6aa11c0f9",
+      "originalPassed": true,
+      "streamsVerified": 8,
+      "gzipHttpBodiesVerified": 0,
+      "sourceGuard": true,
+      "ownedCleanup": true
+    },
+    {
+      "archive": "docs/results/2026/11-14/build-43579153766/original.zip",
+      "bytes": 22987,
+      "sha256": "37014fb915052d91e2f45d946b279598275eb24bd6ef531075c8161da9f42dca",
+      "originalPassed": true,
+      "streamsVerified": 8,
+      "gzipHttpBodiesVerified": 0,
+      "sourceGuard": true,
+      "ownedCleanup": true
+    },
+    {
+      "archive": "docs/results/2026/11-14/build-43579707491/original.zip",
+      "bytes": 24300,
+      "sha256": "cbc03c9d40b35df7bb8a96eae384667c79b9670ac80ec36412c7e0c13b6077e2",
+      "originalPassed": true,
+      "streamsVerified": 8,
+      "gzipHttpBodiesVerified": 0,
+      "sourceGuard": true,
+      "ownedCleanup": true
+    },
+    {
+      "archive": "docs/results/2026/11-14/build-43580480402/original.zip",
+      "bytes": 25641,
+      "sha256": "a2d33d1c8c70d3932acd5d57f6a222ad676e67232cd1d23a4f41c5e3f2f2f674",
+      "originalPassed": true,
+      "streamsVerified": 8,
+      "gzipHttpBodiesVerified": 0,
+      "sourceGuard": true,
+      "ownedCleanup": true
+    }
+  ],
+  "totalStreams": 64,
+  "totalHttpBodies": 17,
+  "note": "Data audit only; preserves negative results and does not establish unrun model or UI cases."
+}

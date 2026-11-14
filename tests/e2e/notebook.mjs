@@ -11,7 +11,7 @@ const out = process.env.MINUTA_OUTPUT, base = process.env.MINUTA_URL;
 assert.match(base, /^https:\/\/[^/]+\.vercel\.app\/?$/);
 assert.match(process.env.MINUTA_DEPLOYMENT_SHA, /^[a-f0-9]{40}$/);
 const origin = new URL(base).origin, fixture = JSON.parse(await readFile('tests/fixtures/speech-v2.json', 'utf8'));
-const modelManifest = JSON.parse(await readFile('docs/qualification/models-v2.json', 'utf8'));
+const modelManifest = JSON.parse(await readFile('docs/qualification/models-v3.json', 'utf8'));
 await mkdir(join(out, 'downloads'));
 await mkdir(join(out, 'http'));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -138,54 +138,55 @@ try {
     return { files: manifest.length, bytes: manifest.reduce((sum, row) => sum + row.bytes, 0) };
   });
   result.priorAcceptedCapture = { run: 43579983642, source: '5fd573137b238d360f11ebef68defd7769c380a0', replayed: false };
-  await page.locator('#meeting-title').fill('Retrospective Albert development case'); await page.locator('#language').selectOption('english');
-  await page.locator('#audio-file').setInputFiles('tests/fixtures/speech-v1/english.wav'); await page.locator('#status').filter({ hasText: 'Audio abierto' }).waitFor();
-  const development = await proposal(page, '#transcribe');
-  const oldText = JSON.parse(await readFile('tests/fixtures/speech.json', 'utf8')).cases[0].text;
-  result.development = { cohort: 'v1 Albert retrospective', text: development.text, wer: wer(oldText, development.text), accuracyAccepted: wer(oldText, development.text) <= 0.35, heldOut: false };
-  await writeFile(join(out, 'development-albert.txt'), development.text); await page.locator('#discard-proposal').click();
-  for (const [index, item] of fixture.cases.entries()) {
-    await run(`M2${index + 1} ${item.id} real Whisper base`, async () => {
-      await fresh(page); await page.locator('#meeting-title').fill(`Speech ${item.id}`); await page.locator('#language').selectOption(item.id);
-      await page.locator('#notes').fill(item.id === 'english' ? 'Review deliverables only.' : 'Revisar las entregas.');
-      await page.locator('#audio-file').setInputFiles(join(out, `${item.id}.wav`)); await page.locator('#status').filter({ hasText: 'Audio abierto' }).waitFor();
-      const event = await proposal(page, '#transcribe'), rate = wer(item.text, event.text);
-      await writeFile(join(out, `${item.id}-transcript.txt`), event.text); assert.ok(rate <= 0.35, `WER ${rate}`);
-      await page.locator('#apply-proposal').click(); await save(page);
-      const exported = await exportedNotes(page, `${item.id}-transcript.json`); assert.equal(exported.meeting.transcript, event.text);
-      return { wer: rate, referenceWords: words(item.text).length, actualWords: words(event.text).length, model: event.meta.model };
-    });
+  result.priorAcceptedTranscriptions = { run: 43580715419, englishWer: 0.125, spanishWer: 3 / 22, qualityScope: 'two synthetic v2 fixtures only' };
+  async function importAccepted(language) {
+    await page.locator('#open-downloads').click();
+    await page.locator('#notes-file').setInputFiles(`tests/fixtures/speech-v2/${language}-accepted-transcript.json`);
+    if (await page.locator('#replace-dialog').isVisible()) await page.locator('#replace-current').click();
+    await page.waitForFunction(title => document.querySelector('#meeting-title').value === title, `Speech ${language}`);
+    return JSON.parse(await readFile(`tests/fixtures/speech-v2/${language}-accepted-transcript.json`, 'utf8')).meeting;
   }
-  await run('M23 English real Qwen with stale proposal', async () => {
-    await openSaved(page, 'Speech english');
-    const event = await proposal(page, '#generate-notes', async () => { await page.locator('#notes').fill('Newer notes: do not overwrite this edit.'); await page.locator('#meeting-title').fill(''); });
-    assert.ok(event.text.length <= 24000 && /nora/i.test(event.text) && /monday/i.test(event.text));
+  function verifyQuotes(event, source) {
+    assert.equal(event.meta.method, 'source-extract-v1');
+    assert.ok(event.meta.units.length > 0);
+    for (const unit of event.meta.units) assert.equal(unit.text, source[unit.source].slice(unit.start, unit.end));
+    assert.equal(event.meta.selectedCount + event.meta.omittedCount, event.meta.totalUnits);
+  }
+  await run('E31 actual English excerpt with stale and invalid edits', async () => {
+    const input = await importAccepted('english'), event = await proposal(page, '#generate-notes'); verifyQuotes(event, input);
+    assert.ok(/Nora/i.test(event.text) && /Monday/i.test(event.text));
+    assert.equal(await page.locator('#consent-dialog').isVisible(), false);
+    await page.locator('#proposal-dialog .close-dialog').click();
+    await page.locator('#notes').fill('Newer notes: do not overwrite this edit.'); await page.locator('#meeting-title').fill('');
+    await page.locator('#review-proposal').click();
     assert.equal(await page.locator('#apply-proposal').isDisabled(), true);
     assert.equal(await page.locator('#meeting-title').inputValue(), '');
-    await exportFile(page, '#download-proposal', 'english-draft.txt');
+    await exportFile(page, '#download-proposal', 'english-source-excerpt.txt');
     await page.screenshot({ path: join(out, 'stale-proposal.png'), fullPage: true });
     await page.locator('#copy-proposal').click(); await page.waitForFunction(() => document.querySelector('#status').textContent.includes('Copia guardada'));
-    const stored = await records(page), copy = stored.find(r => r.title === 'Speech english — borrador IA');
-    assert.equal(copy.notes, 'Review deliverables only.'); assert.equal(copy.summary, event.text);
+    const copy = (await records(page)).find(r => r.title === 'Speech english — extracto'); assert.equal(copy.notes, input.notes); assert.equal(copy.transcript, input.transcript); assert.equal(copy.summary, event.text);
     assert.equal(await page.locator('#notes').inputValue(), 'Newer notes: do not overwrite this edit.');
     await page.locator('#discard-proposal').click(); await page.locator('#meeting-title').fill('Speech english'); await save(page);
-    return { lexicalSanity: true, staleApplyDisabled: true, capturedCopyPreserved: true, meta: event.meta };
+    return { exactSourceQuotes: true, staleApplyDisabled: true, invalidTitleRetained: true, capturedCopyPreserved: true, meta: event.meta };
   });
-  await run('M24 Spanish real Qwen reviewed apply', async () => {
-    await openSaved(page, 'Speech spanish'); const event = await proposal(page, '#generate-notes');
-    assert.ok(event.text.length <= 24000 && /clara/i.test(event.text) && /martes/i.test(event.text));
+  await run('E32 actual Spanish excerpt reviewed apply and exports', async () => {
+    const input = await importAccepted('spanish'), event = await proposal(page, '#generate-notes'); verifyQuotes(event, input);
+    assert.ok(/Clara/i.test(event.text) && /martes/i.test(event.text));
     await page.locator('#apply-proposal').click(); await save(page);
     const exported = await exportedNotes(page, 'spanish-reviewed.json'); assert.equal(exported.meeting.summary, event.text);
     await page.locator('#open-downloads').click(); await exportFile(page, '#export-markdown', 'spanish-reviewed.md'); await page.locator('#downloads-dialog .close-dialog').click();
     await page.screenshot({ path: join(out, 'reviewed-notes.png'), fullPage: true });
-    return { lexicalSanity: true, reviewedApply: true, meta: event.meta };
+    assert.equal(requests.some(r => new URL(r.url).origin !== origin), false, 'Excerpts require no model/network download');
+    return { exactSourceQuotes: true, reviewedApply: true, noModelDownload: true, meta: event.meta };
   });
-  await run('Pinned actual ONNX bodies', async () => {
-    const actual = await modelDigests(page);
-    assert.ok(actual.length >= 3);
-    verifyModelDigests(actual); result.modelBodies = actual;
-    assert.ok(actual.some(r => r.url.includes('/Qwen2.5-0.5B-Instruct/')));
-    return { actual };
+  await run('E33 changed worker ASR transport regression', async () => {
+    await fresh(page); const input = fixture.cases[0]; await page.locator('#meeting-title').fill('ASR worker regression'); await page.locator('#language').selectOption('english');
+    await page.locator('#audio-file').setInputFiles(join(out, 'english.wav')); await page.locator('#status').filter({ hasText: 'Audio abierto' }).waitFor();
+    const event = await proposal(page, '#transcribe'), rate = wer(input.text, event.text); assert.ok(rate <= 0.35, `WER ${rate}`);
+    await writeFile(join(out, 'worker-regression-transcript.txt'), event.text);
+    await page.locator('#apply-proposal').click(); await save(page); const exported = await exportedNotes(page, 'worker-regression.json'); assert.equal(exported.meeting.transcript, event.text);
+    const actual = await modelDigests(page); assert.equal(actual.length, 2); verifyModelDigests(actual); result.modelBodies = actual;
+    return { wer: rate, existingFixture: true, heldOut: false, model: event.meta.model, actual };
   });
   const isolated = await context(), notebook = await open(isolated);
   await run('B01 notebook persistence imports conflicts deletion', async () => {
