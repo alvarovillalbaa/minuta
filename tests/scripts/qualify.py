@@ -23,6 +23,7 @@ work.mkdir()
 env = dict(os.environ, npm_config_cache=str(scratch / "npm-cache"),
            PLAYWRIGHT_BROWSERS_PATH=str(scratch / "browsers"), TMPDIR=str(scratch / "tmp"))
 receipt = {"mode": os.environ["MINUTA_MODE"], "commands": [], "passed": False, "cleanup": False}
+deadline = time.monotonic() + 17 * 60
 
 def vector():
     names = subprocess.check_output(["git", "ls-files", "-z"], cwd=repo).split(b"\0")
@@ -39,6 +40,10 @@ for item in before:
     shutil.copyfile(repo / item["path"], destination)
 
 def execute(name, args, timeout):
+    remaining = int(deadline - time.monotonic() - 30)
+    if remaining < 1:
+        raise RuntimeError("Owned qualification deadline reached before " + name)
+    timeout = min(timeout, remaining)
     started = time.monotonic()
     process = subprocess.Popen(args, cwd=work, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True)
     timed_out = False
@@ -62,7 +67,7 @@ def execute(name, args, timeout):
         except ProcessLookupError:
             absent = True
             break
-    row = {"name": name, "argv": args, "exit": process.returncode, "timedOut": timed_out,
+    row = {"name": name, "argv": args, "exit": process.returncode, "timedOut": timed_out, "timeoutSeconds": timeout,
            "leaderReaped": process.poll() is not None, "groupAbsent": absent,
            "seconds": time.monotonic() - started, "stdoutBytes": len(stdout), "stderrBytes": len(stderr),
            "stdoutSha256": hashlib.sha256(stdout).hexdigest(), "stderrSha256": hashlib.sha256(stderr).hexdigest()}

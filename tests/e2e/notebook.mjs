@@ -206,7 +206,7 @@ try {
   });
   await run('B02 narrow layout and keyboard editor', async () => {
     const narrow = await context({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true }); const p = await open(narrow);
-    for (const width of [390, 320]) { await p.setViewportSize({ width, height: 844 }); assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth)); await p.locator('#notes').fill(`Narrow ${width}`); await p.locator('#open-downloads').click(); await p.locator('#downloads-dialog .close-dialog').click(); await p.screenshot({ path: join(out, `narrow-${width}.png`), fullPage: true }); }
+    for (const width of [390, 320]) { await p.setViewportSize({ width, height: 844 }); assert.ok(await p.evaluate(() => document.documentElement.scrollWidth <= innerWidth)); await p.locator('#notes').tap(); await p.locator('#notes').fill(`Narrow ${width}`); await p.locator('#open-downloads').tap(); await p.locator('#downloads-dialog .close-dialog').tap(); await p.screenshot({ path: join(out, `narrow-${width}.png`), fullPage: true }); }
     await p.locator('#tab-notes').focus(); await p.keyboard.press('ArrowRight'); assert.equal(await p.locator('#tab-summary').getAttribute('aria-selected'), 'true'); return { widths: [390, 320], touchContext: true, keyboardTabs: true };
   });
   await run('B03 malformed import corrupt records and simulated quota', async () => {

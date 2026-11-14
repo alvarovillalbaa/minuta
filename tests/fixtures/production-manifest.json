@@ -10,9 +10,9 @@
     "sha256": "258e6bf10c861b799644fb904d92d47c88face1077c8eabfbb151e31fd548196"
   },
   {
-    "path": "assets/index-Utp4pejV.js",
-    "bytes": 28571,
-    "sha256": "6272a83913282f1ff1fe501c3aebc8872f6472cf4126f37b339e909712bbf11a"
+    "path": "assets/index-DoIO3eFk.js",
+    "bytes": 28891,
+    "sha256": "5d486c1672746bfc56c39b5bbe049e142d8caaa8d42e30646b75190d50be74e7"
   },
   {
     "path": "assets/ort-wasm-simd-threaded.jsep-B0T3yYHD.wasm",
@@ -27,7 +27,7 @@
   {
     "path": "index.html",
     "bytes": 10559,
-    "sha256": "bf37ef64dd7b148b03a50cc7bb2781e249efbb5c6e73cf7e673dd62258fac195"
+    "sha256": "a909b71932d731179e990846994498d5006a07f7bd98fb15a7c068d6eac68790"
   },
   {
     "path": "third-party-licenses.txt",
