@@ -13,6 +13,9 @@ on:
       deployment_sha:
         type: string
         required: false
+      cases:
+        type: string
+        required: false
 permissions:
   contents: read
 jobs:
@@ -31,6 +34,7 @@ jobs:
           MINUTA_MODE: ${{ inputs.mode }}
           MINUTA_URL: ${{ inputs.url }}
           MINUTA_DEPLOYMENT_SHA: ${{ inputs.deployment_sha }}
+          MINUTA_CASES: ${{ inputs.cases }}
           MINUTA_OUTPUT: ${{ runner.temp }}/minuta-artifact
         run: python3 tests/scripts/qualify.py
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

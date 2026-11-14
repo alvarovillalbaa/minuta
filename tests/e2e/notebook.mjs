@@ -10,6 +10,7 @@ const { chromium } = await import(process.env.MINUTA_PLAYWRIGHT);
 const out = process.env.MINUTA_OUTPUT, base = process.env.MINUTA_URL;
 assert.match(base, /^https:\/\/[^/]+\.vercel\.app\/?$/);
 assert.match(process.env.MINUTA_DEPLOYMENT_SHA, /^[a-f0-9]{40}$/);
+assert.ok(process.env.MINUTA_EXPECTED_MANIFEST, 'Use the current locked scratch build manifest');
 const origin = new URL(base).origin, fixture = JSON.parse(await readFile('tests/fixtures/speech-v2.json', 'utf8'));
 const modelManifest = JSON.parse(await readFile('docs/qualification/models-v3.json', 'utf8'));
 await mkdir(join(out, 'downloads'));
@@ -17,6 +18,9 @@ await mkdir(join(out, 'http'));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const result = { passed: false, deployment: { url: base, sha: process.env.MINUTA_DEPLOYMENT_SHA }, cases: [], models: [], requests: [], errors: [], console: [], publicBodies: [], teardown: {} };
 const requests = [], bodies = new Map(), contexts = [], pendingResponses = [];
+const selected = new Set((process.env.MINUTA_CASES || 'E31,E32,E33,B01,B02,B03').split(','));
+assert.ok([...selected].every(name => ['E31', 'E32', 'E33', 'B01', 'B02', 'B03'].includes(name)));
+result.selected = [...selected];
 let browser, modelPage;
 function recordNetwork(context) {
   context.on('request', request => {
@@ -66,6 +70,7 @@ async function fresh(page) {
 async function records(page) { return page.evaluate(() => new Promise((resolve, reject) => { const request = indexedDB.open('minuta-local-v1', 1); request.onerror = () => reject(request.error); request.onsuccess = () => { const db = request.result, tx = db.transaction('meetings', 'readonly'), rows = tx.objectStore('meetings').getAll(); tx.oncomplete = () => { resolve(rows.result); db.close(); }; tx.onabort = () => reject(tx.error); }; })); }
 async function openSaved(page, title) { await page.locator('.meeting-open').filter({ has: page.getByText(title, { exact: true }) }).click(); if (await page.locator('#replace-dialog').isVisible()) await page.locator('#replace-current').click(); await assert.doesNotReject(() => page.waitForFunction(title => document.querySelector('#meeting-title').value === title, title)); }
 async function run(name, action) {
+  if (!name.startsWith('Exact ') && !selected.has(name.split(' ')[0])) return;
   const row = { name, passed: false, started: new Date().toISOString() }; result.cases.push(row); console.log(`START ${name}`);
   try { Object.assign(row, await action()); row.passed = true; } catch (error) {
     row.error = String(error.stack || error);
@@ -125,7 +130,7 @@ try {
   });
   const page = await open(ctx); modelPage = page;
   await run('Exact anonymous production assets', async () => {
-    const manifest = JSON.parse(await readFile('tests/fixtures/production-manifest.json', 'utf8'));
+    const manifest = JSON.parse(await readFile(process.env.MINUTA_EXPECTED_MANIFEST, 'utf8'));
     for (const expected of manifest) {
       const path = expected.path === 'index.html' ? '/' : `/${expected.path}`;
       const response = await ctx.request.get(origin + path), bytes = await response.body();
@@ -232,7 +237,7 @@ try {
     await p.locator('#save-meeting').click(); await p.locator('#status').filter({ hasText: 'No se ha reemplazado' }).waitFor(); await p.locator('#refresh-library').click(); await p.locator('#recover-records').waitFor(); const raw = JSON.parse(await exportFile(p, '#recover-records', 'recovery-raw.json')); assert.equal(raw.records[0].authoredCorruption, true); assert.equal(raw.records[0].notes, initial.meeting.notes);
     return { rejectedWav: true, rejectedJson: true, simulatedQuotaPreservedDraft: true, corruptRecordUnchanged: true, rawMetadataExport: true };
   });
-  result.passed = result.cases.every(c => c.passed);
+  result.passed = result.cases.every(c => c.passed) && result.cases.filter(c => selected.has(c.name.split(' ')[0])).length === selected.size;
 } catch (error) { result.failure = String(error.stack || error); console.error(error); }
 finally {
   if (modelPage && !result.modelBodies) {

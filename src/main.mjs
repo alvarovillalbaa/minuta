@@ -141,7 +141,7 @@ $('confirm-consent').addEventListener('click', () => { const kind = pendingConse
 function startAI(kind) {
   if (job || proposal || captureBusy) return;
   const snapshot = clone(meeting), snapshotAudio = audio, snapshotAudioVersion = audioVersion, snapshotStamp = stamp(), id = crypto.randomUUID();
-  job = { id, kind, snapshot, snapshotAudio, snapshotAudioVersion, stamp: snapshotStamp, editGeneration }; $('job-panel').hidden = false; $('job-progress').removeAttribute('value'); $('job-status').textContent = 'Preparando el modelo local…'; $('ai-detail').textContent = ''; refresh();
+  job = { id, kind, snapshot, snapshotAudio, snapshotAudioVersion, stamp: snapshotStamp, editGeneration }; $('job-panel').hidden = false; $('job-progress').removeAttribute('value'); $('job-status').textContent = kind === 'voice' ? 'Preparando la transcripción local…' : 'Preparando el extracto literal…'; $('ai-detail').textContent = ''; refresh();
   worker ||= new Worker(new URL('./ai.worker.mjs', import.meta.url), { type: 'module' });
   worker.onmessage = event => {
     if (!job || event.data.id !== job.id) return;
@@ -162,14 +162,14 @@ function startAI(kind) {
   worker.onerror = () => { cancelJob(); message('El motor local no ha podido continuar. Tu audio y tus notas se conservan.', true); };
   worker.postMessage({ id, kind, meeting: snapshot, blob: snapshotAudio });
 }
-$('cancel-job').addEventListener('click', () => cancelJob('IA cancelada. El cuaderno y el audio siguen abiertos.'));
+$('cancel-job').addEventListener('click', () => cancelJob('Proceso cancelado. El cuaderno y el audio siguen abiertos.'));
 function openProposal() {
   if (!proposal) return;
   $('proposal-text').value = proposal.text;
   $('proposal-description').textContent = proposal.kind === 'voice' ? 'Transcripción propuesta. Comprueba nombres y palabras antes de copiarla a tu conversación.' : `Extracto literal de ${proposal.meta.selectedCount} de ${proposal.meta.totalUnits} fragmentos. La clasificación usa reglas; revisa el contexto y conserva la fuente completa.`;
   const stale = invalidFields || editGeneration !== proposal.editGeneration || meeting.id !== proposal.snapshot.id || stamp() !== proposal.stamp;
   $('apply-proposal').disabled = stale;
-  $('proposal-state').textContent = stale ? 'La conversación cambió mientras trabajaba la IA. El borrador no puede sustituir tus cambios; puedes descargarlo o guardarlo como una copia.' : 'Solo se aplicará el texto que tú ves y revisas aquí.';
+  $('proposal-state').textContent = stale ? 'La conversación cambió desde que se preparó este borrador. No puede sustituir tus cambios; puedes descargarlo o guardarlo como una copia.' : 'Solo se aplicará el texto que tú ves y revisas aquí.';
   show($('proposal-dialog'));
 }
 $('review-proposal').addEventListener('click', openProposal);
@@ -184,7 +184,7 @@ $('copy-proposal').addEventListener('click', async () => {
   try { const next = validateMeeting({ ...captured.snapshot, id: crypto.randomUUID(), revision: 0, title: `${captured.snapshot.title.slice(0, 98)} — ${captured.kind === 'voice' ? 'transcripción' : 'extracto'}`, createdAt: now, updatedAt: now, [field]: $('proposal-text').value }); await saveMeeting(next, captured.snapshotAudio, null); await refreshLibrary(); message('Copia guardada. El borrador abierto no cambia.'); } catch (error) { message(error.message, true); }
 });
 $('download-proposal').addEventListener('click', () => { if (proposal) download(new Blob([$('proposal-text').value], { type: 'text/plain;charset=utf-8' }), `minuta-borrador-${proposal.kind}.txt`); });
-$('discard-proposal').addEventListener('click', () => { proposal = null; $('proposal-dialog').close(); refresh(); message('Borrador de IA descartado. Tus notas no cambian.'); });
+$('discard-proposal').addEventListener('click', () => { proposal = null; $('proposal-dialog').close(); refresh(); message('Borrador descartado. Tus notas no cambian.'); });
 
 $('open-downloads').addEventListener('click', () => { message('', false, $('download-status')); refresh(); show($('downloads-dialog')); });
 $('export-markdown').addEventListener('click', () => { try { readFields(); download(new Blob([markdown(meeting)], { type: 'text/markdown;charset=utf-8' }), filename('md')); } catch (error) { message(error.message, true, $('download-status')); } });

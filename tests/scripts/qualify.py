@@ -76,6 +76,12 @@ def execute(name, args, timeout, cwd=None):
     if process.returncode or timed_out or not absent:
         raise RuntimeError(f"{name} did not complete successfully")
 
+def record_build():
+    manifest = [{"path": p.relative_to(work / "dist").as_posix(), "bytes": p.stat().st_size,
+                 "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
+                for p in sorted((work / "dist").rglob("*")) if p.is_file()]
+    (output / "build-manifest.json").write_text(json.dumps(manifest, indent=2))
+
 try:
     execute("versions", ["node", "--version"], 10)
     execute("npm-version", ["npm", "--version"], 10)
@@ -83,11 +89,13 @@ try:
         execute("dependencies", ["npm", "ci" if (work / "package-lock.json").exists() else "install", "--ignore-scripts", "--no-audit", "--no-fund"], 300)
         shutil.copyfile(work / "package-lock.json", output / "package-lock.json")
         execute("build", ["npm", "run", "build"], 300)
-        manifest = [{"path": p.relative_to(work / "dist").as_posix(), "bytes": p.stat().st_size,
-                     "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
-                    for p in sorted((work / "dist").rglob("*")) if p.is_file()]
-        (output / "build-manifest.json").write_text(json.dumps(manifest, indent=2))
+        record_build()
     elif receipt["mode"] == "browser":
+        execute("dependencies", ["npm", "ci", "--ignore-scripts", "--no-audit", "--no-fund"], 300)
+        execute("build", ["npm", "run", "build"], 300)
+        record_build()
+        shutil.copyfile(work / "package-lock.json", output / "package-lock.json")
+        env["MINUTA_EXPECTED_MANIFEST"] = str(output / "build-manifest.json")
         tools = scratch / "tools"
         tools.mkdir()
         shutil.copyfile(work / "tests/fixtures/tools/package.json", tools / "package.json")
