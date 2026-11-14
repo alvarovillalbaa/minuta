@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "cohort": "authored-speech-v1",
+  "cases": [
+    { "id": "english", "voiceLocale": "en_US", "text": "The team agreed to launch the website on Friday. Ana will review the exported pictures. Luis will test the phone layout. Marta will write the release notes. We have not decided the price." },
+    { "id": "spanish", "voiceLocale": "es_ES", "text": "Hemos acordado publicar la página el viernes. Ana revisará las imágenes. Luis probará la página en el móvil. Marta escribirá las notas. Todavía no hemos decidido el precio." }
+  ]
+}

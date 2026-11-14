@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "runtime": "@huggingface/transformers@3.8.1",
+  "prompt": "meeting-draft-v1",
+  "device": "wasm",
+  "dtype": "q8",
+  "threads": 1,
+  "models": [
+    { "id": "Xenova/whisper-tiny", "revision": "5332fcc35e32a33b86612b9a57a89be7906102b1", "files": [
+      { "path": "onnx/encoder_model_quantized.onnx", "bytes": 10124910, "sha256": "fd9d995b9dcb0520f0dbf6cf68651af639fc385f594d9d876e69ca2802dc438e" },
+      { "path": "onnx/decoder_model_merged_quantized.onnx", "bytes": 30727765, "sha256": "6c0c125986b007d2e3734bec84c18bda0152071b90b87fadac6d7764499927a0" },
+      { "path": "onnx/decoder_model_quantized.onnx", "bytes": 30460101, "sha256": "d1ac41063dd0a01d278dca49214ff8ce1b930cc9e34e2881c56a79a428650534" },
+      { "path": "onnx/decoder_with_past_model_quantized.onnx", "bytes": 29229119, "sha256": "26d8d7fa7829644b22762c965351893c3fb992501ed1776d54f126530eafabf8" }
+    ] },
+    { "id": "onnx-community/Qwen2.5-0.5B-Instruct", "revision": "22942cb7d7ba4cc81bb4673549ca4d4614469b5e", "files": [
+      { "path": "onnx/model_quantized.onnx", "bytes": 512096557, "sha256": "41834041ab1b29eff9fc592f1a29a1844133aea35832ea9fa91682be13016100" }
+    ] }
+  ],
+  "hashSource": "Hugging Face pinned revision API tree LFS SHA-256 metadata, inspected before inference",
+  "note": "Whisper runtime selection is recorded; optional separate decoder variants need not all be downloaded. No weights are committed."
+}

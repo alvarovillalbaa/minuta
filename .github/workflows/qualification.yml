@@ -1,0 +1,42 @@
+name: Temporary Minuta qualification
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        type: choice
+        required: true
+        default: build
+        options: [build, browser]
+      url:
+        type: string
+        required: false
+      deployment_sha:
+        type: string
+        required: false
+permissions:
+  contents: read
+jobs:
+  qualification:
+    runs-on: ${{ inputs.mode == 'browser' && 'macos-14' || 'ubuntu-latest' }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.x'
+      - name: Owned qualification
+        env:
+          MINUTA_MODE: ${{ inputs.mode }}
+          MINUTA_URL: ${{ inputs.url }}
+          MINUTA_DEPLOYMENT_SHA: ${{ inputs.deployment_sha }}
+          MINUTA_OUTPUT: ${{ runner.temp }}/minuta-artifact
+        run: python3 tests/scripts/qualify.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: minuta-${{ inputs.mode }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/minuta-artifact
+          if-no-files-found: error
+          retention-days: 7

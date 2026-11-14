@@ -1,0 +1,19 @@
+[
+  {
+    "name": "syntax",
+    "argv": [
+      "npm",
+      "run",
+      "check"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "core",
+    "argv": [
+      "npm",
+      "test"
+    ],
+    "exit": 0
+  }
+]

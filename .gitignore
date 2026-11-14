@@ -1,0 +1,7 @@
+node_modules/
+dist/
+public/wasm/
+public/third-party-licenses.txt
+.vercel/
+tests/tmp/
+.DS_Store
