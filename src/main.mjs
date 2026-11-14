@@ -7,15 +7,17 @@ import { listMeetings, loadMeeting, saveMeeting, deleteMeeting, rawRecords } fro
 const $ = id => document.getElementById(id);
 let meeting = emptyMeeting(), audio = null, audioUrl = null, audioVersion = 0, savedRevision = null, savedStamp = null;
 let currentTab = 'notes', captureBusy = false, captureFinishing = false, saving = false, generation = 0, worker = null, job = null, proposal = null, consent = false, pendingConsent = null, pendingReplace = null;
+let editGeneration = 0, invalidFields = false;
 const dialogs = ['consent-dialog', 'proposal-dialog', 'downloads-dialog', 'about-dialog', 'replace-dialog'].map($);
 const stamp = () => inputStamp(meeting, audioVersion);
-const dirty = () => stamp() !== savedStamp;
+const dirty = () => invalidFields || stamp() !== savedStamp;
 function message(text, error = false, target = $('status')) { target.textContent = text; target.classList.toggle('error', error); }
 function show(dialog) { if (!dialog.open) dialog.showModal(); }
 function download(blob, filename) { const url = URL.createObjectURL(blob), link = document.createElement('a'); link.href = url; link.download = filename; document.body.append(link); try { link.click(); } finally { link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1500); } }
 function filename(extension) { return `minuta-${meeting.id}.${extension}`; }
 function readFields() {
   meeting = validateMeeting({ ...meeting, title: $('meeting-title').value, notes: $('notes').value, transcript: $('transcript').value, summary: $('summary').value, language: $('language').value });
+  invalidFields = false;
 }
 function refresh() {
   $('save-state').textContent = dirty() ? 'Borrador sin guardar' : 'Guardado en este navegador';
@@ -43,7 +45,7 @@ for (const name of ['notes', 'summary', 'transcript']) {
   $(`tab-${name}`).addEventListener('click', () => tab(name));
   $(`tab-${name}`).addEventListener('keydown', event => { const all = ['notes', 'summary', 'transcript']; if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) { event.preventDefault(); const next = event.key === 'Home' ? 0 : event.key === 'End' ? 2 : (all.indexOf(name) + (event.key === 'ArrowRight' ? 1 : 2)) % 3; tab(all[next], true); } });
 }
-for (const id of ['meeting-title', 'notes', 'transcript', 'summary', 'language']) $(id).addEventListener(id === 'language' ? 'change' : 'input', () => { try { readFields(); message(''); refresh(); } catch (error) { message(error.message, true); } });
+for (const id of ['meeting-title', 'notes', 'transcript', 'summary', 'language']) $(id).addEventListener(id === 'language' ? 'change' : 'input', () => { editGeneration += 1; try { readFields(); message(''); refresh(); } catch (error) { invalidFields = true; message(error.message, true); refresh(); } });
 for (const dialog of dialogs) {
   dialog.querySelector('.close-dialog')?.addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => { if (event.target !== dialog) return; const r = dialog.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close(); });
@@ -58,7 +60,7 @@ function setAudio(blob, description = '') {
   $('audio-description').textContent = description; refresh();
 }
 async function replaceDocument(next, media, revision) {
-  generation += 1; cancelJob(); proposal = null;
+  generation += 1; editGeneration += 1; invalidFields = false; cancelJob(); proposal = null;
   meeting = validateMeeting(next); savedRevision = revision; setAudio(media, media ? `${(media.size / 1024 / 1024).toFixed(1)} MB · guardado localmente` : '');
   savedStamp = revision === null ? null : stamp(); currentTab = 'notes'; tab('notes'); renderFields(); $('downloads-dialog').close();
   message('Conversación abierta.');
@@ -138,7 +140,7 @@ $('confirm-consent').addEventListener('click', () => { const kind = pendingConse
 function startAI(kind) {
   if (job || proposal || captureBusy) return;
   const snapshot = clone(meeting), snapshotAudio = audio, snapshotAudioVersion = audioVersion, snapshotStamp = stamp(), id = crypto.randomUUID();
-  job = { id, kind, snapshot, snapshotAudio, snapshotAudioVersion, stamp: snapshotStamp }; $('job-panel').hidden = false; $('job-progress').removeAttribute('value'); $('job-status').textContent = 'Preparando el modelo local…'; $('ai-detail').textContent = ''; refresh();
+  job = { id, kind, snapshot, snapshotAudio, snapshotAudioVersion, stamp: snapshotStamp, editGeneration }; $('job-panel').hidden = false; $('job-progress').removeAttribute('value'); $('job-status').textContent = 'Preparando el modelo local…'; $('ai-detail').textContent = ''; refresh();
   worker ||= new Worker(new URL('./ai.worker.mjs', import.meta.url), { type: 'module' });
   worker.onmessage = event => {
     if (!job || event.data.id !== job.id) return;
@@ -164,7 +166,7 @@ function openProposal() {
   if (!proposal) return;
   $('proposal-text').value = proposal.text;
   $('proposal-description').textContent = proposal.kind === 'voice' ? 'Transcripción propuesta. Comprueba nombres y palabras antes de copiarla a tu conversación.' : 'Notas propuestas a partir del texto que había al empezar. Revisa acuerdos, responsables y fechas.';
-  const stale = meeting.id !== proposal.snapshot.id || stamp() !== proposal.stamp;
+  const stale = invalidFields || editGeneration !== proposal.editGeneration || meeting.id !== proposal.snapshot.id || stamp() !== proposal.stamp;
   $('apply-proposal').disabled = stale;
   $('proposal-state').textContent = stale ? 'La conversación cambió mientras trabajaba la IA. El borrador no puede sustituir tus cambios; puedes descargarlo o guardarlo como una copia.' : 'Solo se aplicará el texto que tú ves y revisas aquí.';
   show($('proposal-dialog'));
@@ -172,7 +174,7 @@ function openProposal() {
 $('review-proposal').addEventListener('click', openProposal);
 $('proposal-text').addEventListener('input', () => { if (proposal) proposal.text = $('proposal-text').value; });
 $('apply-proposal').addEventListener('click', () => {
-  if (!proposal || meeting.id !== proposal.snapshot.id || stamp() !== proposal.stamp) { openProposal(); return; }
+  if (!proposal || invalidFields || editGeneration !== proposal.editGeneration || meeting.id !== proposal.snapshot.id || stamp() !== proposal.stamp) { openProposal(); return; }
   try { const field = proposal.kind === 'voice' ? 'transcript' : 'summary'; meeting = validateMeeting({ ...meeting, [field]: $('proposal-text').value }); proposal = null; $('proposal-dialog').close(); renderFields(); tab(field); message('Texto revisado aplicado. Guarda la conversación cuando quieras.'); } catch (error) { message(error.message, true); }
 });
 $('copy-proposal').addEventListener('click', async () => {
@@ -195,6 +197,6 @@ $('notes-file').addEventListener('change', async event => {
 });
 $('open-about').addEventListener('click', () => show($('about-dialog')));
 $('clear-model-cache').addEventListener('click', async () => { if (job) { message('Cancela la IA antes de liberar los modelos.', true, $('cache-status')); return; } cancelJob(); try { const removed = await caches.delete(MODEL_CACHE); message(removed ? 'Caché de modelos de Minuta eliminada. Las conversaciones se conservan.' : 'No había modelos de Minuta en esta caché.', false, $('cache-status')); } catch { message('El navegador no permite liberar esta caché desde aquí. Las conversaciones no cambian.', true, $('cache-status')); } });
-window.addEventListener('beforeunload', event => { if (dirty() && (meeting.notes || meeting.transcript || meeting.summary || audio) || captureBusy || proposal) { event.preventDefault(); event.returnValue = ''; } });
+window.addEventListener('beforeunload', event => { if (dirty() && (meeting.notes || meeting.transcript || meeting.summary || audio || invalidFields || meeting.title !== 'Nueva conversación') || captureBusy || proposal) { event.preventDefault(); event.returnValue = ''; } });
 window.addEventListener('pagehide', () => { generation += 1; worker?.terminate(); void recorder.stop(false); if (audioUrl) URL.revokeObjectURL(audioUrl); });
 renderFields(); void refreshLibrary();

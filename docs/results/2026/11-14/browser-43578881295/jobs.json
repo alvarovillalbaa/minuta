@@ -1,0 +1,32 @@
+{
+  "total_count": 1,
+  "jobs": [
+    {
+      "id": 132399115383,
+      "run_id": 43578881295,
+      "workflow_name": "Temporary Minuta qualification",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/alvarovillalbaa/minuta/actions/runs/43578881295",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOVuCzPs8AAAAe05osdw",
+      "head_sha": "20df9f8a82aba8b83d0268a4fc3e3b5dfe4511da",
+      "url": "https://api.github.com/repos/alvarovillalbaa/minuta/actions/jobs/132399115383",
+      "html_url": "https://github.com/alvarovillalbaa/minuta/actions/runs/43578881295/job/132399115383",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "created_at": "2026-11-14T09:05:34Z",
+      "started_at": "2026-11-14T09:05:34Z",
+      "completed_at": "2026-11-14T09:05:35Z",
+      "name": "qualification",
+      "steps": [],
+      "check_run_url": "https://api.github.com/repos/alvarovillalbaa/minuta/check-runs/132399115383",
+      "labels": [
+        "macos-14"
+      ],
+      "runner_id": 0,
+      "runner_name": "",
+      "runner_group_id": 0,
+      "runner_group_name": ""
+    }
+  ]
+}

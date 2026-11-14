@@ -27,7 +27,11 @@ export function inputStamp(meeting, audioVersion) {
   const m = validateMeeting(meeting);
   return JSON.stringify({ id: m.id, title: m.title, language: m.language, notes: m.notes, transcript: m.transcript, summary: m.summary, audioVersion });
 }
-export function notesBackup(meeting) { return JSON.stringify({ schema: 'minuta.notes', version: 1, includesAudio: false, meeting: validateMeeting(meeting) }, null, 2) + '\n'; }
+export function notesBackup(meeting) {
+  const text = JSON.stringify({ schema: 'minuta.notes', version: 1, includesAudio: false, meeting: validateMeeting(meeting) }, null, 2) + '\n';
+  if (new TextEncoder().encode(text).length > LIMITS.backupBytes) throw new Error('La copia JSON supera los 512 KB. Descarga Markdown o reduce el texto; el cuaderno se conserva.');
+  return text;
+}
 export function parseNotesBackup(text, id = crypto.randomUUID()) {
   if (typeof text !== 'string' || new TextEncoder().encode(text).length > LIMITS.backupBytes) throw new Error('La copia de notas supera los 512 KB.');
   let data; try { data = JSON.parse(text); } catch { throw new Error('La copia de notas no es JSON válido.'); }

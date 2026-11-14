@@ -135,16 +135,17 @@ try {
   }
   await run('M03 English real Qwen with stale proposal', async () => {
     await openSaved(page, 'Speech english');
-    const event = await proposal(page, '#generate-notes', () => page.locator('#notes').fill('Newer notes: do not overwrite this edit.'));
+    const event = await proposal(page, '#generate-notes', async () => { await page.locator('#notes').fill('Newer notes: do not overwrite this edit.'); await page.locator('#meeting-title').fill(''); });
     assert.ok(event.text.length <= 24000 && /ana/i.test(event.text) && /friday/i.test(event.text));
     assert.equal(await page.locator('#apply-proposal').isDisabled(), true);
+    assert.equal(await page.locator('#meeting-title').inputValue(), '');
     await exportFile(page, '#download-proposal', 'english-draft.txt');
     await page.screenshot({ path: join(out, 'stale-proposal.png'), fullPage: true });
     await page.locator('#copy-proposal').click(); await page.waitForFunction(() => document.querySelector('#status').textContent.includes('Copia guardada'));
     const stored = await records(page), copy = stored.find(r => r.title === 'Speech english — borrador IA');
     assert.equal(copy.notes, 'Review deliverables only.'); assert.equal(copy.summary, event.text);
     assert.equal(await page.locator('#notes').inputValue(), 'Newer notes: do not overwrite this edit.');
-    await page.locator('#discard-proposal').click(); await save(page);
+    await page.locator('#discard-proposal').click(); await page.locator('#meeting-title').fill('Speech english'); await save(page);
     return { lexicalSanity: true, staleApplyDisabled: true, capturedCopyPreserved: true, meta: event.meta };
   });
   await run('M04 Spanish real Qwen reviewed apply', async () => {

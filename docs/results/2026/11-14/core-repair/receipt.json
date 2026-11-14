@@ -1,0 +1,31 @@
+[
+  {
+    "name": "syntax",
+    "argv": [
+      "npm",
+      "run",
+      "check"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "codec",
+    "argv": [
+      "node",
+      "--test",
+      "--test-name-pattern",
+      "C09|C10|C25",
+      "tests/unit/core.test.mjs"
+    ],
+    "exit": 0
+  },
+  {
+    "name": "observer",
+    "argv": [
+      "node",
+      "--check",
+      "tests/e2e/notebook.mjs"
+    ],
+    "exit": 0
+  }
+]

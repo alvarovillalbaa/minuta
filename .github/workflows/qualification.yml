@@ -17,7 +17,7 @@ permissions:
   contents: read
 jobs:
   qualification:
-    runs-on: ${{ inputs.mode == 'browser' && 'macos-14' || 'ubuntu-latest' }}
+    runs-on: ${{ inputs.mode == 'browser' && 'macos-15' || 'ubuntu-latest' }}
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
