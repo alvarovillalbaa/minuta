@@ -1,0 +1,21 @@
+{
+  "run": 43578230691,
+  "job": 132397126254,
+  "bytes": 20266,
+  "sha256": "ba6f661689c31ce3a71157fd0aedd49343aa73418a6e5480559127ce8c879ef6",
+  "files": [
+    "build.stdout.txt",
+    "dependencies.stderr.txt",
+    "build.stderr.txt",
+    "dependencies.stdout.txt",
+    "npm-version.stderr.txt",
+    "npm-version.stdout.txt",
+    "package-lock.json",
+    "receipt.json",
+    "source-after.json",
+    "source-before.json",
+    "source.json",
+    "versions.stderr.txt",
+    "versions.stdout.txt"
+  ]
+}

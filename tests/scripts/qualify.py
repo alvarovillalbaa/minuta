@@ -75,7 +75,7 @@ try:
     execute("versions", ["node", "--version"], 10)
     execute("npm-version", ["npm", "--version"], 10)
     if receipt["mode"] == "build":
-        execute("dependencies", ["npm", "install", "--ignore-scripts", "--no-audit", "--no-fund"], 300)
+        execute("dependencies", ["npm", "ci" if (work / "package-lock.json").exists() else "install", "--ignore-scripts", "--no-audit", "--no-fund"], 300)
         shutil.copyfile(work / "package-lock.json", output / "package-lock.json")
         execute("build", ["npm", "run", "build"], 300)
         manifest = [{"path": p.relative_to(work / "dist").as_posix(), "bytes": p.stat().st_size,

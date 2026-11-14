@@ -17,6 +17,7 @@ for (const [name, start] of [['@huggingface/transformers', transformerEntry], ['
   if (!packageData) throw new Error(`No package ownership found for ${name}`);
   let license;
   for (const file of ['LICENSE', 'LICENSE.txt', 'LICENSE.md']) { try { license = await readFile(join(directory, file), 'utf8'); break; } catch {} }
+  if (!license && name === 'onnxruntime-web' && packageData.version === '1.22.0-dev.20250409-89f8206ba4') license = await readFile(join(root, 'licenses/onnxruntime-MIT.txt'), 'utf8');
   if (!license) throw new Error(`No license found for ${name}`);
   notices.push(`${name}@${packageData.version}\n\n${license}`);
 }

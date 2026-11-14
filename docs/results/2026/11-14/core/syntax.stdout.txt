@@ -1,4 +1,0 @@
-
-> minuta@0.1.0 check
-> node --check src/core.mjs && node --check src/wav.mjs && node --check src/storage.mjs && node --check src/recorder.mjs && node --check src/ai.worker.mjs && node --check src/main.mjs
-
