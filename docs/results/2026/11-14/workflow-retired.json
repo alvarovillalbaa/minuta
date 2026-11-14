@@ -1,0 +1,9 @@
+{
+  "id": 418159141,
+  "path": ".github/workflows/qualification.yml",
+  "state": "disabled_manually",
+  "activeRuns": 0,
+  "queuedRuns": 0,
+  "recipe": "tests/fixtures/qualification.workflow.yml",
+  "sourceWorkflowRemoved": true
+}

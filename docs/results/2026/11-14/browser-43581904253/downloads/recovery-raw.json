@@ -1,0 +1,19 @@
+{
+  "schema": "minuta.raw-records",
+  "version": 1,
+  "includesAudio": false,
+  "records": [
+    {
+      "id": "037a592b-e86f-4a95-9481-30c126a80b22",
+      "revision": 1,
+      "title": "Recovery fixture",
+      "createdAt": "2026-11-14T09:44:34.087Z",
+      "updatedAt": "2026-11-14T09:44:34.745Z",
+      "language": "spanish",
+      "notes": "Preserve this working copy.",
+      "transcript": "",
+      "summary": "",
+      "authoredCorruption": true
+    }
+  ]
+}

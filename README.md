@@ -3,6 +3,8 @@
 A quiet, Spanish-first meeting notebook. Record explicitly, take rough notes,
 transcribe audio on your computer and review source-quoted notes before keeping them.
 
+[Open Minuta](https://minuta-liard.vercel.app) · [Release evidence](docs/results/2026/11-14/release.md)
+
 Minuta has no account, meeting bot or application backend. Notes and recordings
 stay in this browser's IndexedDB when you choose **Guardar**. Export notes as
 Markdown or JSON, and download the recording separately as WAV. Browser storage
@@ -46,8 +48,8 @@ variable, Supabase project or paid service is needed.
 See [product contract](docs/specs/product.md) and the
 [original failed protocol](docs/qualification/v1.md) and
 [v2 model result](docs/qualification/v2.md), followed by the
-[current excerpt contract](docs/qualification/v3.md). Qualification results
-will be linked here when observed. Authored synthetic speech is a functional
+[current excerpt contract](docs/qualification/v3.md) and
+[actual results](docs/results/2026/11-14/release.md). Authored synthetic speech is a functional
 fixture, not evidence of accuracy on real meetings.
 
 Original application code: MIT. Runtime dependencies retain their own licenses.

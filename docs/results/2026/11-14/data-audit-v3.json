@@ -1,0 +1,283 @@
+{
+  "archives": [
+    {
+      "archive": "docs/results/2026/11-14/browser-43579346484/original.zip",
+      "bytes": 836636,
+      "sha256": "1023f59056f1662f5073b032f71096bc850b97c6ea3c70d75dbdaa094587e982",
+      "originalPassed": false,
+      "streamsVerified": 12,
+      "gzipHttpBodiesVerified": 8,
+      "downloads": [],
+      "sourceGuard": true,
+      "ownedCleanup": true
+    },
+    {
+      "archive": "docs/results/2026/11-14/browser-43579983642/original.zip",
+      "bytes": 1049023,
+      "sha256": "85e57c214b8a6bc5f75dc880794137de85c3e7e8ac48be5fc0dfec3f6b3425fa",
+      "originalPassed": false,
+      "streamsVerified": 12,
+      "gzipHttpBodiesVerified": 9,
+      "downloads": [
+        {
+          "path": "downloads/captured-microphone.wav",
+          "bytes": 81196,
+          "sha256": "c4c21863561928f5c729b80f80fd1be7cbb5a702ef101463cd12087ecc688e9a"
+        }
+      ],
+      "sourceGuard": true,
+      "ownedCleanup": true
+    },
+    {
+      "archive": "docs/results/2026/11-14/browser-43580715419/original.zip",
+      "bytes": 876883,
+      "sha256": "fbe4a58b51feb7d4282c07c43e6432e4000bae4cc8b1a24e9c583cd2256641b5",
+      "originalPassed": false,
+      "streamsVerified": 12,
+      "gzipHttpBodiesVerified": 9,
+      "downloads": [
+        {
+          "path": "downloads/english-transcript.json",
+          "bytes": 528,
+          "sha256": "a6d64c9363ea8b5d45304501224861395eebae1e9893dbf0559a16ab4048e06c"
+        },
+        {
+          "path": "downloads/spanish-transcript.json",
+          "bytes": 540,
+          "sha256": "7551d59f366994ada2136fcbb3d603299d4eafcb8466659640faf17b54b6dac9"
+        }
+      ],
+      "sourceGuard": true,
+      "ownedCleanup": true
+    },
+    {
+      "archive": "docs/results/2026/11-14/browser-43581904253/original.zip",
+      "bytes": 1244467,
+      "sha256": "8867eb45b928716daf53ccc7181dc05dc1dd2e0fd01e38e25159ee3cdc0aa9f7",
+      "originalPassed": true,
+      "streamsVerified": 16,
+      "gzipHttpBodiesVerified": 9,
+      "downloads": [
+        {
+          "path": "downloads/deleted-open-copy.json",
+          "bytes": 412,
+          "sha256": "100f225106f3f8b7ee866e51e216854bb7aedfb3df6f5caebae737a80bb2874c"
+        },
+        {
+          "path": "downloads/english-source-excerpt.txt",
+          "bytes": 438,
+          "sha256": "3f0fe6386c9a048dc788ffb66d2971f302f4f1e192142ae68bfee67d2c6d0f14"
+        },
+        {
+          "path": "downloads/notebook-imported.json",
+          "bytes": 414,
+          "sha256": "2681898819d5427bbd1b17817e9f9101ee114c41f6138eef3ee972b2f071bf35"
+        },
+        {
+          "path": "downloads/notebook-initial.json",
+          "bytes": 424,
+          "sha256": "e43615bd158c072d94150747e6e29e7258bd809a61c8bcdf09ecf8ca28bf8cbc"
+        },
+        {
+          "path": "downloads/recovery-initial.json",
+          "bytes": 396,
+          "sha256": "a7a39d285244742c2cdcbefa6cd77366265658ddf85795ab6e043fc85428a3e4"
+        },
+        {
+          "path": "downloads/recovery-raw.json",
+          "bytes": 465,
+          "sha256": "db01d8d1ce0e8c46646df12361e9d3eaf440a23ade8216c62f5e9de8fd3e404d"
+        },
+        {
+          "path": "downloads/spanish-reviewed.json",
+          "bytes": 1009,
+          "sha256": "9d6827d2442e217658c288931c9e42c81b553069cbb5561b7c32bfeb7d64b2ba"
+        },
+        {
+          "path": "downloads/spanish-reviewed.md",
+          "bytes": 760,
+          "sha256": "cdc864bd1f19991befb8dcd993f3e0ffbcd8db21ae60b088017bd159a6c40655"
+        },
+        {
+          "path": "downloads/worker-regression.json",
+          "bytes": 510,
+          "sha256": "33363fbd09cc46d7c5be96b21bfc955e35fbabd05b96a7d63dd30e521c6fa8c9"
+        }
+      ],
+      "sourceGuard": true,
+      "ownedCleanup": true
+    },
+    {
+      "archive": "docs/results/2026/11-14/build-43578230691/original.zip",
+      "bytes": 20266,
+      "sha256": "ba6f661689c31ce3a71157fd0aedd49343aa73418a6e5480559127ce8c879ef6",
+      "originalPassed": false,
+      "streamsVerified": 8,
+      "gzipHttpBodiesVerified": 0,
+      "downloads": [],
+      "sourceGuard": true,
+      "ownedCleanup": true
+    },
+    {
+      "archive": "docs/results/2026/11-14/build-43578713893/original.zip",
+      "bytes": 21988,
+      "sha256": "768582bfb76d1fffe4828b1fadefb9453dbfe57bab3c923c4af048d6aa11c0f9",
+      "originalPassed": true,
+      "streamsVerified": 8,
+      "gzipHttpBodiesVerified": 0,
+      "downloads": [],
+      "sourceGuard": true,
+      "ownedCleanup": true
+    },
+    {
+      "archive": "docs/results/2026/11-14/build-43579153766/original.zip",
+      "bytes": 22987,
+      "sha256": "37014fb915052d91e2f45d946b279598275eb24bd6ef531075c8161da9f42dca",
+      "originalPassed": true,
+      "streamsVerified": 8,
+      "gzipHttpBodiesVerified": 0,
+      "downloads": [],
+      "sourceGuard": true,
+      "ownedCleanup": true
+    },
+    {
+      "archive": "docs/results/2026/11-14/build-43579707491/original.zip",
+      "bytes": 24300,
+      "sha256": "cbc03c9d40b35df7bb8a96eae384667c79b9670ac80ec36412c7e0c13b6077e2",
+      "originalPassed": true,
+      "streamsVerified": 8,
+      "gzipHttpBodiesVerified": 0,
+      "downloads": [],
+      "sourceGuard": true,
+      "ownedCleanup": true
+    },
+    {
+      "archive": "docs/results/2026/11-14/build-43580480402/original.zip",
+      "bytes": 25641,
+      "sha256": "a2d33d1c8c70d3932acd5d57f6a222ad676e67232cd1d23a4f41c5e3f2f2f674",
+      "originalPassed": true,
+      "streamsVerified": 8,
+      "gzipHttpBodiesVerified": 0,
+      "downloads": [],
+      "sourceGuard": true,
+      "ownedCleanup": true
+    },
+    {
+      "archive": "docs/results/2026/11-14/build-43581577032/original.zip",
+      "bytes": 28422,
+      "sha256": "0d7ba288ee40436634a21618522d08dfc93adeb55dec9c1ca154d3797ac170ea",
+      "originalPassed": true,
+      "streamsVerified": 8,
+      "gzipHttpBodiesVerified": 0,
+      "downloads": [],
+      "sourceGuard": true,
+      "ownedCleanup": true
+    }
+  ],
+  "totalStreams": 100,
+  "totalGzipHttpBodies": 35,
+  "totalNativeDownloads": 12,
+  "actualAcceptedModelBodies": [
+    {
+      "url": "https://huggingface.co/Xenova/whisper-base/resolve/64da57285918e20ea79ea5c88eed7197933abaa8/onnx/encoder_model_quantized.onnx",
+      "bytes": 23200850,
+      "sha256": "3e345e977b55620a37c0c2b2af0644e019afdfad562dcf71eb929bb7274285f9"
+    },
+    {
+      "url": "https://huggingface.co/Xenova/whisper-base/resolve/64da57285918e20ea79ea5c88eed7197933abaa8/onnx/decoder_model_merged_quantized.onnx",
+      "bytes": 53707539,
+      "sha256": "a6beb6baabb66f00b6a686d828c95ffca6146d51900cbad0266cad38f64cf861"
+    }
+  ],
+  "acceptedSourceInputsUnchanged": [
+    {
+      "path": "index.html",
+      "bytes": 10634,
+      "sha256": "205d35bd379a744e7161e478af26cbc8f3134e4b78d56b4492258dd4df55bfef"
+    },
+    {
+      "path": "licenses/onnxruntime-MIT.txt",
+      "bytes": 1073,
+      "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 66332,
+      "sha256": "80c76cf98c53c59868140dfb01b14f70bf821b53b67e227996d9393969bd33e1"
+    },
+    {
+      "path": "package.json",
+      "bytes": 606,
+      "sha256": "4d767c29fd298945928ad725b63278eb880c7987dd01afd8f5695fca7789d7ac"
+    },
+    {
+      "path": "public/icon.svg",
+      "bytes": 194,
+      "sha256": "dfdf6dd5113591d8210063fbe39d42280d626f1e097966be8022dfc37fcbf15e"
+    },
+    {
+      "path": "scripts/prepare-assets.mjs",
+      "bytes": 2054,
+      "sha256": "fb9701edcb16ff946c56792fd8b390ee4f4c51ab82d084e76d55445385c84c0e"
+    },
+    {
+      "path": "src/ai.worker.mjs",
+      "bytes": 2476,
+      "sha256": "62ac7ecb031c6c5a7d59aaee9a86849e3b52e35e48f5adc4f9b1b397a1ccc553"
+    },
+    {
+      "path": "src/capture.worklet.mjs",
+      "bytes": 933,
+      "sha256": "2eb2bdb62b1497541cb44d5e687933888c903642c1ee2aa6fdc7001695468148"
+    },
+    {
+      "path": "src/core.mjs",
+      "bytes": 5748,
+      "sha256": "0e6925857a0d41c2af29e80c80e06b1917bc3c3fe86f1baa18adcd86784c52c3"
+    },
+    {
+      "path": "src/extract.mjs",
+      "bytes": 3778,
+      "sha256": "a8b24585c6180122e3ca704b78cdb89b005dc86de99207d712827852a1e9c146"
+    },
+    {
+      "path": "src/main.mjs",
+      "bytes": 21243,
+      "sha256": "6247d15726538dacf0faf9e851743565dd6e2eecd79d42327146d46dd2c75ceb"
+    },
+    {
+      "path": "src/recorder.mjs",
+      "bytes": 5321,
+      "sha256": "828c7145ce3c61cffcc7f86a8b22ba997c8e2a425d87766d146c656ecc984c7e"
+    },
+    {
+      "path": "src/storage.mjs",
+      "bytes": 5975,
+      "sha256": "c975466ab9f7ca8c619869183ed666868e007dffe25a5368c5af90b57c56c543"
+    },
+    {
+      "path": "src/styles.css",
+      "bytes": 11828,
+      "sha256": "fd9c9e42dfb7cf278b14148f31cc92e9a741311be88d6ebd25a41a12d2b56742"
+    },
+    {
+      "path": "src/wav.mjs",
+      "bytes": 4235,
+      "sha256": "5558f0ae2ac8d89bcd0ca5b8915e16719b8b4e87b63677d31639c71809295ea1"
+    },
+    {
+      "path": "vercel.json",
+      "bytes": 813,
+      "sha256": "55955184f6e60f31e2dc5d0a2672114cd0fa02cd59dc58fdcd0a7d176cc4514b"
+    },
+    {
+      "path": "vite.config.mjs",
+      "bytes": 196,
+      "sha256": "0099b392012697d2d6e740029e369d161fde02cefee68f86ebc448e9e11009c4"
+    }
+  ],
+  "acceptedContextCount": 4,
+  "noUploadRequests": true,
+  "noQwenRequests": true,
+  "note": "Data audit preserves every negative outcome; no browser/model replay."
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "minuta.notes",
+  "version": 1,
+  "includesAudio": false,
+  "meeting": {
+    "id": "725b315b-47ad-4a3a-a157-3b0dd71c1304",
+    "revision": 0,
+    "title": "Authored <literal> notebook",
+    "createdAt": "2026-11-14T09:44:26.617Z",
+    "updatedAt": "2026-11-14T09:44:30.504Z",
+    "language": "spanish",
+    "notes": "First writer wins this revision.",
+    "transcript": "",
+    "summary": ""
+  }
+}

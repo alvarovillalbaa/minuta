@@ -1,0 +1,16 @@
+{
+  "schema": "minuta.notes",
+  "version": 1,
+  "includesAudio": false,
+  "meeting": {
+    "id": "b1e1c663-259f-4370-8b35-f15f1ea18643",
+    "revision": 1,
+    "title": "Imported notebook",
+    "createdAt": "2026-11-14T09:44:26.617Z",
+    "updatedAt": "2026-11-14T09:44:29.001Z",
+    "language": "spanish",
+    "notes": "Literal <script>window.bad=1</script> & 🙂",
+    "transcript": "",
+    "summary": ""
+  }
+}

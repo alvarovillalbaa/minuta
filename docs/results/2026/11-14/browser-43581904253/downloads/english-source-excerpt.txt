@@ -1,0 +1,20 @@
+# Excerpt for review
+
+## Personal notes
+
+- [N1] Review deliverables only.
+
+## Possible decisions
+
+- [T1] We agreed to send the proposal on Monday,
+
+## Possible actions
+
+- [T2] Nora will check the figures,
+- [T3] then we'll test the mobile version,
+
+## Questions and pending items
+
+- [T4] the price is still undecided.
+
+5 of 5 excerpts. Rule-based grouping; review the context. The complete source remains in Personal notes and Transcript.

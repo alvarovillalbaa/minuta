@@ -1,0 +1,16 @@
+{
+  "schema": "minuta.notes",
+  "version": 1,
+  "includesAudio": false,
+  "meeting": {
+    "id": "40f66c01-67dc-4906-bd5b-5c56ebd5401c",
+    "revision": 1,
+    "title": "ASR worker regression",
+    "createdAt": "2026-11-14T09:44:08.382Z",
+    "updatedAt": "2026-11-14T09:44:24.949Z",
+    "language": "english",
+    "notes": "",
+    "transcript": "We agreed to send the proposal on Monday, Nora will check the figures, then we'll test the mobile version, the price is still undecided.",
+    "summary": ""
+  }
+}

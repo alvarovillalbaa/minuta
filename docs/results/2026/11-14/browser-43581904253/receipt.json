@@ -1,0 +1,154 @@
+{
+  "mode": "browser",
+  "commands": [
+    {
+      "name": "versions",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 10,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 0.01870850000000246,
+      "stdoutBytes": 9,
+      "stderrBytes": 0,
+      "stdoutSha256": "6a0cec2e157365c1a8ac6d1715733b7c3321a7c5565862a701ca71ef00359d04",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "npm-version",
+      "argv": [
+        "npm",
+        "--version"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 10,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 0.11680470900000728,
+      "stdoutBytes": 8,
+      "stderrBytes": 0,
+      "stdoutSha256": "acb90e420303a6e949fec90f74faf64cc372894b3964e310a261689b898f41b0",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dependencies",
+      "argv": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 300,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 4.801671375000012,
+      "stdoutBytes": 25,
+      "stderrBytes": 128,
+      "stdoutSha256": "9504b0ef625664fea47c76f97041c4564bfab209f0a5daf41528653e48d0ccff",
+      "stderrSha256": "a79e4d8ee28132a825b18a6728298bfe8dcea7ecd2f8ce8541d2aa732a4af3b5"
+    },
+    {
+      "name": "build",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 300,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 1.1321573749999914,
+      "stdoutBytes": 915,
+      "stderrBytes": 0,
+      "stdoutSha256": "d65e9d0d0c8bb325af8f35136ac191df60d0252e6b223dec0b4e9476c258ea4c",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "tools",
+      "argv": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 180,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 0.5787808750000067,
+      "stdoutBytes": 27,
+      "stderrBytes": 0,
+      "stdoutSha256": "b98c80335753588d72b3a42cc880a89a3e1fcce565803c33bf62209166fdd9dc",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "chromium",
+      "argv": [
+        "node",
+        "/var/folders/2s/vty41l455yv698g4xkgfv7z00000gn/T/minuta-qualification-aqc11v8u/tools/node_modules/playwright/cli.js",
+        "install",
+        "chromium"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 180,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 8.172576375000006,
+      "stdoutBytes": 6920,
+      "stderrBytes": 0,
+      "stdoutSha256": "99c1c70f7187081781545df4f03ca6558e663fb538e0dd68660a70964c869f17",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "speech",
+      "argv": [
+        "python3",
+        "tests/scripts/speech.py"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 90,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 0.12769524999998794,
+      "stdoutBytes": 623,
+      "stderrBytes": 0,
+      "stdoutSha256": "5dd87d40f0a98cf41c02bfb08efdb4198be3ad151dc4f9dcc07ddf27436d3ded",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "browser",
+      "argv": [
+        "node",
+        "tests/e2e/notebook.mjs"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 840,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 33.868750917,
+      "stdoutBytes": 4165,
+      "stderrBytes": 0,
+      "stdoutSha256": "295e486d654962605bf8f2881fffb1413dc8f55c46be82d6b2fafb4e6d763531",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "passed": true,
+  "cleanup": true,
+  "sourceUnchanged": true,
+  "scratchBytes": 1164649967
+}
