@@ -1,0 +1,81 @@
+{
+  "mode": "build",
+  "commands": [
+    {
+      "name": "versions",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 10,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 0.004409623000000806,
+      "stdoutBytes": 9,
+      "stderrBytes": 0,
+      "stdoutSha256": "6a0cec2e157365c1a8ac6d1715733b7c3321a7c5565862a701ca71ef00359d04",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "npm-version",
+      "argv": [
+        "npm",
+        "--version"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 10,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 0.09853505800001017,
+      "stdoutBytes": 8,
+      "stderrBytes": 0,
+      "stdoutSha256": "acb90e420303a6e949fec90f74faf64cc372894b3964e310a261689b898f41b0",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "dependencies",
+      "argv": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 300,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 4.593995305000007,
+      "stdoutBytes": 25,
+      "stderrBytes": 128,
+      "stdoutSha256": "3bda2750757a733cfc391212e8111e2e72da8ef272e8c0c4b9042becdb9913d8",
+      "stderrSha256": "a79e4d8ee28132a825b18a6728298bfe8dcea7ecd2f8ce8541d2aa732a4af3b5"
+    },
+    {
+      "name": "build",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 300,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 1.1638474580000064,
+      "stdoutBytes": 915,
+      "stderrBytes": 0,
+      "stdoutSha256": "77b1226b179805025cedecac2de204d3343091360292ce8cd6263c4327968264",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "passed": true,
+  "cleanup": true,
+  "sourceUnchanged": true,
+  "scratchBytes": 652905376
+}

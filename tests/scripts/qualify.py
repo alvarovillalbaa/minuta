@@ -39,13 +39,13 @@ for item in before:
     destination.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(repo / item["path"], destination)
 
-def execute(name, args, timeout):
+def execute(name, args, timeout, cwd=None):
     remaining = int(deadline - time.monotonic() - 30)
     if remaining < 1:
         raise RuntimeError("Owned qualification deadline reached before " + name)
     timeout = min(timeout, remaining)
     started = time.monotonic()
-    process = subprocess.Popen(args, cwd=work, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True)
+    process = subprocess.Popen(args, cwd=cwd or work, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True)
     timed_out = False
     try:
         stdout, stderr = process.communicate(timeout=timeout)
@@ -90,8 +90,11 @@ try:
     elif receipt["mode"] == "browser":
         tools = scratch / "tools"
         tools.mkdir()
-        (tools / "package.json").write_text('{"private":true,"dependencies":{"playwright":"1.56.1"}}')
-        execute("tools", ["npm", "install", "--prefix", str(tools), "--ignore-scripts", "--no-audit", "--no-fund"], 180)
+        shutil.copyfile(work / "tests/fixtures/tools/package.json", tools / "package.json")
+        locked = (work / "tests/fixtures/tools/package-lock.json").exists()
+        if locked:
+            shutil.copyfile(work / "tests/fixtures/tools/package-lock.json", tools / "package-lock.json")
+        execute("tools", ["npm", "ci" if locked else "install", "--ignore-scripts", "--no-audit", "--no-fund"], 180, cwd=tools)
         shutil.copyfile(tools / "package-lock.json", output / "tools-lock.json")
         execute("chromium", ["node", str(tools / "node_modules/playwright/cli.js"), "install", "chromium"], 180)
         env["MINUTA_PLAYWRIGHT"] = str(tools / "node_modules/playwright/index.mjs")

@@ -1,8 +1,8 @@
 [
   {
-    "path": "assets/ai.worker-8R4t3x6d.js",
+    "path": "assets/ai.worker-DDybrxkd.js",
     "bytes": 892020,
-    "sha256": "d45fc8ec18ab7eab811e14bc4de776d5e05d11ebd1069f3a779f1255281a25ea"
+    "sha256": "5a06e1a7c3a80b2136d8900609cf4f514f4f8c085d17009d5fbc7f9fe225b54b"
   },
   {
     "path": "assets/capture.worklet-D57mleKD.mjs",
@@ -10,14 +10,14 @@
     "sha256": "2eb2bdb62b1497541cb44d5e687933888c903642c1ee2aa6fdc7001695468148"
   },
   {
+    "path": "assets/index-CJQG1z1h.js",
+    "bytes": 27655,
+    "sha256": "898d9392738334852c95d28ba04a54c8ea2c9c1fb078d4ddebadf1391c88364d"
+  },
+  {
     "path": "assets/index-DD0htT_G.css",
     "bytes": 11738,
     "sha256": "258e6bf10c861b799644fb904d92d47c88face1077c8eabfbb151e31fd548196"
-  },
-  {
-    "path": "assets/index-DOeb5MW2.js",
-    "bytes": 27655,
-    "sha256": "bb083fe226bab39fd71cfd7bf9a0e3ba038de91d1540306bdbb9bce8a89b6b96"
   },
   {
     "path": "assets/ort-wasm-simd-threaded.jsep-B0T3yYHD.wasm",
@@ -32,7 +32,7 @@
   {
     "path": "index.html",
     "bytes": 10559,
-    "sha256": "2e7437301366de3e725fb5fb0c8cc6234e53a62bc4fef4fa8237c3ae13361ff4"
+    "sha256": "d2900e2ac3891c12131de5cb7bda0002cb1de585ffad4bf8b5d7191e10185318"
   },
   {
     "path": "third-party-licenses.txt",
