@@ -1,0 +1,295 @@
+{
+  "passed": false,
+  "deployment": {
+    "url": "https://minuta-liard.vercel.app",
+    "sha": "5fd573137b238d360f11ebef68defd7769c380a0"
+  },
+  "cases": [
+    {
+      "name": "Exact anonymous production assets",
+      "passed": true,
+      "started": "2026-11-14T09:19:36.461Z",
+      "files": 12,
+      "bytes": 55346405,
+      "finished": "2026-11-14T09:19:39.786Z"
+    },
+    {
+      "name": "B04 authored fake microphone through actual worklet",
+      "passed": true,
+      "started": "2026-11-14T09:19:39.794Z",
+      "seconds": 2.536,
+      "rms": 0.1617528206860516,
+      "tracks": [
+        "ended"
+      ],
+      "contexts": [
+        "closed"
+      ],
+      "bytes": 81196,
+      "sha256": "c4c21863561928f5c729b80f80fd1be7cbb5a702ef101463cd12087ecc688e9a",
+      "finished": "2026-11-14T09:19:43.688Z"
+    },
+    {
+      "name": "M01 english real Whisper",
+      "passed": false,
+      "started": "2026-11-14T09:19:43.691Z",
+      "error": "AssertionError [ERR_ASSERTION]: WER 1\n    at file:///private/var/folders/2s/vty41l455yv698g4xkgfv7z00000gn/T/minuta-qualification-b18fxyxq/source/tests/e2e/notebook.mjs:139:83\n    at async run (file:///private/var/folders/2s/vty41l455yv698g4xkgfv7z00000gn/T/minuta-qualification-b18fxyxq/source/tests/e2e/notebook.mjs:70:28)\n    at async file:///private/var/folders/2s/vty41l455yv698g4xkgfv7z00000gn/T/minuta-qualification-b18fxyxq/source/tests/e2e/notebook.mjs:134:5",
+      "ui": [
+        {
+          "url": "https://minuta-liard.vercel.app/",
+          "status": "Borrador preparado. Revísalo antes de aplicarlo.",
+          "diagnostic": "",
+          "recording": false
+        }
+      ],
+      "finished": "2026-11-14T09:19:52.470Z"
+    }
+  ],
+  "models": [
+    {
+      "type": "result",
+      "id": "3b266e3d-a03d-4751-b40f-a791b4db5923",
+      "text": "I'm not going to be able to do anything that I can do.",
+      "meta": {
+        "model": {
+          "id": "Xenova/whisper-tiny",
+          "revision": "5332fcc35e32a33b86612b9a57a89be7906102b1",
+          "dtype": "q8"
+        },
+        "seconds": 12.998125,
+        "samples": 207970,
+        "sampleRate": 16000
+      }
+    }
+  ],
+  "requests": [
+    {
+      "url": "https://minuta-liard.vercel.app/",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://minuta-liard.vercel.app/assets/index-DOeb5MW2.js",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://minuta-liard.vercel.app/assets/index-DD0htT_G.css",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://minuta-liard.vercel.app/assets/ai.worker-8R4t3x6d.js",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://huggingface.co/Xenova/whisper-tiny/resolve/5332fcc35e32a33b86612b9a57a89be7906102b1/tokenizer.json",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://huggingface.co/Xenova/whisper-tiny/resolve/5332fcc35e32a33b86612b9a57a89be7906102b1/tokenizer_config.json",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://huggingface.co/Xenova/whisper-tiny/resolve/5332fcc35e32a33b86612b9a57a89be7906102b1/config.json",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://huggingface.co/Xenova/whisper-tiny/resolve/5332fcc35e32a33b86612b9a57a89be7906102b1/preprocessor_config.json",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://huggingface.co/api/resolve-cache/models/Xenova/whisper-tiny/5332fcc35e32a33b86612b9a57a89be7906102b1/tokenizer_config.json",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://huggingface.co/api/resolve-cache/models/Xenova/whisper-tiny/5332fcc35e32a33b86612b9a57a89be7906102b1/preprocessor_config.json",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://huggingface.co/api/resolve-cache/models/Xenova/whisper-tiny/5332fcc35e32a33b86612b9a57a89be7906102b1/config.json",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://huggingface.co/api/resolve-cache/models/Xenova/whisper-tiny/5332fcc35e32a33b86612b9a57a89be7906102b1/tokenizer.json",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://huggingface.co/Xenova/whisper-tiny/resolve/5332fcc35e32a33b86612b9a57a89be7906102b1/onnx/encoder_model_quantized.onnx",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://huggingface.co/Xenova/whisper-tiny/resolve/5332fcc35e32a33b86612b9a57a89be7906102b1/onnx/decoder_model_merged_quantized.onnx",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://huggingface.co/Xenova/whisper-tiny/resolve/5332fcc35e32a33b86612b9a57a89be7906102b1/generation_config.json",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://huggingface.co/Xenova/whisper-tiny/resolve/5332fcc35e32a33b86612b9a57a89be7906102b1/tokenizer.json",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://huggingface.co/api/resolve-cache/models/Xenova/whisper-tiny/5332fcc35e32a33b86612b9a57a89be7906102b1/tokenizer.json",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://huggingface.co/api/resolve-cache/models/Xenova/whisper-tiny/5332fcc35e32a33b86612b9a57a89be7906102b1/generation_config.json",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://us.aws.cdn.hf.co/xet-bridge-us/6452c15b3a794b2d9b15a809/be9fd4dea91805a4f9be0f93406b67a7971641f8a6377c5e9ea065629449e731",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://us.aws.cdn.hf.co/xet-bridge-us/6452c15b3a794b2d9b15a809/33ed314ad3ab9a9f1754350299f1cb3f1a55b3d076ea6fdf1f5dacf2da15cc6e",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://minuta-liard.vercel.app/wasm/ort-wasm-simd-threaded.jsep.mjs",
+      "method": "GET",
+      "bodyBytes": 0
+    },
+    {
+      "url": "https://minuta-liard.vercel.app/wasm/ort-wasm-simd-threaded.jsep.wasm",
+      "method": "GET",
+      "bodyBytes": 0
+    }
+  ],
+  "errors": [],
+  "console": [],
+  "publicBodies": [
+    {
+      "path": "/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 10559,
+      "sha256": "2e7437301366de3e725fb5fb0c8cc6234e53a62bc4fef4fa8237c3ae13361ff4",
+      "explicitAnonymousAssetCheck": true,
+      "body": "8a5edab282632443.body.gz"
+    },
+    {
+      "path": "/assets/index-DD0htT_G.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 11738,
+      "sha256": "258e6bf10c861b799644fb904d92d47c88face1077c8eabfbb151e31fd548196",
+      "explicitAnonymousAssetCheck": true,
+      "body": "8003eca9660fe623.body.gz"
+    },
+    {
+      "path": "/assets/index-DOeb5MW2.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 27655,
+      "sha256": "bb083fe226bab39fd71cfd7bf9a0e3ba038de91d1540306bdbb9bce8a89b6b96",
+      "explicitAnonymousAssetCheck": true,
+      "body": "66409cca2ccab4d1.body.gz"
+    },
+    {
+      "path": "/assets/ai.worker-8R4t3x6d.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 892020,
+      "sha256": "d45fc8ec18ab7eab811e14bc4de776d5e05d11ebd1069f3a779f1255281a25ea",
+      "explicitAnonymousAssetCheck": true,
+      "body": "f33b6bb1788e1e0a.body.gz"
+    },
+    {
+      "path": "/assets/capture.worklet-D57mleKD.mjs",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 933,
+      "sha256": "2eb2bdb62b1497541cb44d5e687933888c903642c1ee2aa6fdc7001695468148",
+      "explicitAnonymousAssetCheck": true,
+      "body": "04e152f3aef40e28.body.gz"
+    },
+    {
+      "path": "/assets/ort-wasm-simd-threaded.jsep-B0T3yYHD.wasm",
+      "status": 200,
+      "type": "application/wasm",
+      "bytes": 21596019,
+      "sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39",
+      "explicitAnonymousAssetCheck": true
+    },
+    {
+      "path": "/icon.svg",
+      "status": 200,
+      "type": "image/svg+xml",
+      "bytes": 194,
+      "sha256": "dfdf6dd5113591d8210063fbe39d42280d626f1e097966be8022dfc37fcbf15e",
+      "explicitAnonymousAssetCheck": true,
+      "body": "a2e3916dbd95d51c.body.gz"
+    },
+    {
+      "path": "/third-party-licenses.txt",
+      "status": 200,
+      "type": "text/plain; charset=utf-8",
+      "bytes": 12521,
+      "sha256": "905e9cd2a32e62f5f647a1cb7431e7cb92047b99403b2019249a108d36c920bf",
+      "explicitAnonymousAssetCheck": true,
+      "body": "8d677d9bf083fe03.body.gz"
+    },
+    {
+      "path": "/wasm/ort-wasm-simd-threaded.jsep.mjs",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 44484,
+      "sha256": "08fb86ec433c78bfb032c5d84a68b8e8e5a8d81268fa39e24314179a5767a5b9",
+      "explicitAnonymousAssetCheck": true,
+      "body": "73fee1a0908d784d.body.gz"
+    },
+    {
+      "path": "/wasm/ort-wasm-simd-threaded.jsep.wasm",
+      "status": 200,
+      "type": "application/wasm",
+      "bytes": 21596019,
+      "sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39",
+      "explicitAnonymousAssetCheck": true
+    },
+    {
+      "path": "/wasm/ort-wasm-simd-threaded.mjs",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 20856,
+      "sha256": "43c25054b6b9ac000f786c65545ff83a45f871e0e310e8c2f4d48a363bb66db4",
+      "explicitAnonymousAssetCheck": true,
+      "body": "0d235e724fdc3f10.body.gz"
+    },
+    {
+      "path": "/wasm/ort-wasm-simd-threaded.wasm",
+      "status": 200,
+      "type": "application/wasm",
+      "bytes": 11133407,
+      "sha256": "f061472c6e77d6d50d079aacdc0ff9b63fee287ddd2cbf46cf62438d3891de2b",
+      "explicitAnonymousAssetCheck": true
+    }
+  ],
+  "teardown": {
+    "browserDisconnected": true,
+    "contextsClosed": 1
+  },
+  "browser": "141.0.7390.37",
+  "node": "v24.22.2",
+  "failure": "AssertionError [ERR_ASSERTION]: WER 1\n    at file:///private/var/folders/2s/vty41l455yv698g4xkgfv7z00000gn/T/minuta-qualification-b18fxyxq/source/tests/e2e/notebook.mjs:139:83\n    at async run (file:///private/var/folders/2s/vty41l455yv698g4xkgfv7z00000gn/T/minuta-qualification-b18fxyxq/source/tests/e2e/notebook.mjs:70:28)\n    at async file:///private/var/folders/2s/vty41l455yv698g4xkgfv7z00000gn/T/minuta-qualification-b18fxyxq/source/tests/e2e/notebook.mjs:134:5",
+  "noUploadRequests": true,
+  "pinnedModelRequests": true
+}

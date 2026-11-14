@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "cohort": "authored-speech-v2",
+  "cases": [
+    { "id": "english", "voiceLocale": "en_US", "voice": "Samantha", "text": "We agreed to send the proposal on Monday. Nora will check the figures. Ben will test the mobile version. The price is still undecided." },
+    { "id": "spanish", "voiceLocale": "es_ES", "voice": "Mónica", "text": "El equipo publicará el informe el martes. Clara revisará las cifras. Pedro comprobará la versión móvil. El presupuesto todavía no está aprobado." }
+  ]
+}

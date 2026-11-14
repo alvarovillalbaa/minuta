@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "runtime": "@huggingface/transformers@3.8.1",
+  "prompt": "meeting-draft-v1",
+  "device": "wasm",
+  "dtype": "q8",
+  "threads": 1,
+  "models": [
+    { "id": "Xenova/whisper-base", "revision": "64da57285918e20ea79ea5c88eed7197933abaa8", "files": [
+      { "path": "onnx/encoder_model_quantized.onnx", "bytes": 23200850, "sha256": "3e345e977b55620a37c0c2b2af0644e019afdfad562dcf71eb929bb7274285f9" },
+      { "path": "onnx/decoder_model_merged_quantized.onnx", "bytes": 53707539, "sha256": "a6beb6baabb66f00b6a686d828c95ffca6146d51900cbad0266cad38f64cf861" },
+      { "path": "onnx/decoder_model_quantized.onnx", "bytes": 53309877, "sha256": "96fc8b98013e0f9461159a7b0d57922e170b15767db8afef1ea7880f1deef33b" },
+      { "path": "onnx/decoder_with_past_model_quantized.onnx", "bytes": 50088237, "sha256": "7b12f3892bce5a5c9729eb3d5c2ac451e64dd20e367d643eaa675345a114471d" }
+    ] },
+    { "id": "onnx-community/Qwen2.5-0.5B-Instruct", "revision": "22942cb7d7ba4cc81bb4673549ca4d4614469b5e", "files": [
+      { "path": "onnx/model_quantized.onnx", "bytes": 512096557, "sha256": "41834041ab1b29eff9fc592f1a29a1844133aea35832ea9fa91682be13016100" }
+    ] }
+  ],
+  "hashSource": "Hugging Face pinned revision API tree LFS SHA-256 metadata, inspected before v2 inference",
+  "note": "V1's failed tiny-model cohort remains failed. V2 is a separate small functional cohort, not a causal comparison or general accuracy claim."
+}

@@ -39,7 +39,8 @@ license notices into the static output. Vercel serves `dist/`. No environment
 variable, Supabase project or paid service is needed.
 
 See [product contract](docs/specs/product.md) and the
-[frozen qualification protocol](docs/qualification/v1.md). Qualification results
+[original failed protocol](docs/qualification/v1.md) and
+[frozen v2 correction](docs/qualification/v2.md). Qualification results
 will be linked here when observed. Authored synthetic speech is a functional
 fixture, not evidence of accuracy on real meetings.
 

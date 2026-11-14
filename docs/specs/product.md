@@ -32,7 +32,7 @@ store enrollment is part of this release.
 
 ## Inference boundary
 
-Transformers.js 3.8.1 runs pinned Whisper tiny q8 and Qwen2.5 0.5B q8 in a
+Transformers.js 3.8.1 runs pinned Whisper base q8 and Qwen2.5 0.5B q8 in a
 dedicated module worker. CPU WASM is self-hosted and single-threaded. No WebGPU,
 remote inference, generated code execution, agent tools or secret is required.
 Model downloads use Hugging Face's public resolve endpoints. This exposes a
@@ -53,6 +53,7 @@ their own evidence; synthetic fixture checks cannot establish them.
 - [Self-hosted WASM settings](https://huggingface.co/docs/transformers.js/v3.8.1/en/custom_usage)
 - [Transformers.js v3.8.1 source](https://github.com/huggingface/transformers.js/tree/2ec882e739e4cb461f8d440d4d7394cbf5372429)
 - [Whisper tiny conversion](https://huggingface.co/Xenova/whisper-tiny/tree/5332fcc35e32a33b86612b9a57a89be7906102b1)
+- [Whisper base correction](https://huggingface.co/Xenova/whisper-base/tree/64da57285918e20ea79ea5c88eed7197933abaa8)
 - [Qwen ONNX conversion](https://huggingface.co/onnx-community/Qwen2.5-0.5B-Instruct/tree/22942cb7d7ba4cc81bb4673549ca4d4614469b5e)
 - [Parent Qwen model card](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct)
 - [Vite 8.3.8 release](https://github.com/vitejs/vite/releases/tag/v8.3.8)

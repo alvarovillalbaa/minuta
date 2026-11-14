@@ -1,0 +1,119 @@
+{
+  "mode": "browser",
+  "commands": [
+    {
+      "name": "versions",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 10,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 0.020297874999997134,
+      "stdoutBytes": 9,
+      "stderrBytes": 0,
+      "stdoutSha256": "6a0cec2e157365c1a8ac6d1715733b7c3321a7c5565862a701ca71ef00359d04",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "npm-version",
+      "argv": [
+        "npm",
+        "--version"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 10,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 0.17211474999999155,
+      "stdoutBytes": 8,
+      "stderrBytes": 0,
+      "stdoutSha256": "acb90e420303a6e949fec90f74faf64cc372894b3964e310a261689b898f41b0",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "tools",
+      "argv": [
+        "npm",
+        "install",
+        "--prefix",
+        "/var/folders/2s/vty41l455yv698g4xkgfv7z00000gn/T/minuta-qualification-b18fxyxq/tools",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 180,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 2.502116541999996,
+      "stdoutBytes": 24,
+      "stderrBytes": 0,
+      "stdoutSha256": "c59541a7d8bfc9987c0aa47adf2cdd2858be8b66de5abc0331d5a6484ae63ab6",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "chromium",
+      "argv": [
+        "node",
+        "/var/folders/2s/vty41l455yv698g4xkgfv7z00000gn/T/minuta-qualification-b18fxyxq/tools/node_modules/playwright/cli.js",
+        "install",
+        "chromium"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 180,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 8.901433292000007,
+      "stdoutBytes": 6920,
+      "stderrBytes": 0,
+      "stdoutSha256": "48fdfe94e125c68439e7eaf582e9e4a53356201260579266b211fb7b73a9e8d4",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "speech",
+      "argv": [
+        "python3",
+        "tests/scripts/speech.py"
+      ],
+      "exit": 0,
+      "timedOut": false,
+      "timeoutSeconds": 90,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 0.14176299999999742,
+      "stdoutBytes": 633,
+      "stderrBytes": 0,
+      "stdoutSha256": "e21f0f5c57248edccc931784610aec171e7b19e3a13733acc65920a9e8b33095",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "browser",
+      "argv": [
+        "node",
+        "tests/e2e/notebook.mjs"
+      ],
+      "exit": 1,
+      "timedOut": false,
+      "timeoutSeconds": 840,
+      "leaderReaped": true,
+      "groupAbsent": true,
+      "seconds": 18.147230834,
+      "stdoutBytes": 1367,
+      "stderrBytes": 594,
+      "stdoutSha256": "fe3b1721a41ab3807c9615d378ea8c22e0bb811adc2bbc9482187a8da2d16f9b",
+      "stderrSha256": "8dc4677befcb6a01a51770ab4922241c6bfbb721fcff923a8cf6cc0b848d68c3"
+    }
+  ],
+  "passed": false,
+  "cleanup": true,
+  "error": "RuntimeError('browser did not complete successfully')",
+  "sourceUnchanged": true,
+  "scratchBytes": 555509892
+}

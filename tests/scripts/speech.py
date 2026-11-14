@@ -9,7 +9,7 @@ import subprocess
 import wave
 
 output = Path(os.environ["MINUTA_OUTPUT"])
-frozen = Path("tests/fixtures/speech-v1")
+frozen = Path("tests/fixtures/speech-v2")
 if (frozen / "speech-manifest.json").exists():
     manifest = json.loads((frozen / "speech-manifest.json").read_text())
     for item in manifest["voices"]:
@@ -22,14 +22,16 @@ if (frozen / "speech-manifest.json").exists():
     raise SystemExit(0)
 catalog = subprocess.check_output(["/usr/bin/say", "-v", "?"]).decode()
 (output / "voice-catalog.txt").write_text(catalog)
-fixtures = json.loads(Path("tests/fixtures/speech.json").read_text())
+fixtures = json.loads(Path("tests/fixtures/speech-v2.json").read_text())
 manifest = {"cohort": fixtures["cohort"], "voices": [], "completedBeforeInference": True}
 for case in fixtures["cases"]:
     candidates = [match.group(1).strip() for line in catalog.splitlines()
                   if (match := re.match(r"^(.*?)\s+" + re.escape(case["voiceLocale"]) + r"\s+#", line))]
     if not candidates:
         raise RuntimeError("No installed voice for " + case["voiceLocale"])
-    voice = candidates[0]
+    voice = case["voice"]
+    if voice not in candidates:
+        raise RuntimeError("Frozen voice is unavailable: " + voice)
     aiff = output / (case["id"] + ".aiff")
     wav = output / (case["id"] + ".wav")
     subprocess.run(["/usr/bin/say", "-v", voice, "-r", "165", "-o", str(aiff), case["text"]], check=True)

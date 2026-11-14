@@ -10,14 +10,14 @@ const { chromium } = await import(process.env.MINUTA_PLAYWRIGHT);
 const out = process.env.MINUTA_OUTPUT, base = process.env.MINUTA_URL;
 assert.match(base, /^https:\/\/[^/]+\.vercel\.app\/?$/);
 assert.match(process.env.MINUTA_DEPLOYMENT_SHA, /^[a-f0-9]{40}$/);
-const origin = new URL(base).origin, fixture = JSON.parse(await readFile('tests/fixtures/speech.json', 'utf8'));
-const modelManifest = JSON.parse(await readFile('docs/qualification/models-v1.json', 'utf8'));
+const origin = new URL(base).origin, fixture = JSON.parse(await readFile('tests/fixtures/speech-v2.json', 'utf8'));
+const modelManifest = JSON.parse(await readFile('docs/qualification/models-v2.json', 'utf8'));
 await mkdir(join(out, 'downloads'));
 await mkdir(join(out, 'http'));
 const sha = bytes => createHash('sha256').update(bytes).digest('hex');
 const result = { passed: false, deployment: { url: base, sha: process.env.MINUTA_DEPLOYMENT_SHA }, cases: [], models: [], requests: [], errors: [], console: [], publicBodies: [], teardown: {} };
 const requests = [], bodies = new Map(), contexts = [], pendingResponses = [];
-let browser;
+let browser, modelPage;
 function recordNetwork(context) {
   context.on('request', request => {
     const u = new URL(request.url());
@@ -89,6 +89,24 @@ async function proposal(page, button, edit = null) {
   result.models.push(event); assert.equal(event.type, 'result', JSON.stringify(event));
   await page.locator('#proposal-dialog').waitFor({ timeout: 10000 }); return event;
 }
+async function modelDigests(page) {
+  return page.evaluate(async () => {
+    const cache = await caches.open('minuta-models-v1'), rows = [];
+    for (const request of await cache.keys()) {
+      const u = new URL(request.url); if (!u.pathname.endsWith('.onnx')) continue;
+      const response = await cache.match(request), bytes = await response.arrayBuffer(), digest = await crypto.subtle.digest('SHA-256', bytes);
+      rows.push({ url: u.origin + u.pathname, bytes: bytes.byteLength, sha256: [...new Uint8Array(digest)].map(x => x.toString(16).padStart(2, '0')).join('') });
+    }
+    return rows;
+  });
+}
+function verifyModelDigests(actual) {
+  for (const row of actual) {
+    const model = modelManifest.models.find(m => row.url.includes(`/${m.id}/resolve/${m.revision}/`)); assert.ok(model, row.url);
+    const expected = model.files.find(file => row.url.endsWith(`/${file.path}`)); assert.ok(expected, row.url);
+    assert.equal(row.bytes, expected.bytes); assert.equal(row.sha256, expected.sha256);
+  }
+}
 
 try {
   browser = await chromium.launch({ headless: true, args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', `--use-file-for-fake-audio-capture=${join(out, 'english.wav')}`] });
@@ -105,7 +123,7 @@ try {
       navigator.mediaDevices.getUserMedia = async (...args) => { const stream = await original(...args); window.__minutaProbe.tracks.push(...stream.getTracks()); return stream; };
     }
   });
-  const page = await open(ctx);
+  const page = await open(ctx); modelPage = page;
   await run('Exact anonymous production assets', async () => {
     const manifest = JSON.parse(await readFile('tests/fixtures/production-manifest.json', 'utf8'));
     for (const expected of manifest) {
@@ -119,19 +137,15 @@ try {
     }
     return { files: manifest.length, bytes: manifest.reduce((sum, row) => sum + row.bytes, 0) };
   });
-  await run('B04 authored fake microphone through actual worklet', async () => {
-    await page.locator('#record').click(); await page.waitForFunction(() => document.querySelector('#status').textContent.includes('Grabando.'));
-    await page.waitForTimeout(2500); await page.locator('#stop-record').click(); await page.locator('#audio-ready').waitFor();
-    await page.locator('#open-downloads').click(); const bytes = await exportFile(page, '#export-audio', 'captured-microphone.wav'); await page.locator('#downloads-dialog .close-dialog').click();
-    const decoded = decodeWav(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength));
-    const energy = Math.sqrt(decoded.samples.reduce((sum, x) => sum + x * x, 0) / decoded.samples.length);
-    assert.ok(decoded.seconds >= 1 && energy > 0.0005);
-    const stopped = await page.evaluate(() => ({ tracks: window.__minutaProbe.tracks.map(t => t.readyState), contexts: window.__minutaProbe.contexts.map(c => c.state) }));
-    assert.ok(stopped.tracks.length && stopped.tracks.every(x => x === 'ended')); assert.ok(stopped.contexts.every(x => x === 'closed'));
-    return { seconds: decoded.seconds, rms: energy, ...stopped, bytes: bytes.length, sha256: sha(bytes) };
-  });
+  result.priorAcceptedCapture = { run: 43579983642, source: '5fd573137b238d360f11ebef68defd7769c380a0', replayed: false };
+  await page.locator('#meeting-title').fill('Retrospective Albert development case'); await page.locator('#language').selectOption('english');
+  await page.locator('#audio-file').setInputFiles('tests/fixtures/speech-v1/english.wav'); await page.locator('#status').filter({ hasText: 'Audio abierto' }).waitFor();
+  const development = await proposal(page, '#transcribe');
+  const oldText = JSON.parse(await readFile('tests/fixtures/speech.json', 'utf8')).cases[0].text;
+  result.development = { cohort: 'v1 Albert retrospective', text: development.text, wer: wer(oldText, development.text), accuracyAccepted: wer(oldText, development.text) <= 0.35, heldOut: false };
+  await writeFile(join(out, 'development-albert.txt'), development.text); await page.locator('#discard-proposal').click();
   for (const [index, item] of fixture.cases.entries()) {
-    await run(`M0${index + 1} ${item.id} real Whisper`, async () => {
+    await run(`M2${index + 1} ${item.id} real Whisper base`, async () => {
       await fresh(page); await page.locator('#meeting-title').fill(`Speech ${item.id}`); await page.locator('#language').selectOption(item.id);
       await page.locator('#notes').fill(item.id === 'english' ? 'Review deliverables only.' : 'Revisar las entregas.');
       await page.locator('#audio-file').setInputFiles(join(out, `${item.id}.wav`)); await page.locator('#status').filter({ hasText: 'Audio abierto' }).waitFor();
@@ -142,10 +156,10 @@ try {
       return { wer: rate, referenceWords: words(item.text).length, actualWords: words(event.text).length, model: event.meta.model };
     });
   }
-  await run('M03 English real Qwen with stale proposal', async () => {
+  await run('M23 English real Qwen with stale proposal', async () => {
     await openSaved(page, 'Speech english');
     const event = await proposal(page, '#generate-notes', async () => { await page.locator('#notes').fill('Newer notes: do not overwrite this edit.'); await page.locator('#meeting-title').fill(''); });
-    assert.ok(event.text.length <= 24000 && /ana/i.test(event.text) && /friday/i.test(event.text));
+    assert.ok(event.text.length <= 24000 && /nora/i.test(event.text) && /monday/i.test(event.text));
     assert.equal(await page.locator('#apply-proposal').isDisabled(), true);
     assert.equal(await page.locator('#meeting-title').inputValue(), '');
     await exportFile(page, '#download-proposal', 'english-draft.txt');
@@ -157,9 +171,9 @@ try {
     await page.locator('#discard-proposal').click(); await page.locator('#meeting-title').fill('Speech english'); await save(page);
     return { lexicalSanity: true, staleApplyDisabled: true, capturedCopyPreserved: true, meta: event.meta };
   });
-  await run('M04 Spanish real Qwen reviewed apply', async () => {
+  await run('M24 Spanish real Qwen reviewed apply', async () => {
     await openSaved(page, 'Speech spanish'); const event = await proposal(page, '#generate-notes');
-    assert.ok(event.text.length <= 24000 && /ana/i.test(event.text) && /viernes/i.test(event.text));
+    assert.ok(event.text.length <= 24000 && /clara/i.test(event.text) && /martes/i.test(event.text));
     await page.locator('#apply-proposal').click(); await save(page);
     const exported = await exportedNotes(page, 'spanish-reviewed.json'); assert.equal(exported.meeting.summary, event.text);
     await page.locator('#open-downloads').click(); await exportFile(page, '#export-markdown', 'spanish-reviewed.md'); await page.locator('#downloads-dialog .close-dialog').click();
@@ -167,22 +181,9 @@ try {
     return { lexicalSanity: true, reviewedApply: true, meta: event.meta };
   });
   await run('Pinned actual ONNX bodies', async () => {
-    const actual = await page.evaluate(async () => {
-      const cache = await caches.open('minuta-models-v1'), rows = [];
-      for (const request of await cache.keys()) {
-        const u = new URL(request.url); if (!u.pathname.endsWith('.onnx')) continue;
-        const response = await cache.match(request), bytes = await response.arrayBuffer();
-        const digest = await crypto.subtle.digest('SHA-256', bytes);
-        rows.push({ url: u.origin + u.pathname, bytes: bytes.byteLength, sha256: [...new Uint8Array(digest)].map(x => x.toString(16).padStart(2, '0')).join('') });
-      }
-      return rows;
-    });
+    const actual = await modelDigests(page);
     assert.ok(actual.length >= 3);
-    for (const row of actual) {
-      const model = modelManifest.models.find(m => row.url.includes(`/${m.id}/resolve/${m.revision}/`)); assert.ok(model, row.url);
-      const expected = model.files.find(file => row.url.endsWith(`/${file.path}`)); assert.ok(expected, row.url);
-      assert.equal(row.bytes, expected.bytes); assert.equal(row.sha256, expected.sha256);
-    }
+    verifyModelDigests(actual); result.modelBodies = actual;
     assert.ok(actual.some(r => r.url.includes('/Qwen2.5-0.5B-Instruct/')));
     return { actual };
   });
@@ -233,6 +234,10 @@ try {
   result.passed = result.cases.every(c => c.passed);
 } catch (error) { result.failure = String(error.stack || error); console.error(error); }
 finally {
+  if (modelPage && !result.modelBodies) {
+    try { if (await modelPage.locator('#cancel-job').isVisible()) await modelPage.locator('#cancel-job').click(); result.modelBodies = await modelDigests(modelPage); verifyModelDigests(result.modelBodies); }
+    catch (error) { result.modelHashError = String(error); result.passed = false; }
+  }
   await Promise.allSettled(pendingResponses);
   result.publicBodies = [...bodies.values()].filter(Boolean);
   result.requests = requests;

@@ -1,7 +1,7 @@
 export const LIMITS = Object.freeze({ audioBytes: 128 * 1024 * 1024, seconds: 3600, title: 120, notes: 16000, transcript: 64000, summary: 24000, backupBytes: 512 * 1024, meetings: 50 });
 export const MODEL_CACHE = 'minuta-models-v1';
 export const MODELS = Object.freeze({
-  voice: { id: 'Xenova/whisper-tiny', revision: '5332fcc35e32a33b86612b9a57a89be7906102b1', dtype: 'q8' },
+  voice: { id: 'Xenova/whisper-base', revision: '64da57285918e20ea79ea5c88eed7197933abaa8', dtype: 'q8' },
   notes: { id: 'onnx-community/Qwen2.5-0.5B-Instruct', revision: '22942cb7d7ba4cc81bb4673549ca4d4614469b5e', dtype: 'q8' },
 });
 export const PROMPT_VERSION = 'meeting-draft-v1';
