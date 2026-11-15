@@ -27,7 +27,7 @@ try{
  }
  assert.equal(report.resources.length,12);
  const {chromium}=await import(process.env.MINUTA_PLAYWRIGHT);
- browserServer=await chromium.launchServer({headless:true,args:['--use-fake-device-for-media-stream','--use-file-for-fake-audio-capture='+path.resolve('tests/fixtures/speech-v2/english.wav')]});native=browserServer.process();browser=await chromium.connect(browserServer.wsEndpoint());report.browser=browser.version();
+ browserServer=await chromium.launchServer({headless:true,channel:'chromium',args:['--use-fake-device-for-media-stream','--use-file-for-fake-audio-capture='+path.resolve('tests/fixtures/speech-v2/english.wav')]});native=browserServer.process();browser=await chromium.connect(browserServer.wsEndpoint());report.browser=browser.version();report.browserChannel='chromium';report.browserExecutable=path.basename(native.spawnfile);
  const ctx=await browser.newContext({viewport:{width:320,height:844},isMobile:true,hasTouch:true,acceptDownloads:true});contexts.push(ctx);
  await ctx.grantPermissions([],{origin});
  await ctx.addInitScript(()=>{
