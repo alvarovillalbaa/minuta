@@ -1,0 +1,130 @@
+[
+  {
+    "run": 43688511984,
+    "source": "2ad2ceb89debf022a75c92fb0a497382709e0119",
+    "conclusion": "failure",
+    "jobSeconds": 25,
+    "artifact": [
+      {
+        "id": 14151740733,
+        "name": "minuta-consumer-hosted-proof",
+        "size_in_bytes": 102340,
+        "url": "https://api.github.com/repos/alvarovillalbaa/minuta/actions/artifacts/14151740733",
+        "archive_download_url": "https://api.github.com/repos/alvarovillalbaa/minuta/actions/artifacts/14151740733/zip",
+        "expired": false,
+        "created_at": "2026-11-15T07:07:49Z",
+        "expires_at": "2026-11-22T07:07:48Z",
+        "updated_at": "2026-11-15T07:07:49Z",
+        "digest": "sha256:450adfd7d7987304c5b69afad9a760ac16efbf230499e57ab5c8b44ef446a4e6",
+        "workflow_run": {
+          "id": 43688511984,
+          "repository_id": 1457566526,
+          "head_repository_id": 1457566526,
+          "head_branch": "qa/minuta-consumer-20261115",
+          "head_sha": "2ad2ceb89debf022a75c92fb0a497382709e0119"
+        }
+      }
+    ]
+  },
+  {
+    "run": 43689128135,
+    "source": "004ab7de6ba90c7b4626c1b014d9a75f10ffdc21",
+    "conclusion": "failure",
+    "jobSeconds": 26,
+    "artifact": [
+      {
+        "id": 14151387972,
+        "name": "minuta-consumer-hosted-proof",
+        "size_in_bytes": 103953,
+        "url": "https://api.github.com/repos/alvarovillalbaa/minuta/actions/artifacts/14151387972",
+        "archive_download_url": "https://api.github.com/repos/alvarovillalbaa/minuta/actions/artifacts/14151387972/zip",
+        "expired": false,
+        "created_at": "2026-11-15T07:15:48Z",
+        "expires_at": "2026-11-22T07:15:47Z",
+        "updated_at": "2026-11-15T07:15:48Z",
+        "digest": "sha256:c584f900493865fb0abe2308413b86dad1cac7462b4b98efc09fe88b42806781",
+        "workflow_run": {
+          "id": 43689128135,
+          "repository_id": 1457566526,
+          "head_repository_id": 1457566526,
+          "head_branch": "qa/minuta-consumer-20261115",
+          "head_sha": "004ab7de6ba90c7b4626c1b014d9a75f10ffdc21"
+        }
+      }
+    ]
+  },
+  {
+    "run": 43689338534,
+    "source": "2f1f90d9f1558103dda1403e947b83199283b61e",
+    "conclusion": "failure",
+    "jobSeconds": 28,
+    "artifact": [
+      {
+        "id": 14152160886,
+        "name": "minuta-consumer-hosted-proof",
+        "size_in_bytes": 105011,
+        "url": "https://api.github.com/repos/alvarovillalbaa/minuta/actions/artifacts/14152160886",
+        "archive_download_url": "https://api.github.com/repos/alvarovillalbaa/minuta/actions/artifacts/14152160886/zip",
+        "expired": false,
+        "created_at": "2026-11-15T07:18:44Z",
+        "expires_at": "2026-11-22T07:18:42Z",
+        "updated_at": "2026-11-15T07:18:44Z",
+        "digest": "sha256:2d609aa75be32113d13049c58342f7c964028df35b48663bc2a12b84f20bf4e8",
+        "workflow_run": {
+          "id": 43689338534,
+          "repository_id": 1457566526,
+          "head_repository_id": 1457566526,
+          "head_branch": "qa/minuta-consumer-20261115",
+          "head_sha": "2f1f90d9f1558103dda1403e947b83199283b61e"
+        }
+      }
+    ]
+  },
+  {
+    "run": 43689501458,
+    "source": "7973a656b04219a8d3209fe2b3a226d0671eedb0",
+    "conclusion": "success",
+    "hostedJobSeconds": 23,
+    "retireJobSeconds": 12,
+    "artifact": [
+      {
+        "id": 14151623210,
+        "name": "minuta-consumer-retirement",
+        "size_in_bytes": 274,
+        "url": "https://api.github.com/repos/alvarovillalbaa/minuta/actions/artifacts/14151623210",
+        "archive_download_url": "https://api.github.com/repos/alvarovillalbaa/minuta/actions/artifacts/14151623210/zip",
+        "expired": false,
+        "created_at": "2026-11-15T07:21:03Z",
+        "expires_at": "2026-11-22T07:21:01Z",
+        "updated_at": "2026-11-15T07:21:03Z",
+        "digest": "sha256:94545e4cc8e464e82d6d99cb5c33c08cf99a49e2c96a49a425b15540b80dd979",
+        "workflow_run": {
+          "id": 43689501458,
+          "repository_id": 1457566526,
+          "head_repository_id": 1457566526,
+          "head_branch": "qa/minuta-consumer-20261115",
+          "head_sha": "7973a656b04219a8d3209fe2b3a226d0671eedb0"
+        }
+      },
+      {
+        "id": 14151084154,
+        "name": "minuta-consumer-hosted-proof",
+        "size_in_bytes": 206963,
+        "url": "https://api.github.com/repos/alvarovillalbaa/minuta/actions/artifacts/14151084154",
+        "archive_download_url": "https://api.github.com/repos/alvarovillalbaa/minuta/actions/artifacts/14151084154/zip",
+        "expired": false,
+        "created_at": "2026-11-15T07:20:48Z",
+        "expires_at": "2026-11-22T07:20:47Z",
+        "updated_at": "2026-11-15T07:20:48Z",
+        "digest": "sha256:c2351ff308f54377ccc7552d055a98a103a571e88d5cfef9c9839162b77ec13b",
+        "workflow_run": {
+          "id": 43689501458,
+          "repository_id": 1457566526,
+          "head_repository_id": 1457566526,
+          "head_branch": "qa/minuta-consumer-20261115",
+          "head_sha": "7973a656b04219a8d3209fe2b3a226d0671eedb0"
+        }
+      }
+    ]
+  }
+]

@@ -15,6 +15,11 @@ Last updated: 2026-11-15
   docs/results/2026/11-15/consumer-v1/result.md. Native N01-N08 (N06a/N06b) are
   separate from callback and older scientific results. Do not replay closed
   cases unchanged. Preserve every failed packet and exact source identity.
+- Consumer delivery is published and hosted H01 passed in full Chromium channel
+  chromium (actual native NotAllowedError); the original headless-shell failures
+  remain immutable. Total temporary CI job time237s; the leased QA branch is
+  deleted, with no active temporary workflow on main. Do not replay closed
+  source/hosted/scientific scopes unchanged. See the canonical receipt above.
 - Read README.md, docs/specs/product.md and the frozen qualification protocol.
   Preserve user work; use apply_patch. Application data never goes to an API.
 - Runtime transcription is real Transformers.js/ONNX in an owned Web Worker,

@@ -47,9 +47,47 @@
     "fail": 0,
     "skipped": 0
   },
-  "jobWallSeconds": 123,
-  "actualHosted": "pending",
-  "retirement": "pending",
+  "jobWallSeconds": 237,
+  "actualHosted": {
+    "status": "passed",
+    "case": "H01",
+    "source": "7973a656b04219a8d3209fe2b3a226d0671eedb0",
+    "run": 43689501458,
+    "job": 132736936465,
+    "release": "c9e0d8600704f4674f83f2c0744e461bd3f6d302",
+    "deployment": "dpl_Bpwytd1UkNcA3UEPyP8Hz1goevC8",
+    "url": "https://minuta-liard.vercel.app",
+    "resourceBodies": 12,
+    "channel": "chromium",
+    "executable": "chrome",
+    "browser": "141.0.7390.37",
+    "nativeMicrophoneError": "NotAllowedError",
+    "obtainedTracks": 0
+  },
+  "retirement": {
+    "release": "c9e0d8600704f4674f83f2c0744e461bd3f6d302",
+    "qa": "7973a656b04219a8d3209fe2b3a226d0671eedb0",
+    "deleted": true,
+    "delete_status": 204,
+    "readback_status": 404
+  },
   "localCheckout": "preserved and unreconciled because Mac storage is full",
-  "qaDeployments": 0
+  "qaDeployments": 0,
+  "hostedFailures": [
+    {
+      "run": 43688511984,
+      "source": "2ad2ceb89debf022a75c92fb0a497382709e0119",
+      "reason": "asserted notes before asynchronous saved-card load finished"
+    },
+    {
+      "run": 43689128135,
+      "source": "004ab7de6ba90c7b4626c1b014d9a75f10ffdc21",
+      "reason": "headless shell native NotSupportedError instead of NotAllowedError"
+    },
+    {
+      "run": 43689338534,
+      "source": "2f1f90d9f1558103dda1403e947b83199283b61e",
+      "reason": "same headless shell result with pinned fake audio and separate desktop diagnostic"
+    }
+  ]
 }

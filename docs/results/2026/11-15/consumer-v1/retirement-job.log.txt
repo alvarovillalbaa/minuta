@@ -1,0 +1,106 @@
+﻿2026-11-15T07:20:54.7501771Z Current runner version: '2.338.2'
+2026-11-15T07:20:54.7519734Z ##[group]Runner Image Provisioner
+2026-11-15T07:20:54.7520453Z Hosted Compute Agent
+2026-11-15T07:20:54.7520893Z Version: 20261103.629
+2026-11-15T07:20:54.7521353Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+2026-11-15T07:20:54.7521871Z Build Date: 2026-11-03T17:26:59Z
+2026-11-15T07:20:54.7522344Z Worker ID: {2201e3fa-0e3c-454e-9637-9da969ee1826}
+2026-11-15T07:20:54.7522882Z Region: us-west-2
+2026-11-15T07:20:54.7523265Z Cloud: AWS
+2026-11-15T07:20:54.7523632Z ##[endgroup]
+2026-11-15T07:20:54.7524586Z ##[group]Operating System
+2026-11-15T07:20:54.7525015Z Ubuntu
+2026-11-15T07:20:54.7525402Z 24.04.5
+2026-11-15T07:20:54.7525785Z LTS
+2026-11-15T07:20:54.7526434Z ##[endgroup]
+2026-11-15T07:20:54.7526833Z ##[group]Runner Image
+2026-11-15T07:20:54.7527313Z Image: ubuntu-24.04
+2026-11-15T07:20:54.7527717Z Version: 20261111.127.1
+2026-11-15T07:20:54.7528626Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261111.127/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-15T07:20:54.7529936Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261111.127
+2026-11-15T07:20:54.7530628Z ##[endgroup]
+2026-11-15T07:20:54.7531421Z ##[group]GITHUB_TOKEN Permissions
+2026-11-15T07:20:54.7533046Z Contents: write
+2026-11-15T07:20:54.7533474Z Metadata: read
+2026-11-15T07:20:54.7533872Z ##[endgroup]
+2026-11-15T07:20:54.7535482Z Secret source: Actions
+2026-11-15T07:20:54.7536517Z Cache mode: write
+2026-11-15T07:20:54.7537055Z Prepare workflow directory
+2026-11-15T07:20:54.7763238Z Prepare all required actions
+2026-11-15T07:20:54.7799038Z Getting action download info
+2026-11-15T07:20:55.1556672Z Download action repository 'actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9' (SHA:cf430e030ddbb5b0abf93d22962f4752f3646cd9)
+2026-11-15T07:20:57.0367818Z Complete job name: retire
+2026-11-15T07:20:57.1042397Z ##[group]Run python3 - <<'PY'
+2026-11-15T07:20:57.1043627Z [36;1mpython3 - <<'PY'[0m
+2026-11-15T07:20:57.1044623Z [36;1mfrom pathlib import Path[0m
+2026-11-15T07:20:57.1045778Z [36;1mimport os,json,urllib.request,urllib.error[0m
+2026-11-15T07:20:57.1048093Z [36;1mroot=Path(os.environ["RUNNER_TEMP"])/("minuta-retirement-"+os.environ["GITHUB_RUN_ID"]+"-"+os.environ["GITHUB_RUN_ATTEMPT"])[0m
+2026-11-15T07:20:57.1049987Z [36;1mroot.mkdir()[0m
+2026-11-15T07:20:57.1051356Z [36;1mreceipt={"release":os.environ["RELEASE_SHA"],"qa":os.environ["GITHUB_SHA"],"deleted":False}[0m
+2026-11-15T07:20:57.1053215Z [36;1mclass NoRedirect(urllib.request.HTTPRedirectHandler):[0m
+2026-11-15T07:20:57.1054501Z [36;1m    def redirect_request(self,*args):[0m
+2026-11-15T07:20:57.1055699Z [36;1m        return None[0m
+2026-11-15T07:20:57.1056934Z [36;1mopener=urllib.request.build_opener(NoRedirect)[0m
+2026-11-15T07:20:57.1058155Z [36;1mdef request(method,suffix):[0m
+2026-11-15T07:20:57.1061102Z [36;1m    req=urllib.request.Request("https://api.github.com/repos/alvarovillalbaa/minuta"+suffix,method=method,headers={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json"})[0m
+2026-11-15T07:20:57.1063820Z [36;1m    try:[0m
+2026-11-15T07:20:57.1064833Z [36;1m        with opener.open(req,timeout=20) as response:[0m
+2026-11-15T07:20:57.1066297Z [36;1m            raw=response.read(1024*1024)[0m
+2026-11-15T07:20:57.1067665Z [36;1m            return response.status,json.loads(raw) if raw else None[0m
+2026-11-15T07:20:57.1069066Z [36;1m    except urllib.error.HTTPError as error:[0m
+2026-11-15T07:20:57.1070185Z [36;1m        raw=error.read(16384)[0m
+2026-11-15T07:20:57.1071394Z [36;1m        return error.code,json.loads(raw) if raw else None[0m
+2026-11-15T07:20:57.1072576Z [36;1mtry:[0m
+2026-11-15T07:20:57.1073725Z [36;1m    assert os.environ["GITHUB_REF"]=="refs/heads/qa/minuta-consumer-20261115"[0m
+2026-11-15T07:20:57.1075354Z [36;1m    status,main=request("GET","/git/ref/heads/main")[0m
+2026-11-15T07:20:57.1077347Z [36;1m    assert status==200 and main["object"]["sha"]==receipt["release"],"Main lease changed; preserve QA ref"[0m
+2026-11-15T07:20:57.1079524Z [36;1m    status,commit=request("GET","/git/commits/"+receipt["release"])[0m
+2026-11-15T07:20:57.1081317Z [36;1m    assert status==200 and commit["tree"]["sha"]=="9057962005e83f29c3bb4c0c86bf810849ce2409"[0m
+2026-11-15T07:20:57.1083371Z [36;1m    status,_=request("GET","/contents/.github/workflows/consumer-v1-qa.yml?ref=main")[0m
+2026-11-15T07:20:57.1085161Z [36;1m    assert status==404,"One-off workflow must be absent from main"[0m
+2026-11-15T07:20:57.1087053Z [36;1m    status,owned=request("GET","/git/ref/heads/qa/minuta-consumer-20261115")[0m
+2026-11-15T07:20:57.1089070Z [36;1m    assert status==200 and owned["object"]["sha"]==receipt["qa"],"QA lease changed; preserve ref"[0m
+2026-11-15T07:20:57.1091011Z [36;1m    status,_=request("DELETE","/git/refs/heads/qa/minuta-consumer-20261115")[0m
+2026-11-15T07:20:57.1092447Z [36;1m    receipt["delete_status"]=status[0m
+2026-11-15T07:20:57.1093685Z [36;1m    assert status==204,"Temporary ref deletion refused"[0m
+2026-11-15T07:20:57.1095440Z [36;1m    status,_=request("GET","/git/ref/heads/qa/minuta-consumer-20261115")[0m
+2026-11-15T07:20:57.1097072Z [36;1m    receipt["readback_status"]=status[0m
+2026-11-15T07:20:57.1098345Z [36;1m    assert status==404,"Temporary branch still present"[0m
+2026-11-15T07:20:57.1099600Z [36;1m    receipt["deleted"]=True[0m
+2026-11-15T07:20:57.1100639Z [36;1mexcept Exception as error:[0m
+2026-11-15T07:20:57.1101837Z [36;1m    receipt["error"]=type(error).__name__+": "+str(error)[0m
+2026-11-15T07:20:57.1103033Z [36;1m    raise[0m
+2026-11-15T07:20:57.1103835Z [36;1mfinally:[0m
+2026-11-15T07:20:57.1105053Z [36;1m    (root/"retirement.json").write_text(json.dumps(receipt,indent=2)+"\n")[0m
+2026-11-15T07:20:57.1106660Z [36;1m    print(json.dumps(receipt))[0m
+2026-11-15T07:20:57.1107763Z [36;1mPY[0m
+2026-11-15T07:20:57.3568696Z shell: /usr/bin/bash -e {0}
+2026-11-15T07:20:57.3569406Z env:
+2026-11-15T07:20:57.3575409Z   GH_TOKEN: ***
+2026-11-15T07:20:57.3576093Z   RELEASE_SHA: c9e0d8600704f4674f83f2c0744e461bd3f6d302
+2026-11-15T07:20:57.3576755Z ##[endgroup]
+2026-11-15T07:20:59.6809982Z {"release": "c9e0d8600704f4674f83f2c0744e461bd3f6d302", "qa": "7973a656b04219a8d3209fe2b3a226d0671eedb0", "deleted": true, "delete_status": 204, "readback_status": 404}
+2026-11-15T07:20:59.7017526Z ##[group]Run actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+2026-11-15T07:20:59.7017987Z with:
+2026-11-15T07:20:59.7018341Z   name: minuta-consumer-retirement
+2026-11-15T07:20:59.7018712Z   path: /home/runner/work/_temp/minuta-retirement-43689501458-1
+2026-11-15T07:20:59.7019074Z   retention-days: 7
+2026-11-15T07:20:59.7019371Z   if-no-files-found: warn
+2026-11-15T07:20:59.7019653Z   compression-level: 6
+2026-11-15T07:20:59.7019921Z   overwrite: false
+2026-11-15T07:20:59.7020197Z   include-hidden-files: false
+2026-11-15T07:20:59.7020484Z   archive: true
+2026-11-15T07:20:59.7020746Z ##[endgroup]
+2026-11-15T07:21:01.8752303Z With the provided path, there will be 1 file uploaded
+2026-11-15T07:21:01.8755773Z Artifact name is valid!
+2026-11-15T07:21:01.8756285Z Root directory input is valid!
+2026-11-15T07:21:02.4135295Z Uploading artifact: minuta-consumer-retirement.zip
+2026-11-15T07:21:02.4163269Z Beginning upload of artifact content to blob storage
+2026-11-15T07:21:02.7723222Z Uploaded bytes 274
+2026-11-15T07:21:02.8602366Z Finished uploading artifact content to blob storage!
+2026-11-15T07:21:02.8603273Z SHA256 digest of uploaded artifact is 94545e4cc8e464e82d6d99cb5c33c08cf99a49e2c96a49a425b15540b80dd979
+2026-11-15T07:21:02.8603747Z Finalizing artifact upload
+2026-11-15T07:21:03.4179387Z Artifact minuta-consumer-retirement successfully finalized. Artifact ID 14151623210
+2026-11-15T07:21:03.4180333Z Artifact minuta-consumer-retirement has been successfully uploaded! Final size is 274 bytes. Artifact ID is 14151623210
+2026-11-15T07:21:03.4183102Z Artifact download URL: https://github.com/alvarovillalbaa/minuta/actions/runs/43689501458/artifacts/14151623210
+2026-11-15T07:21:03.4319253Z Cleaning up orphan processes
