@@ -1,0 +1,136 @@
+{
+  "date": "2026-11-15",
+  "owner": "GEN-3659",
+  "base": "7afa041218b5d9dde83175379be9f14b8eb00197",
+  "localDirtySnapshot": [
+    {
+      "path": "AGENTS.md",
+      "bytes": 2954,
+      "sha256": "cfe5d68cc6b49efef6b76357afe613adc2a20c5bd3452af3fa629b37361c41ed"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3721,
+      "sha256": "2c9cee1a1e0feb8fc52f7ab74e45a0a8ba63089b71a51273a67bb019dcc159c5"
+    },
+    {
+      "path": "docs/specs/product.md",
+      "bytes": 6960,
+      "sha256": "5a141295220ccfcfc0e2c58ef1f0862985e8d2c414b7f3da7adbb2f9931f2cea"
+    },
+    {
+      "path": "index.html",
+      "bytes": 13506,
+      "sha256": "0206557a3d480f826de4c5674e16e365be94b754c64102a54a8bdda7248b4c99"
+    },
+    {
+      "path": "public/icon.svg",
+      "bytes": 194,
+      "sha256": "ea5dc4e9c5d36a029dbf3208617862f90e2ee5e700b37955cbf1b4bc150967bc"
+    },
+    {
+      "path": "src/main.mjs",
+      "bytes": 24846,
+      "sha256": "dd5a978359d7205266ec16885a7e2025eb6c5ea30183246bc1f234ef91d1c707"
+    },
+    {
+      "path": "src/styles.css",
+      "bytes": 16876,
+      "sha256": "23251169399ae0036b9412d2c97c00d61fea8770e247adaccf5ada43bd5a402e"
+    },
+    {
+      "path": "docs/results/2026/11-14/consumer-redesign.md",
+      "bytes": 3769,
+      "sha256": "754da846fc42752bfe70e745551ec82c1fcac72375565701dc9db46ed4003129"
+    },
+    {
+      "path": "tests/unit/notebook-ui.test.mjs",
+      "bytes": 13834,
+      "sha256": "375ec6a3878df33469fb48f269d7182ccf1f10138fc597e722e8b3a434542b74"
+    }
+  ],
+  "standingAuthority": "Minuta AGENTS source/dependencies/focused authored checks/temporary free CI/local-model fixture inference/static deployment; no Linky authority reused.",
+  "storage": {
+    "freeGiB": 0.1,
+    "requiredGiB": 34,
+    "localHeavyWork": false,
+    "localWrites": "No safe local persistence while the volume is full. Immutable owned remote Git objects retain source/packet without changing the dirty Mac checkout/index/refs."
+  },
+  "scope": [
+    "N01",
+    "N02",
+    "N03",
+    "N04",
+    "N05",
+    "N06a",
+    "N06b",
+    "N07",
+    "N08"
+  ],
+  "frozenProtocols": "v1/v2/v3, accepted transcript inputs, old failures and model/runtime module source remain unchanged.",
+  "maxTotalCiJobWallMinutes": 20,
+  "actualCiSecondsUsed": 0,
+  "staticChecks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "f781ed",
+        "wall_time_seconds": 0.143371125,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "4997b6",
+        "wall_time_seconds": 0.156475709,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "ae7b2c",
+        "wall_time_seconds": 0.156404833,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "4824ed",
+        "wall_time_seconds": 0.000008833,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "bfb0b8",
+        "wall_time_seconds": 0.067083334,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "c086a6",
+        "wall_time_seconds": 0.000010209,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    }
+  ],
+  "productionDeployment": "Not changed. QA ref includes deploymentEnabled false before publication."
+}
