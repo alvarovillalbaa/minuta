@@ -1,0 +1,16 @@
+{
+  "schema": "minuta.notes",
+  "version": 1,
+  "includesAudio": false,
+  "meeting": {
+    "id": "be36d9a6-d248-4b4d-8658-668c3c745a4c",
+    "revision": 1,
+    "title": "Entrega pública de Minuta T2",
+    "createdAt": "2026-11-15T07:15:44.867Z",
+    "updatedAt": "2026-11-15T07:15:45.250Z",
+    "language": "spanish",
+    "notes": "Nora revisará la propuesta el lunes. El precio sigue sin decidir.",
+    "transcript": "",
+    "summary": "# Extracto para revisar\n\n## Mis notas\n\n- [N1] Nora revisará la propuesta el lunes.\n- [N2] El precio sigue sin decidir.\n\n2 de 2 fragmentos. Clasificación por reglas; revisa el contexto. La fuente completa se conserva en Mis notas y Transcripción."
+  }
+}

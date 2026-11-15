@@ -1,0 +1,21 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'NotSupportedError'
+- 'NotAllowedError'
+      ^
+
+    at file:///home/runner/work/minuta/minuta/tests/e2e/consumer-hosted-v1.mjs:86:52 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'NotSupportedError',
+  expected: 'NotAllowedError',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.2

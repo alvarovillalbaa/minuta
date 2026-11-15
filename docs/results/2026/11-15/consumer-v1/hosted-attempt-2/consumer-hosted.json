@@ -1,0 +1,260 @@
+{
+  "tier": "T2",
+  "source": "004ab7de6ba90c7b4626c1b014d9a75f10ffdc21",
+  "release": "c9e0d8600704f4674f83f2c0744e461bd3f6d302",
+  "url": "https://minuta-liard.vercel.app",
+  "node": "v24.22.2",
+  "resources": [
+    {
+      "path": "/assets/ai.worker-BaNRRJSN.js",
+      "status": 200,
+      "bytes": 892780,
+      "sha256": "b6404660c9ef6949b239fdb52ea9044dde02bddd86d0068f5c01635a407ad986",
+      "expected": "b6404660c9ef6949b239fdb52ea9044dde02bddd86d0068f5c01635a407ad986",
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self' blob:; connect-src 'self' https://huggingface.co https://*.huggingface.co https://*.hf.co; media-src 'self' blob:; img-src 'self' data: blob:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "permissions-policy": "microphone=(self), camera=()"
+      }
+    },
+    {
+      "path": "/assets/capture.worklet-D57mleKD.mjs",
+      "status": 200,
+      "bytes": 933,
+      "sha256": "2eb2bdb62b1497541cb44d5e687933888c903642c1ee2aa6fdc7001695468148",
+      "expected": "2eb2bdb62b1497541cb44d5e687933888c903642c1ee2aa6fdc7001695468148",
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self' blob:; connect-src 'self' https://huggingface.co https://*.huggingface.co https://*.hf.co; media-src 'self' blob:; img-src 'self' data: blob:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "permissions-policy": "microphone=(self), camera=()"
+      }
+    },
+    {
+      "path": "/assets/index-CyvY_z2c.css",
+      "status": 200,
+      "bytes": 16770,
+      "sha256": "f4b0008df91e9ac98b6a93a8c640d16850710da0740dfad738a76a49f5874170",
+      "expected": "f4b0008df91e9ac98b6a93a8c640d16850710da0740dfad738a76a49f5874170",
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self' blob:; connect-src 'self' https://huggingface.co https://*.huggingface.co https://*.hf.co; media-src 'self' blob:; img-src 'self' data: blob:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "permissions-policy": "microphone=(self), camera=()"
+      }
+    },
+    {
+      "path": "/assets/index-yKIlGzW9.js",
+      "status": 200,
+      "bytes": 30191,
+      "sha256": "aa812b69ce16e695abbae7e493b3478061c62820379767322ab89f3edddff2a6",
+      "expected": "aa812b69ce16e695abbae7e493b3478061c62820379767322ab89f3edddff2a6",
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self' blob:; connect-src 'self' https://huggingface.co https://*.huggingface.co https://*.hf.co; media-src 'self' blob:; img-src 'self' data: blob:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "permissions-policy": "microphone=(self), camera=()"
+      }
+    },
+    {
+      "path": "/assets/ort-wasm-simd-threaded.jsep-B0T3yYHD.wasm",
+      "status": 200,
+      "bytes": 21596019,
+      "sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39",
+      "expected": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39",
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self' blob:; connect-src 'self' https://huggingface.co https://*.huggingface.co https://*.hf.co; media-src 'self' blob:; img-src 'self' data: blob:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "permissions-policy": "microphone=(self), camera=()"
+      }
+    },
+    {
+      "path": "/icon.svg",
+      "status": 200,
+      "bytes": 194,
+      "sha256": "ea5dc4e9c5d36a029dbf3208617862f90e2ee5e700b37955cbf1b4bc150967bc",
+      "expected": "ea5dc4e9c5d36a029dbf3208617862f90e2ee5e700b37955cbf1b4bc150967bc",
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self' blob:; connect-src 'self' https://huggingface.co https://*.huggingface.co https://*.hf.co; media-src 'self' blob:; img-src 'self' data: blob:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "permissions-policy": "microphone=(self), camera=()"
+      }
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 13611,
+      "sha256": "cf6096c0e223a9ffa5a2b37746dcd7346191384135da5950165a31b487929db7",
+      "expected": "cf6096c0e223a9ffa5a2b37746dcd7346191384135da5950165a31b487929db7",
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self' blob:; connect-src 'self' https://huggingface.co https://*.huggingface.co https://*.hf.co; media-src 'self' blob:; img-src 'self' data: blob:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "permissions-policy": "microphone=(self), camera=()"
+      }
+    },
+    {
+      "path": "/third-party-licenses.txt",
+      "status": 200,
+      "bytes": 12521,
+      "sha256": "905e9cd2a32e62f5f647a1cb7431e7cb92047b99403b2019249a108d36c920bf",
+      "expected": "905e9cd2a32e62f5f647a1cb7431e7cb92047b99403b2019249a108d36c920bf",
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self' blob:; connect-src 'self' https://huggingface.co https://*.huggingface.co https://*.hf.co; media-src 'self' blob:; img-src 'self' data: blob:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "permissions-policy": "microphone=(self), camera=()"
+      }
+    },
+    {
+      "path": "/wasm/ort-wasm-simd-threaded.jsep.mjs",
+      "status": 200,
+      "bytes": 44484,
+      "sha256": "08fb86ec433c78bfb032c5d84a68b8e8e5a8d81268fa39e24314179a5767a5b9",
+      "expected": "08fb86ec433c78bfb032c5d84a68b8e8e5a8d81268fa39e24314179a5767a5b9",
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self' blob:; connect-src 'self' https://huggingface.co https://*.huggingface.co https://*.hf.co; media-src 'self' blob:; img-src 'self' data: blob:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "permissions-policy": "microphone=(self), camera=()"
+      }
+    },
+    {
+      "path": "/wasm/ort-wasm-simd-threaded.jsep.wasm",
+      "status": 200,
+      "bytes": 21596019,
+      "sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39",
+      "expected": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39",
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self' blob:; connect-src 'self' https://huggingface.co https://*.huggingface.co https://*.hf.co; media-src 'self' blob:; img-src 'self' data: blob:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "permissions-policy": "microphone=(self), camera=()"
+      }
+    },
+    {
+      "path": "/wasm/ort-wasm-simd-threaded.mjs",
+      "status": 200,
+      "bytes": 20856,
+      "sha256": "43c25054b6b9ac000f786c65545ff83a45f871e0e310e8c2f4d48a363bb66db4",
+      "expected": "43c25054b6b9ac000f786c65545ff83a45f871e0e310e8c2f4d48a363bb66db4",
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self' blob:; connect-src 'self' https://huggingface.co https://*.huggingface.co https://*.hf.co; media-src 'self' blob:; img-src 'self' data: blob:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "permissions-policy": "microphone=(self), camera=()"
+      }
+    },
+    {
+      "path": "/wasm/ort-wasm-simd-threaded.wasm",
+      "status": 200,
+      "bytes": 11133407,
+      "sha256": "f061472c6e77d6d50d079aacdc0ff9b63fee287ddd2cbf46cf62438d3891de2b",
+      "expected": "f061472c6e77d6d50d079aacdc0ff9b63fee287ddd2cbf46cf62438d3891de2b",
+      "headers": {
+        "content-security-policy": "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; worker-src 'self' blob:; connect-src 'self' https://huggingface.co https://*.huggingface.co https://*.hf.co; media-src 'self' blob:; img-src 'self' data: blob:; object-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "no-referrer",
+        "permissions-policy": "microphone=(self), camera=()"
+      }
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "url": "https://minuta-liard.vercel.app/",
+      "hasQuery": false,
+      "bodyBytes": 0
+    },
+    {
+      "method": "GET",
+      "url": "https://minuta-liard.vercel.app/assets/index-yKIlGzW9.js",
+      "hasQuery": false,
+      "bodyBytes": 0
+    },
+    {
+      "method": "GET",
+      "url": "https://minuta-liard.vercel.app/assets/index-CyvY_z2c.css",
+      "hasQuery": false,
+      "bodyBytes": 0
+    },
+    {
+      "method": "GET",
+      "url": "https://minuta-liard.vercel.app/assets/ai.worker-BaNRRJSN.js",
+      "hasQuery": false,
+      "bodyBytes": 0
+    },
+    {
+      "method": "GET",
+      "url": "https://minuta-liard.vercel.app/",
+      "hasQuery": false,
+      "bodyBytes": 0
+    },
+    {
+      "method": "GET",
+      "url": "https://minuta-liard.vercel.app/assets/index-yKIlGzW9.js",
+      "hasQuery": false,
+      "bodyBytes": 0
+    },
+    {
+      "method": "GET",
+      "url": "https://minuta-liard.vercel.app/assets/index-CyvY_z2c.css",
+      "hasQuery": false,
+      "bodyBytes": 0
+    }
+  ],
+  "errors": [],
+  "unexpected": [],
+  "cases": [],
+  "passed": false,
+  "browser": "141.0.7390.37",
+  "excerpt": {
+    "method": "source-extract-v1",
+    "selectedCount": 2,
+    "totalUnits": 2,
+    "units": [
+      {
+        "source": "notes",
+        "start": 0,
+        "end": 36,
+        "text": "Nora revisará la propuesta el lunes.",
+        "id": "N1",
+        "category": "personal"
+      },
+      {
+        "source": "notes",
+        "start": 37,
+        "end": 65,
+        "text": "El precio sigue sin decidir.",
+        "id": "N2",
+        "category": "personal"
+      }
+    ]
+  },
+  "permissionBefore": {
+    "state": "denied",
+    "calls": 0
+  },
+  "deniedCapture": {
+    "calls": 1,
+    "errors": [
+      {
+        "name": "NotSupportedError",
+        "message": "Not supported"
+      }
+    ],
+    "tracks": [],
+    "status": "Not supported"
+  },
+  "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'NotSupportedError'\n- 'NotAllowedError'\n      ^\n\n    at file:///home/runner/work/minuta/minuta/tests/e2e/consumer-hosted-v1.mjs:86:52",
+  "cleanup": {
+    "contextsClosed": true,
+    "nativePid": 3171,
+    "nativeExitCode": 0,
+    "nativeAbsent": true,
+    "failures": []
+  }
+}

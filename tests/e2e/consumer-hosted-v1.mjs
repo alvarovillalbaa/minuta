@@ -10,6 +10,7 @@ const config=JSON.parse(await readFile('vercel.json','utf8'));
 const expectedHeaders=Object.fromEntries(config.headers[0].headers.map(h=>[h.key.toLowerCase(),h.value]));
 const report={tier:'T2',source:process.env.GITHUB_SHA,release:process.env.MINUTA_RELEASE_SHA,url:origin,node:process.version,resources:[],requests:[],errors:[],unexpected:[],cases:[],passed:false};
 const contexts=[];let browserServer,browser,native;
+const fixture=await readFile('tests/fixtures/speech-v2/english.wav');assert.equal(fixture.length,246774);assert.equal(createHash('sha256').update(fixture).digest('hex'),'696c4221d5c4edffd3691a86d5049af3d21140e0fe33466451469e64560b5314');
 await mkdir(path.join(out,'downloads'),{recursive:true});
 try{
  let total=0;
@@ -26,7 +27,7 @@ try{
  }
  assert.equal(report.resources.length,12);
  const {chromium}=await import(process.env.MINUTA_PLAYWRIGHT);
- browserServer=await chromium.launchServer({headless:true,args:['--use-fake-device-for-media-stream']});native=browserServer.process();browser=await chromium.connect(browserServer.wsEndpoint());report.browser=browser.version();
+ browserServer=await chromium.launchServer({headless:true,args:['--use-fake-device-for-media-stream','--use-file-for-fake-audio-capture='+path.resolve('tests/fixtures/speech-v2/english.wav')]});native=browserServer.process();browser=await chromium.connect(browserServer.wsEndpoint());report.browser=browser.version();
  const ctx=await browser.newContext({viewport:{width:320,height:844},isMobile:true,hasTouch:true,acceptDownloads:true});contexts.push(ctx);
  await ctx.grantPermissions([],{origin});
  await ctx.addInitScript(()=>{
@@ -36,7 +37,7 @@ try{
    navigator.mediaDevices.getUserMedia=async(...args)=>{
     __minutaHosted.mediaCalls++;
     try{const stream=await original(...args);__minutaHosted.tracks.push(...stream.getTracks());return stream;}
-    catch(error){__minutaHosted.mediaErrors.push({name:error.name,message:error.message});throw error;}
+    catch(error){__minutaHosted.mediaErrors.push({name:error.name,message:error.message,stack:error.stack,constraints:args});throw error;}
    };
   }
   const NativeWorker=window.Worker;
@@ -90,7 +91,16 @@ try{
  assert.deepEqual(report.errors,[]);assert.deepEqual(report.unexpected,[]);assert.ok(report.requests.length>=7);
  report.cases.push({id:'H01',status:'passed',description:'Twelve exact anonymous public bodies/headers and real320px consumer write/excerpt/review/save/reload/download plus observed native denied microphone call'});
  report.passed=true;
-}catch(error){report.error=error.stack;throw error;}
+}catch(error){report.error=error.stack;
+ if(browser){
+  const diagnostic=await browser.newContext({viewport:{width:1360,height:920}});contexts.push(diagnostic);
+  try{
+   await diagnostic.grantPermissions([],{origin});const d=await diagnostic.newPage();await d.goto(origin,{waitUntil:'networkidle'});
+   report.desktopDiagnostic=await d.evaluate(async()=>{const state=(await navigator.permissions.query({name:'microphone'})).state;try{const stream=await navigator.mediaDevices.getUserMedia({audio:true});const tracks=stream.getTracks().map(t=>({kind:t.kind,state:t.readyState}));stream.getTracks().forEach(t=>t.stop());return{state,unexpectedStream:true,tracks};}catch(e){return{state,error:{name:e.name,message:e.message,stack:e.stack}};}});
+  }catch(e){report.desktopDiagnostic={diagnosticError:String(e)};}
+ }
+ throw error;
+}
 finally{
  const failures=[];for(const ctx of contexts){try{await ctx.close();}catch(e){failures.push(String(e));}}
  if(browser){try{await browser.close();}catch(e){failures.push(String(e));}}
