@@ -8,10 +8,11 @@ and audio entry points, searchable conversation cards and a resumable working
 draft. Opening a page never starts recording. The editor has no SaaS sidebar;
 **Lo que me llevo** holds the user's reviewed summary. See the
 [iteration receipt](docs/results/2026/11-14/consumer-redesign.md) for actual checks
-and limits. These changes are not yet published; the release link below refers
-to the earlier edition.
+and limits. The [consumer qualification](docs/results/2026/11-15/consumer-v1/result.md)
+records the actual native source boundaries; new hosted delivery is checked
+separately from the earlier release.
 
-[Open Minuta](https://minuta-liard.vercel.app) · [Release evidence](docs/results/2026/11-14/release.md)
+[Open Minuta](https://minuta-liard.vercel.app) · [Consumer evidence](docs/results/2026/11-15/consumer-v1/result.md) · [Original release](docs/results/2026/11-14/release.md)
 
 Minuta has no account, meeting bot or application backend. Notes and recordings
 stay in this browser's IndexedDB when you choose **Guardar**. Export notes as

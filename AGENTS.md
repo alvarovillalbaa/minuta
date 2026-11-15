@@ -1,6 +1,6 @@
 # Minuta
 
-Last updated: 2026-11-14
+Last updated: 2026-11-15
 
 - Owner source: GEN-3659, Iterating All My Personal Projects, explicitly asks
   for a consumer redesign informed by Granola, Bluedot, Notion AI Notetaker and
@@ -11,9 +11,10 @@ Last updated: 2026-11-14
   must not reset it; creating/opening another conversation uses the replacement
   guard. Home entry buttons do not capture audio. Library search is read-only;
   keep titles/previews as textContent and ignore superseded async library reads.
-- The new UI is local and unpublished. Its callback checks are not browser,
-  capture, IndexedDB or visual evidence. Preserve earlier frozen qualification
-  protocols/results; they do not qualify the changed interface.
+- The consumer qualification and exact source/carry/delivery boundaries are in
+  docs/results/2026/11-15/consumer-v1/result.md. Native N01-N08 (N06a/N06b) are
+  separate from callback and older scientific results. Do not replay closed
+  cases unchanged. Preserve every failed packet and exact source identity.
 - Read README.md, docs/specs/product.md and the frozen qualification protocol.
   Preserve user work; use apply_patch. Application data never goes to an API.
 - Runtime transcription is real Transformers.js/ONNX in an owned Web Worker,
@@ -40,3 +41,7 @@ Last updated: 2026-11-14
   paths. Keep package/tool locks and generated output separate; retire QA CI.
 - Use focused syntax/core checks and git diff --check. Persist actual source,
   model/body hashes, native downloads, screenshots and owned teardown in docs/.
+
+- Mac persistence is blocked by full storage. The corrected placeholder and
+  qualification helpers/results may be remote-only; inspect the current owning
+  GitHub receipt before repeating local work. Preserve the dirty checkout.

@@ -1,0 +1,79 @@
+{
+  "source": "61fbc4c677df5d783c30fc049359b5918202c36c",
+  "run": 43686370689,
+  "job": 132727590833,
+  "node": "v24.22.2",
+  "tests": 9,
+  "pass": 9,
+  "fail": 0,
+  "skipped": 0,
+  "stdoutSha256": "04d04d05aed9a39461040399abf9b880609a019c3ed0f5f591c60e50ec3660ec",
+  "inputs": [
+    {
+      "path": "index.html",
+      "bytes": 13512,
+      "sha256": "8670903187a66d20a3738a7371e3b3c1c638366b7f4bef09ba69c4cdf70c18dd"
+    },
+    {
+      "path": "package-lock.json",
+      "bytes": 66332,
+      "sha256": "80c76cf98c53c59868140dfb01b14f70bf821b53b67e227996d9393969bd33e1"
+    },
+    {
+      "path": "package.json",
+      "bytes": 606,
+      "sha256": "4d767c29fd298945928ad725b63278eb880c7987dd01afd8f5695fca7789d7ac"
+    },
+    {
+      "path": "src/ai.worker.mjs",
+      "bytes": 2476,
+      "sha256": "62ac7ecb031c6c5a7d59aaee9a86849e3b52e35e48f5adc4f9b1b397a1ccc553"
+    },
+    {
+      "path": "src/capture.worklet.mjs",
+      "bytes": 933,
+      "sha256": "2eb2bdb62b1497541cb44d5e687933888c903642c1ee2aa6fdc7001695468148"
+    },
+    {
+      "path": "src/core.mjs",
+      "bytes": 5748,
+      "sha256": "0e6925857a0d41c2af29e80c80e06b1917bc3c3fe86f1baa18adcd86784c52c3"
+    },
+    {
+      "path": "src/extract.mjs",
+      "bytes": 3778,
+      "sha256": "a8b24585c6180122e3ca704b78cdb89b005dc86de99207d712827852a1e9c146"
+    },
+    {
+      "path": "src/main.mjs",
+      "bytes": 24846,
+      "sha256": "dd5a978359d7205266ec16885a7e2025eb6c5ea30183246bc1f234ef91d1c707"
+    },
+    {
+      "path": "src/recorder.mjs",
+      "bytes": 5321,
+      "sha256": "828c7145ce3c61cffcc7f86a8b22ba997c8e2a425d87766d146c656ecc984c7e"
+    },
+    {
+      "path": "src/storage.mjs",
+      "bytes": 5975,
+      "sha256": "c975466ab9f7ca8c619869183ed666868e007dffe25a5368c5af90b57c56c543"
+    },
+    {
+      "path": "src/styles.css",
+      "bytes": 16876,
+      "sha256": "23251169399ae0036b9412d2c97c00d61fea8770e247adaccf5ada43bd5a402e"
+    },
+    {
+      "path": "src/wav.mjs",
+      "bytes": 4235,
+      "sha256": "5558f0ae2ac8d89bcd0ca5b8915e16719b8b4e87b63677d31639c71809295ea1"
+    },
+    {
+      "path": "tests/unit/notebook-ui.test.mjs",
+      "bytes": 13834,
+      "sha256": "375ec6a3878df33469fb48f269d7182ccf1f10138fc597e722e8b3a434542b74"
+    }
+  ],
+  "originalTap": "docs/results/2026/11-15/consumer-v1/attempt-3/03-consumer-callbacks.stdout.txt"
+}

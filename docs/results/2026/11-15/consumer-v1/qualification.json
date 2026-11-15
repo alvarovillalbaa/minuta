@@ -1,0 +1,55 @@
+{
+  "qualifiedSource": "e98aec47bdae38a0eff5f2ae37b4d3ebfd7b04e5",
+  "nativeOutcomes": {
+    "N01": {
+      "source": "61fbc4c677df5d783c30fc049359b5918202c36c",
+      "run": 43686370689
+    },
+    "N02": {
+      "source": "8ef14e9ff26274070f7d4392566a91dce4b53039",
+      "run": 43685546382
+    },
+    "N03": {
+      "source": "8ef14e9ff26274070f7d4392566a91dce4b53039",
+      "run": 43685546382
+    },
+    "N04": {
+      "source": "61fbc4c677df5d783c30fc049359b5918202c36c",
+      "run": 43686370689
+    },
+    "N05": {
+      "source": "61fbc4c677df5d783c30fc049359b5918202c36c",
+      "run": 43686370689
+    },
+    "N06a": {
+      "source": "61fbc4c677df5d783c30fc049359b5918202c36c",
+      "run": 43686370689
+    },
+    "N06b": {
+      "source": "61fbc4c677df5d783c30fc049359b5918202c36c",
+      "run": 43686370689
+    },
+    "N07": {
+      "source": "e98aec47bdae38a0eff5f2ae37b4d3ebfd7b04e5",
+      "run": 43686977003
+    },
+    "N08": {
+      "source": "e98aec47bdae38a0eff5f2ae37b4d3ebfd7b04e5",
+      "run": 43686977003
+    }
+  },
+  "callbacks": {
+    "count": 9,
+    "source": "61fbc4c677df5d783c30fc049359b5918202c36c",
+    "run": 43686370689,
+    "node": "v24.22.2",
+    "pass": 9,
+    "fail": 0,
+    "skipped": 0
+  },
+  "jobWallSeconds": 123,
+  "actualHosted": "pending",
+  "retirement": "pending",
+  "localCheckout": "preserved and unreconciled because Mac storage is full",
+  "qaDeployments": 0
+}

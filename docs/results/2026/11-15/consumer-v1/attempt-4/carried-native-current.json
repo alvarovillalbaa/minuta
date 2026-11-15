@@ -1,0 +1,219 @@
+{
+  "source": "61fbc4c677df5d783c30fc049359b5918202c36c",
+  "run": 43686370689,
+  "job": 132727590833,
+  "passedCases": [
+    "N01",
+    "N04",
+    "N05",
+    "N06a",
+    "N06b"
+  ],
+  "node": "v24.22.2",
+  "browser": "141.0.7390.37",
+  "publicBuild": [
+    {
+      "path": "assets/ai.worker-BaNRRJSN.js",
+      "bytes": 892780,
+      "sha256": "b6404660c9ef6949b239fdb52ea9044dde02bddd86d0068f5c01635a407ad986"
+    },
+    {
+      "path": "assets/capture.worklet-D57mleKD.mjs",
+      "bytes": 933,
+      "sha256": "2eb2bdb62b1497541cb44d5e687933888c903642c1ee2aa6fdc7001695468148"
+    },
+    {
+      "path": "assets/index-CyvY_z2c.css",
+      "bytes": 16770,
+      "sha256": "f4b0008df91e9ac98b6a93a8c640d16850710da0740dfad738a76a49f5874170"
+    },
+    {
+      "path": "assets/index-yKIlGzW9.js",
+      "bytes": 30191,
+      "sha256": "aa812b69ce16e695abbae7e493b3478061c62820379767322ab89f3edddff2a6"
+    },
+    {
+      "path": "assets/ort-wasm-simd-threaded.jsep-B0T3yYHD.wasm",
+      "bytes": 21596019,
+      "sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39"
+    },
+    {
+      "path": "icon.svg",
+      "bytes": 194,
+      "sha256": "ea5dc4e9c5d36a029dbf3208617862f90e2ee5e700b37955cbf1b4bc150967bc"
+    },
+    {
+      "path": "index.html",
+      "bytes": 13611,
+      "sha256": "cf6096c0e223a9ffa5a2b37746dcd7346191384135da5950165a31b487929db7"
+    },
+    {
+      "path": "third-party-licenses.txt",
+      "bytes": 12521,
+      "sha256": "905e9cd2a32e62f5f647a1cb7431e7cb92047b99403b2019249a108d36c920bf"
+    },
+    {
+      "path": "wasm/ort-wasm-simd-threaded.jsep.mjs",
+      "bytes": 44484,
+      "sha256": "08fb86ec433c78bfb032c5d84a68b8e8e5a8d81268fa39e24314179a5767a5b9"
+    },
+    {
+      "path": "wasm/ort-wasm-simd-threaded.jsep.wasm",
+      "bytes": 21596019,
+      "sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39"
+    },
+    {
+      "path": "wasm/ort-wasm-simd-threaded.mjs",
+      "bytes": 20856,
+      "sha256": "43c25054b6b9ac000f786c65545ff83a45f871e0e310e8c2f4d48a363bb66db4"
+    },
+    {
+      "path": "wasm/ort-wasm-simd-threaded.wasm",
+      "bytes": 11133407,
+      "sha256": "f061472c6e77d6d50d079aacdc0ff9b63fee287ddd2cbf46cf62438d3891de2b"
+    }
+  ],
+  "nativeReportPath": "docs/results/2026/11-15/consumer-v1/attempt-3/consumer-browser.json",
+  "nativeReportSha256": "3faf106ed4804540704d8053bad933e6054c130b389e45020ab952a98c3bb2d3",
+  "originalPassedRows": [
+    {
+      "id": "N01",
+      "description": "Native consumer home, invalid draft continuity, literal search/save and fresh reload",
+      "status": "passed",
+      "stored": [
+        {
+          "id": "fb92a8a7-dbc5-4431-aaf1-9b35a1fee1a0",
+          "revision": 1,
+          "title": "Caf\u00e9 <literal> de la semana"
+        }
+      ]
+    },
+    {
+      "id": "N04",
+      "description": "Native WAV chooser/playback, separate byte-exact audio export and refused/cancelled input",
+      "status": "passed",
+      "playback": {
+        "currentTime": 0.220916,
+        "duration": 7.583688,
+        "paused": false
+      },
+      "audio": {
+        "bytes": 246774,
+        "sha256": "696c4221d5c4edffd3691a86d5049af3d21140e0fe33466451469e64560b5314"
+      }
+    },
+    {
+      "id": "N05",
+      "description": "Real excerpt worker survives new home/resume with invalid stale edits and captured-input copy",
+      "status": "passed",
+      "worker": {
+        "method": "source-extract-v1",
+        "units": [
+          {
+            "source": "notes",
+            "start": 0,
+            "end": 25,
+            "text": "Review deliverables only.",
+            "id": "N1",
+            "category": "personal"
+          },
+          {
+            "source": "transcript",
+            "start": 0,
+            "end": 41,
+            "text": "We agreed to send the proposal on Monday,",
+            "id": "T1",
+            "category": "decisions"
+          },
+          {
+            "source": "transcript",
+            "start": 42,
+            "end": 70,
+            "text": "Nora will check the figures,",
+            "id": "T2",
+            "category": "actions"
+          },
+          {
+            "source": "transcript",
+            "start": 71,
+            "end": 106,
+            "text": "then we'll test the mobile version,",
+            "id": "T3",
+            "category": "actions"
+          },
+          {
+            "source": "transcript",
+            "start": 107,
+            "end": 136,
+            "text": "the price is still undecided.",
+            "id": "T4",
+            "category": "pending"
+          }
+        ],
+        "selectedCount": 5,
+        "totalUnits": 5
+      }
+    },
+    {
+      "id": "N06a",
+      "description": "Native 390px home/editor/dialog taps and keyboard with long title",
+      "status": "passed",
+      "home": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390
+      },
+      "editor": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390
+      },
+      "downloads": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390
+      },
+      "about": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390
+      },
+      "replacement": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "id": "N06b",
+      "description": "Native 320px home/editor/dialog taps and keyboard with long title",
+      "status": "passed",
+      "home": {
+        "innerWidth": 320,
+        "clientWidth": 320,
+        "scrollWidth": 320
+      },
+      "editor": {
+        "innerWidth": 320,
+        "clientWidth": 320,
+        "scrollWidth": 320
+      },
+      "downloads": {
+        "innerWidth": 320,
+        "clientWidth": 320,
+        "scrollWidth": 320
+      },
+      "about": {
+        "innerWidth": 320,
+        "clientWidth": 320,
+        "scrollWidth": 320
+      },
+      "replacement": {
+        "innerWidth": 320,
+        "clientWidth": 320,
+        "scrollWidth": 320
+      }
+    }
+  ],
+  "boundary": "Five cases retain exact current application build and original native cleanup. N02/N03 retain their separately verified placeholder-only inverse binding."
+}

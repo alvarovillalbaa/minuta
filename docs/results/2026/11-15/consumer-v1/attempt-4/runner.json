@@ -1,0 +1,139 @@
+{
+  "source": "e98aec47bdae38a0eff5f2ae37b4d3ebfd7b04e5",
+  "commands": [
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "stdout": "01-node-version.stdout.txt",
+      "stderr": "01-node-version.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 0.101,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "6a0cec2e157365c1a8ac6d1715733b7c3321a7c5565862a701ca71ef00359d04",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "syntax",
+      "argv": [
+        "npm",
+        "run",
+        "check"
+      ],
+      "stdout": "02-syntax.stdout.txt",
+      "stderr": "02-syntax.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 0.303,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "2e5cd92c18f927722ad11825294528c5a70903067c3a0d55532812b171afa88e",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "dependencies",
+      "argv": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "stdout": "03-dependencies.stdout.txt",
+      "stderr": "03-dependencies.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 3.507,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "7270478802e3a47f2f309c90fd2239adc2294010c9f7b85f828afb5272dedab6",
+      "stderrSha256": "a79e4d8ee28132a825b18a6728298bfe8dcea7ecd2f8ce8541d2aa732a4af3b5"
+    },
+    {
+      "label": "build",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "stdout": "04-build.stdout.txt",
+      "stderr": "04-build.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 1.002,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "7b28adea3c0d047386a79fcaa8975de1134bcee2f8727146c2132da1bbf2db3b",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "browser-tools",
+      "argv": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--omit=optional",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "stdout": "05-browser-tools.stdout.txt",
+      "stderr": "05-browser-tools.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 0.401,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "d12c8ea3a67f8a808e3f490d45547cc6946bf6fd1ad4fb0754dec96161a96ee6",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "chromium",
+      "argv": [
+        "node",
+        "/home/runner/work/_temp/minuta-consumer-43686977003-1/tools/node_modules/playwright/cli.js",
+        "install",
+        "chromium"
+      ],
+      "stdout": "06-chromium.stdout.txt",
+      "stderr": "06-chromium.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 5.107,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "b60bd33f0fc23ddb06f7d7e0542c1aa5e4ae64904ec7338833724ea3740a2056",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "consumer-browser",
+      "argv": [
+        "node",
+        "tests/e2e/consumer-v1.mjs"
+      ],
+      "stdout": "07-consumer-browser.stdout.txt",
+      "stderr": "07-consumer-browser.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 2.405,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "passed": true,
+  "serverPid": 2575,
+  "serverForced": false,
+  "serverExit": 0,
+  "serverGroupAbsent": true,
+  "sourceStable": true,
+  "gitClean": true,
+  "lingeringOwnedPids": [],
+  "ownedProcessesAbsent": true,
+  "scratchBytes": 1632883031,
+  "ownedScratchRemoved": true
+}

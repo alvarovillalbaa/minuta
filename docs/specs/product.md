@@ -30,9 +30,10 @@ and readable text are implementation choices; no competitor assets are reused.
 - The reviewed summary is called **Lo que me llevo**. Extracts remain labelled
   as quotes grouped by rules, distinct from transcription and human writing.
   Model-download consent, raw recovery and separate notes/audio exports remain.
-- The local redesign has syntax, core and controlled callback evidence only.
-  See its [receipt](../results/2026/11-14/consumer-redesign.md). Prior browser and
-  inference results belong to their frozen source, not this changed UI.
+- The [consumer qualification](../results/2026/11-15/consumer-v1/result.md)
+  records native home/draft/library/capture/worker/mobile/storage outcomes on
+  their exact sources. Older inference evidence is carried only after archive,
+  source and compiled-body identity checks. Actual hosted delivery is separate.
 
 The useful first scope is an account-free notebook for explicit recording,
 editable notes/transcript, actual local transcription and reviewable literal

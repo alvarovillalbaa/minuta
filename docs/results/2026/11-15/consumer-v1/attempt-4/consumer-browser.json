@@ -1,0 +1,78 @@
+{
+  "tier": "T2",
+  "source": "e98aec47bdae38a0eff5f2ae37b4d3ebfd7b04e5",
+  "node": "v24.22.2",
+  "selected": [
+    "N07",
+    "N08"
+  ],
+  "cases": [
+    {
+      "id": "N07",
+      "description": "Actual browser-denied microphone leaves current consumer notes and controls usable",
+      "status": "passed",
+      "permission": {
+        "state": "denied"
+      }
+    },
+    {
+      "id": "N08",
+      "description": "Authored write denial/corruption preserve working draft, cards and original metadata recovery",
+      "status": "passed",
+      "boundary": "Explicitly injected write denial and corrupt own T2 record; not OS-quota/all-corruption proof"
+    }
+  ],
+  "boundaries": [
+    {
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-yKIlGzW9.js",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-CyvY_z2c.css",
+          "bodyBytes": 0
+        }
+      ],
+      "errors": [],
+      "unexpected": []
+    },
+    {
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-yKIlGzW9.js",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-CyvY_z2c.css",
+          "bodyBytes": 0
+        }
+      ],
+      "errors": [],
+      "unexpected": []
+    }
+  ],
+  "passed": true,
+  "browser": "141.0.7390.37",
+  "cleanup": {
+    "contextsClosed": true,
+    "nativePid": 2599,
+    "nativeExitCode": 0,
+    "nativeAbsent": true,
+    "failures": []
+  }
+}
