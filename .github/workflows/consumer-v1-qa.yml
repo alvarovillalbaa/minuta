@@ -1,0 +1,101 @@
+name: Temporary Minuta hosted consumer qualification
+on:
+  push:
+    branches: [qa/minuta-consumer-20261115]
+permissions:
+  contents: read
+concurrency:
+  group: minuta-consumer-hosted-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  hosted:
+    if: github.ref == 'refs/heads/qa/minuta-consumer-20261115'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Define owned proof path
+        shell: bash
+        run: echo "MINUTA_OUTPUT=$RUNNER_TEMP/minuta-consumer-proof-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT" >> "$GITHUB_ENV"
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38
+        with:
+          node-version: '24.22.2'
+      - name: Anonymous production readback and owned teardown
+        env:
+          MINUTA_RELEASE_SHA: c9e0d8600704f4674f83f2c0744e461bd3f6d302
+        run: python3 tests/scripts/consumer-hosted-v1-qa.py
+      - name: Retain original bytes in job log
+        if: always()
+        run: node tests/scripts/emit-consumer-proof.mjs
+      - name: Retain original bounded proof
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: minuta-consumer-hosted-proof
+          path: ${{ env.MINUTA_OUTPUT }}
+          retention-days: 7
+
+  retire:
+    needs: hosted
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    permissions:
+      contents: write
+    steps:
+      - name: Retire only the leased temporary branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_SHA: c9e0d8600704f4674f83f2c0744e461bd3f6d302
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import os,json,urllib.request,urllib.error
+          root=Path(os.environ["RUNNER_TEMP"])/("minuta-retirement-"+os.environ["GITHUB_RUN_ID"]+"-"+os.environ["GITHUB_RUN_ATTEMPT"])
+          root.mkdir()
+          receipt={"release":os.environ["RELEASE_SHA"],"qa":os.environ["GITHUB_SHA"],"deleted":False}
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self,*args):
+                  return None
+          opener=urllib.request.build_opener(NoRedirect)
+          def request(method,suffix):
+              req=urllib.request.Request("https://api.github.com/repos/alvarovillalbaa/minuta"+suffix,method=method,headers={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json"})
+              try:
+                  with opener.open(req,timeout=20) as response:
+                      raw=response.read(1024*1024)
+                      return response.status,json.loads(raw) if raw else None
+              except urllib.error.HTTPError as error:
+                  raw=error.read(16384)
+                  return error.code,json.loads(raw) if raw else None
+          try:
+              assert os.environ["GITHUB_REF"]=="refs/heads/qa/minuta-consumer-20261115"
+              status,main=request("GET","/git/ref/heads/main")
+              assert status==200 and main["object"]["sha"]==receipt["release"],"Main lease changed; preserve QA ref"
+              status,commit=request("GET","/git/commits/"+receipt["release"])
+              assert status==200 and commit["tree"]["sha"]=="9057962005e83f29c3bb4c0c86bf810849ce2409"
+              status,_=request("GET","/contents/.github/workflows/consumer-v1-qa.yml?ref=main")
+              assert status==404,"One-off workflow must be absent from main"
+              status,owned=request("GET","/git/ref/heads/qa/minuta-consumer-20261115")
+              assert status==200 and owned["object"]["sha"]==receipt["qa"],"QA lease changed; preserve ref"
+              status,_=request("DELETE","/git/refs/heads/qa/minuta-consumer-20261115")
+              receipt["delete_status"]=status
+              assert status==204,"Temporary ref deletion refused"
+              status,_=request("GET","/git/ref/heads/qa/minuta-consumer-20261115")
+              receipt["readback_status"]=status
+              assert status==404,"Temporary branch still present"
+              receipt["deleted"]=True
+          except Exception as error:
+              receipt["error"]=type(error).__name__+": "+str(error)
+              raise
+          finally:
+              (root/"retirement.json").write_text(json.dumps(receipt,indent=2)+"\n")
+              print(json.dumps(receipt))
+          PY
+      - name: Retain retirement readback
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: minuta-consumer-retirement
+          path: ${{ runner.temp }}/minuta-retirement-${{ github.run_id }}-${{ github.run_attempt }}
+          retention-days: 7
