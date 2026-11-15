@@ -102,6 +102,7 @@ try{
   assert.equal(await p.locator('.meeting-item').count(),0);assert.match(await p.locator('.library-empty').innerText(),/próxima conversación/);
   assert.deepEqual(await probe(p),{mediaCalls:0,displayCalls:0,workers:0,tracks:[],contexts:[]});await shot(p,'home-empty.png');
   await writing(p);assert.equal(await p.locator('#notes').evaluate(e=>document.activeElement===e),true);
+  assert.equal(await p.locator('#notes').getAttribute('placeholder'),'¿De qué vamos a hablar?\n\nAnota nombres, preguntas, acuerdos…');await shot(p,'editor-writing.png');
   const title='Café <literal> de la semana',notes='Nora revisará la propuesta el lunes. <img src="https://invalid.example/private" onerror="window.injected=true"> Ben mantiene el presupuesto pendiente.';
   await p.locator('#meeting-title').fill(title);await p.locator('#notes').fill(notes);await home(p);
   assert.equal(await p.locator('#draft-title').innerText(),title);await p.locator('#start-listening').click();await p.locator('#replace-dialog').waitFor();await p.locator('#keep-current').click();
@@ -137,8 +138,8 @@ try{
  });
  await run('N04','Native WAV chooser/playback, separate byte-exact audio export and refused/cancelled input',async row=>{
   const s=await context(),p=s.page;await open(s);await writing(p);await p.locator('#notes').fill('Notas que no se envían.');const source='tests/fixtures/speech-v2/english.wav',expected=await readFile(source);
-  await chooser(p,'label[for="audio-file"]',source);await p.locator('#status').filter({hasText:'Audio abierto'}).waitFor();await p.locator('#audio-player').tap({position:{x:25,y:27}});await p.waitForFunction(()=>document.querySelector('#audio-player').currentTime>0.2);
-  row.playback=await p.locator('#audio-player').evaluate(e=>({currentTime:e.currentTime,duration:e.duration,paused:e.paused}));assert.ok(row.playback.currentTime>0);await p.locator('#audio-player').tap({position:{x:25,y:27}});
+  await chooser(p,'label[for="audio-file"]',source);await p.locator('#status').filter({hasText:'Audio abierto'}).waitFor();await p.locator('#audio-player').click({position:{x:25,y:27}});await p.waitForFunction(()=>document.querySelector('#audio-player').currentTime>0.2);
+  row.playback=await p.locator('#audio-player').evaluate(e=>({currentTime:e.currentTime,duration:e.duration,paused:e.paused}));assert.ok(row.playback.currentTime>0);await p.locator('#audio-player').click({position:{x:25,y:27}});
   await p.locator('#transcribe').click();await p.locator('#consent-dialog').waitFor();await p.locator('#cancel-consent').click();assert.equal((await probe(p)).workers,0);
   await chooser(p,'label[for="audio-file"]',{name:'invalid.wav',mimeType:'audio/wav',buffer:Buffer.from('invalid')});await p.locator('#status').filter({hasText:'anterior se conserva'}).waitFor();
   await p.locator('#open-downloads').click();const exported=await download(p,'#export-audio','n04-opened-audio.wav');assert.equal(sha(exported),sha(expected));assert.equal(exported.length,expected.length);

@@ -1,0 +1,34 @@
+{
+  "run": 43685546382,
+  "job": 132725162253,
+  "source": "8ef14e9ff26274070f7d4392566a91dce4b53039",
+  "passed": [
+    "N01",
+    "N02",
+    "N03"
+  ],
+  "failed": "N04: test used touch tap in a desktop context; stopped before actual playback",
+  "correction": "Two native desktop audio actions use click. The original capture screenshot also exposed literal escaped placeholder line breaks; a single HTML attribute is corrected, with a new N01 DOM assertion/screenshot.",
+  "retained": [
+    "N02",
+    "N03"
+  ],
+  "carryGate": "All eleven non-HTML build bodies exact; reversing the sole placeholder encoding must restore the original built HTML byte count/SHA-256. Any other asset/HTML change refuses carry. Prior capture remains on its exact older source; no fresh recording claim.",
+  "selected": [
+    "N01",
+    "N04",
+    "N05",
+    "N06a",
+    "N06b",
+    "N07",
+    "N08"
+  ],
+  "callbacks": "Rerun nine focused callbacks because HTML is a changed actual input. Frozen C/E/ASR cases stay closed.",
+  "cleanup": {
+    "contextsClosed": true,
+    "nativePid": 2603,
+    "nativeExitCode": 0,
+    "nativeAbsent": true,
+    "failures": []
+  }
+}

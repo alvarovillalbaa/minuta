@@ -1,0 +1,188 @@
+{
+  "tier": "T2",
+  "source": "8ef14e9ff26274070f7d4392566a91dce4b53039",
+  "node": "v24.22.2",
+  "selected": [
+    "N01",
+    "N02",
+    "N03",
+    "N04",
+    "N05",
+    "N06a",
+    "N06b",
+    "N07",
+    "N08"
+  ],
+  "cases": [
+    {
+      "id": "N01",
+      "description": "Native consumer home, invalid draft continuity, literal search/save and fresh reload",
+      "status": "passed",
+      "stored": [
+        {
+          "id": "211ff4f6-5be2-4d40-8e9e-185feffe408d",
+          "revision": 1,
+          "title": "Café <literal> de la semana"
+        }
+      ]
+    },
+    {
+      "id": "N02",
+      "description": "Current saved cards, actual backup/import, two-tab conflicts/copy and two-step delete",
+      "status": "passed",
+      "ids": {
+        "initial": "40712bff-9744-4dbf-9c89-b21be09e9faf",
+        "imported": "548b69df-a7b9-4d95-8959-68b082067ebe",
+        "openAfterDelete": "fbb67259-9b69-40ea-ab2b-167a2c17b0dc"
+      }
+    },
+    {
+      "id": "N03",
+      "description": "Current home/listen native fake-microphone worklet, busy states and normal capture teardown",
+      "status": "passed",
+      "capture": {
+        "bytes": 73516,
+        "sha256": "16921729fe27717d7f90a9c611cd554a9af36ecf1acf6f2e6231aa0c958ea44f",
+        "seconds": 2.296,
+        "rms": 0.20828060908848312
+      },
+      "native": {
+        "mediaCalls": 1,
+        "displayCalls": 0,
+        "workers": 0,
+        "tracks": [
+          {
+            "kind": "audio",
+            "state": "ended"
+          }
+        ],
+        "contexts": [
+          "closed"
+        ]
+      }
+    },
+    {
+      "id": "N04",
+      "description": "Native WAV chooser/playback, separate byte-exact audio export and refused/cancelled input",
+      "status": "failed",
+      "error": "locator.tap: The page does not support tap. Use hasTouch context option to enable touch support.\n    at /home/runner/work/_temp/minuta-consumer-43685546382-1/source/tests/e2e/consumer-v1.mjs:140:157\n    at async run (/home/runner/work/_temp/minuta-consumer-43685546382-1/source/tests/e2e/consumer-v1.mjs:93:6)\n    at async file:///home/runner/work/_temp/minuta-consumer-43685546382-1/source/tests/e2e/consumer-v1.mjs:138:2",
+      "observed": [
+        {
+          "url": "http://127.0.0.1:4173/",
+          "state": {
+            "home": false,
+            "editor": true,
+            "status": "Audio abierto. No se ha enviado a ningún servicio.",
+            "library": ""
+          },
+          "errors": [],
+          "unexpected": []
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-yKIlGzW9.js",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-CyvY_z2c.css",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-yKIlGzW9.js",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-CyvY_z2c.css",
+          "bodyBytes": 0
+        }
+      ],
+      "errors": [],
+      "unexpected": []
+    },
+    {
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-yKIlGzW9.js",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-CyvY_z2c.css",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-yKIlGzW9.js",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-CyvY_z2c.css",
+          "bodyBytes": 0
+        }
+      ],
+      "errors": [],
+      "unexpected": []
+    },
+    {
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-yKIlGzW9.js",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-CyvY_z2c.css",
+          "bodyBytes": 0
+        }
+      ],
+      "errors": [],
+      "unexpected": []
+    }
+  ],
+  "passed": false,
+  "browser": "141.0.7390.37",
+  "cleanup": {
+    "contextsClosed": true,
+    "nativePid": 2603,
+    "nativeExitCode": 0,
+    "nativeAbsent": true,
+    "failures": []
+  }
+}

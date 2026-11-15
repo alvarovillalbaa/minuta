@@ -1,0 +1,140 @@
+{
+  "source": "8ef14e9ff26274070f7d4392566a91dce4b53039",
+  "commands": [
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "stdout": "01-node-version.stdout.txt",
+      "stderr": "01-node-version.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 0.1,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "6a0cec2e157365c1a8ac6d1715733b7c3321a7c5565862a701ca71ef00359d04",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "syntax",
+      "argv": [
+        "npm",
+        "run",
+        "check"
+      ],
+      "stdout": "02-syntax.stdout.txt",
+      "stderr": "02-syntax.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 0.301,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "2e5cd92c18f927722ad11825294528c5a70903067c3a0d55532812b171afa88e",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "dependencies",
+      "argv": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "stdout": "03-dependencies.stdout.txt",
+      "stderr": "03-dependencies.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 4.807,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "34c01b85cc738e030ee9220f8f902fb8b664fe34a63d06d0a92875d0a23ef176",
+      "stderrSha256": "a79e4d8ee28132a825b18a6728298bfe8dcea7ecd2f8ce8541d2aa732a4af3b5"
+    },
+    {
+      "label": "build",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "stdout": "04-build.stdout.txt",
+      "stderr": "04-build.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 1.202,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "cf77c6b813e798b0b911c615ea00cc53903265069ba5214d12b3acb7d6295847",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "browser-tools",
+      "argv": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--omit=optional",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "stdout": "05-browser-tools.stdout.txt",
+      "stderr": "05-browser-tools.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 0.501,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "1a5520b4ff33037b13ed941f18626bb6c22dbff8919dc1a26ac091185a77bf66",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "chromium",
+      "argv": [
+        "node",
+        "/home/runner/work/_temp/minuta-consumer-43685546382-1/tools/node_modules/playwright/cli.js",
+        "install",
+        "chromium"
+      ],
+      "stdout": "06-chromium.stdout.txt",
+      "stderr": "06-chromium.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 8.714,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "75adad6c85af1926310b9a53e3d7e68204ed85df04bc430acdc2403373658e73",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "consumer-browser",
+      "argv": [
+        "node",
+        "tests/e2e/consumer-v1.mjs"
+      ],
+      "stdout": "07-consumer-browser.stdout.txt",
+      "stderr": "07-consumer-browser.stderr.txt",
+      "exit": 1,
+      "orphanedGroup": false,
+      "seconds": 10.914,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "73606fcb88ee93b37d3d2618f6eb16715b3c1c5b6629edaaeea0cc61a67cd1d4"
+    }
+  ],
+  "passed": false,
+  "serverPid": 2579,
+  "error": "RuntimeError: consumer-browser failed; preserve original streams",
+  "serverForced": false,
+  "serverExit": 0,
+  "serverGroupAbsent": true,
+  "sourceStable": true,
+  "gitClean": true,
+  "lingeringOwnedPids": [],
+  "ownedProcessesAbsent": true,
+  "scratchBytes": 1632882798,
+  "ownedScratchRemoved": true
+}

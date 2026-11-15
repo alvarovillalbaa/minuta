@@ -1,0 +1,12 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+locator.tap: The page does not support tap. Use hasTouch context option to enable touch support.
+    at /home/runner/work/_temp/minuta-consumer-43685546382-1/source/tests/e2e/consumer-v1.mjs:140:157
+    at async run (/home/runner/work/_temp/minuta-consumer-43685546382-1/source/tests/e2e/consumer-v1.mjs:93:6)
+    at async file:///home/runner/work/_temp/minuta-consumer-43685546382-1/source/tests/e2e/consumer-v1.mjs:138:2 {
+  name: 'Error'
+}
+
+Node.js v24.22.2

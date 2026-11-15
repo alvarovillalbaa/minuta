@@ -1,0 +1,113 @@
+{
+  "source": "8ef14e9ff26274070f7d4392566a91dce4b53039",
+  "run": 43685546382,
+  "job": 132725162253,
+  "passedCases": [
+    "N02",
+    "N03"
+  ],
+  "node": "v24.22.2",
+  "browser": "141.0.7390.37",
+  "publicBuild": [
+    {
+      "path": "assets/ai.worker-BaNRRJSN.js",
+      "bytes": 892780,
+      "sha256": "b6404660c9ef6949b239fdb52ea9044dde02bddd86d0068f5c01635a407ad986"
+    },
+    {
+      "path": "assets/capture.worklet-D57mleKD.mjs",
+      "bytes": 933,
+      "sha256": "2eb2bdb62b1497541cb44d5e687933888c903642c1ee2aa6fdc7001695468148"
+    },
+    {
+      "path": "assets/index-CyvY_z2c.css",
+      "bytes": 16770,
+      "sha256": "f4b0008df91e9ac98b6a93a8c640d16850710da0740dfad738a76a49f5874170"
+    },
+    {
+      "path": "assets/index-yKIlGzW9.js",
+      "bytes": 30191,
+      "sha256": "aa812b69ce16e695abbae7e493b3478061c62820379767322ab89f3edddff2a6"
+    },
+    {
+      "path": "assets/ort-wasm-simd-threaded.jsep-B0T3yYHD.wasm",
+      "bytes": 21596019,
+      "sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39"
+    },
+    {
+      "path": "icon.svg",
+      "bytes": 194,
+      "sha256": "ea5dc4e9c5d36a029dbf3208617862f90e2ee5e700b37955cbf1b4bc150967bc"
+    },
+    {
+      "path": "index.html",
+      "bytes": 13605,
+      "sha256": "f9422f5e14578dcb1dd8a0d926fc44b64e5c6325ccc039ef35093ff96e18e6c3"
+    },
+    {
+      "path": "third-party-licenses.txt",
+      "bytes": 12521,
+      "sha256": "905e9cd2a32e62f5f647a1cb7431e7cb92047b99403b2019249a108d36c920bf"
+    },
+    {
+      "path": "wasm/ort-wasm-simd-threaded.jsep.mjs",
+      "bytes": 44484,
+      "sha256": "08fb86ec433c78bfb032c5d84a68b8e8e5a8d81268fa39e24314179a5767a5b9"
+    },
+    {
+      "path": "wasm/ort-wasm-simd-threaded.jsep.wasm",
+      "bytes": 21596019,
+      "sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39"
+    },
+    {
+      "path": "wasm/ort-wasm-simd-threaded.mjs",
+      "bytes": 20856,
+      "sha256": "43c25054b6b9ac000f786c65545ff83a45f871e0e310e8c2f4d48a363bb66db4"
+    },
+    {
+      "path": "wasm/ort-wasm-simd-threaded.wasm",
+      "bytes": 11133407,
+      "sha256": "f061472c6e77d6d50d079aacdc0ff9b63fee287ddd2cbf46cf62438d3891de2b"
+    }
+  ],
+  "nativeReportPath": "docs/results/2026/11-15/consumer-v1/attempt-2/consumer-browser.json",
+  "nativeReportSha256": "4d2d1847b68a2f035e576df123660c6cab88e194d1af059a924f15c15fd88808",
+  "originalPassedRows": [
+    {
+      "id": "N02",
+      "description": "Current saved cards, actual backup/import, two-tab conflicts/copy and two-step delete",
+      "status": "passed",
+      "ids": {
+        "initial": "40712bff-9744-4dbf-9c89-b21be09e9faf",
+        "imported": "548b69df-a7b9-4d95-8959-68b082067ebe",
+        "openAfterDelete": "fbb67259-9b69-40ea-ab2b-167a2c17b0dc"
+      }
+    },
+    {
+      "id": "N03",
+      "description": "Current home/listen native fake-microphone worklet, busy states and normal capture teardown",
+      "status": "passed",
+      "capture": {
+        "bytes": 73516,
+        "sha256": "16921729fe27717d7f90a9c611cd554a9af36ecf1acf6f2e6231aa0c958ea44f",
+        "seconds": 2.296,
+        "rms": 0.20828060908848312
+      },
+      "native": {
+        "mediaCalls": 1,
+        "displayCalls": 0,
+        "workers": 0,
+        "tracks": [
+          {
+            "kind": "audio",
+            "state": "ended"
+          }
+        ],
+        "contexts": [
+          "closed"
+        ]
+      }
+    }
+  ],
+  "boundary": "Actual N02/N03 retained on 8ef14e9 source. All 11 non-HTML public bodies are identical; the only HTML change replaces a literal escaped placeholder with entity line breaks. Reversing that exact placeholder encoding must restore the old HTML digest; all other changes refuse carry. N01 now checks the corrected placeholder and runs again. No capture/ASR replay."
+}

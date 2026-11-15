@@ -1,0 +1,16 @@
+{
+  "schema": "minuta.notes",
+  "version": 1,
+  "includesAudio": false,
+  "meeting": {
+    "id": "548b69df-a7b9-4d95-8959-68b082067ebe",
+    "revision": 1,
+    "title": "Importada T2",
+    "createdAt": "2026-11-15T06:28:24.411Z",
+    "updatedAt": "2026-11-15T06:28:25.058Z",
+    "language": "spanish",
+    "notes": "Original guardado.",
+    "transcript": "",
+    "summary": ""
+  }
+}

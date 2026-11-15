@@ -18,6 +18,7 @@ work=owned/"source";work.mkdir()
 env=dict(os.environ)
 env["TMPDIR"]=str(owned/"tmp")
 env.update(npm_config_cache=str(owned/"npm-cache"),PLAYWRIGHT_BROWSERS_PATH=str(owned/"browsers"),MINUTA_URL="http://127.0.0.1:4173",MINUTA_OUTPUT=str(out),MINUTA_EXPECTED_MANIFEST=str(out/"build-manifest.json"),MINUTA_DIST=str(work/"dist"))
+env["MINUTA_CASES"]="N01,N04,N05,N06a,N06b,N07,N08"
 env["MINUTA_PLAYWRIGHT"]=str(owned/"tools/node_modules/playwright/index.mjs")
 deadline=time.monotonic()+15*60
 receipt={"source":os.environ["GITHUB_SHA"],"commands":[],"passed":False}
@@ -87,14 +88,7 @@ try:
     (out/"declared-inputs.json").write_text(json.dumps([row for row in before if row["path"] in names],indent=2)+"\n")
     run("node-version",["node","--version"])
     run("syntax",["npm","run","check"])
-    carried=json.loads((repo/"tests/fixtures/consumer-callbacks-accepted-v1.json").read_text())
-    assert (out/"01-node-version.stdout.txt").read_text().strip()==carried["node"]=="v24.22.2"
-    assert carried["tests"]==carried["pass"]==9 and carried["fail"]==carried["skipped"]==0
-    assert hashlib.sha256((repo/carried["originalTap"]).read_bytes()).hexdigest()==carried["stdoutSha256"]
-    for item in carried["inputs"]:
-        source=work/item["path"]
-        assert source.is_file() and source.stat().st_size==item["bytes"] and hashlib.sha256(source.read_bytes()).hexdigest()==item["sha256"],"Changed accepted callback input: "+item["path"]
-    (out/"carried-callbacks.json").write_text(json.dumps(carried,indent=2)+"\n")
+    run("consumer-callbacks",["node","--test","--test-reporter=tap","tests/unit/notebook-ui.test.mjs"])
     run("dependencies",["npm","ci","--ignore-scripts","--no-audit","--no-fund"],300)
     assert (work/"package-lock.json").read_bytes()==(repo/"package-lock.json").read_bytes(),"App lock changed"
     shutil.copyfile(work/"package-lock.json",out/"app-lock.json")
@@ -102,6 +96,23 @@ try:
     manifest=[{"path":p.relative_to(work/"dist").as_posix(),"bytes":p.stat().st_size,"sha256":hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted((work/"dist").rglob("*")) if p.is_file()]
     assert 1<=len(manifest)<=32 and sum(row["bytes"] for row in manifest)<80*1024*1024
     (out/"build-manifest.json").write_text(json.dumps(manifest,indent=2)+"\n")
+    native_carry=json.loads((repo/"tests/fixtures/consumer-native-accepted-v1.json").read_text())
+    old_public={item["path"]:item for item in native_carry["publicBuild"]}
+    new_public={item["path"]:item for item in manifest}
+    assert set(old_public)==set(new_public),"Changed asset set refuses native carry"
+    for name,item in old_public.items():
+        if name!="index.html":assert new_public[name]==item,"Changed non-HTML application body refuses native carry: "+name
+    html=(work/"dist/index.html").read_bytes()
+    assert html.count(b"&#10;&#10;")==1,"Placeholder repair not unique"
+    restored=html.replace(b"&#10;&#10;",b"\\n\\n",1)
+    assert len(restored)==old_public["index.html"]["bytes"] and hashlib.sha256(restored).hexdigest()==old_public["index.html"]["sha256"],"Any other HTML change refuses native carry"
+    original_native=repo/native_carry["nativeReportPath"]
+    assert hashlib.sha256(original_native.read_bytes()).hexdigest()==native_carry["nativeReportSha256"]
+    native_report=json.loads(original_native.read_text())
+    assert native_report["node"]==native_carry["node"]=="v24.22.2" and native_report["browser"]==native_carry["browser"]=="141.0.7390.37"
+    assert [row["id"] for row in native_report["cases"] if row["status"]=="passed" and row["id"] in native_carry["passedCases"]]==native_carry["passedCases"]==["N02","N03"]
+    assert native_report["cleanup"]["nativeAbsent"] and native_report["cleanup"]["nativeExitCode"]==0
+    (out/"carried-native.json").write_text(json.dumps(native_carry,indent=2)+"\n")
     original=repo/"docs/results/2026/11-14/browser-43581904253/original.zip"
     assert hashlib.sha256(original.read_bytes()).hexdigest()=="8867eb45b928716daf53ccc7181dc05dc1dd2e0fd01e38e25159ee3cdc0aa9f7"
     with zipfile.ZipFile(original) as archive:

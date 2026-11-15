@@ -1,0 +1,16 @@
+{
+  "schema": "minuta.notes",
+  "version": 1,
+  "includesAudio": false,
+  "meeting": {
+    "id": "fbb67259-9b69-40ea-ab2b-167a2c17b0dc",
+    "revision": 0,
+    "title": "Revisión compartida T2",
+    "createdAt": "2026-11-15T06:28:24.411Z",
+    "updatedAt": "2026-11-15T06:28:25.991Z",
+    "language": "spanish",
+    "notes": "Primera revisión confirmada.",
+    "transcript": "",
+    "summary": ""
+  }
+}
