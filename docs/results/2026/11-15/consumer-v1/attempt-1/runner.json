@@ -1,0 +1,100 @@
+{
+  "source": "c1f8325fc33b3f0e6cbbe605101e1623e5c3d949",
+  "commands": [
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "stdout": "01-node-version.stdout.txt",
+      "stderr": "01-node-version.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 0.101,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "6a0cec2e157365c1a8ac6d1715733b7c3321a7c5565862a701ca71ef00359d04",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "syntax",
+      "argv": [
+        "npm",
+        "run",
+        "check"
+      ],
+      "stdout": "02-syntax.stdout.txt",
+      "stderr": "02-syntax.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 0.401,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "2e5cd92c18f927722ad11825294528c5a70903067c3a0d55532812b171afa88e",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "consumer-callbacks",
+      "argv": [
+        "node",
+        "--test",
+        "--test-reporter=tap",
+        "tests/unit/notebook-ui.test.mjs"
+      ],
+      "stdout": "03-consumer-callbacks.stdout.txt",
+      "stderr": "03-consumer-callbacks.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 0.702,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "33a0a2ed3d10514d8f066c9678f55bf11ad6922d8487075f9f73aba34d13a07f",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "dependencies",
+      "argv": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "stdout": "04-dependencies.stdout.txt",
+      "stderr": "04-dependencies.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 6.11,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "e87fd7090ceec26b33a7c2e46e78bbf544864c6b765ec64b3594836c305242c2",
+      "stderrSha256": "a79e4d8ee28132a825b18a6728298bfe8dcea7ecd2f8ce8541d2aa732a4af3b5"
+    },
+    {
+      "label": "build",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "stdout": "05-build.stdout.txt",
+      "stderr": "05-build.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 1.202,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "f9fe2737250acfd5c77b00ea059e4ffdc5c6ec7c1b1a68f1ae578eddd41e5132",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "passed": false,
+  "error": "AssertionError: Changed frozen worker/runtime artifact: assets/ai.worker-DDybrxkd.js",
+  "sourceStable": true,
+  "gitClean": true,
+  "lingeringOwnedPids": [],
+  "ownedProcessesAbsent": true,
+  "scratchBytes": 650158091,
+  "ownedScratchRemoved": true
+}

@@ -1,0 +1,18 @@
+
+> minuta@0.1.0 build
+> node scripts/prepare-assets.mjs && vite build
+
+{"selfHostedWasmFiles":["ort-wasm-simd-threaded.jsep.mjs","ort-wasm-simd-threaded.jsep.wasm","ort-wasm-simd-threaded.mjs","ort-wasm-simd-threaded.wasm"]}
+[36mvite v8.3.8 [32mbuilding client environment for production...[36m[39m
+transforming...
+✓ 9 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/assets/capture.worklet-D57mleKD.mjs                    0.93 kB
+dist/index.html                                            13.60 kB │ gzip:     4.58 kB
+dist/assets/ai.worker-BaNRRJSN.js                         892.78 kB
+dist/assets/ort-wasm-simd-threaded.jsep-B0T3yYHD.wasm  21,596.01 kB │ gzip: 5,168.67 kB
+dist/assets/index-CyvY_z2c.css                             16.77 kB │ gzip:     4.31 kB
+dist/assets/index-yKIlGzW9.js                              30.19 kB │ gzip:    10.64 kB
+
+[32m✓ built in 704ms[39m

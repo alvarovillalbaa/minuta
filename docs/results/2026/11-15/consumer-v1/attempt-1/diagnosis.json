@@ -1,0 +1,75 @@
+{
+  "run": 43684550449,
+  "job": 132722171071,
+  "source": "c1f8325fc33b3f0e6cbbe605101e1623e5c3d949",
+  "jobWallSeconds": 17,
+  "nativeBrowserCasesRun": 0,
+  "callbacks": {
+    "tests": 9,
+    "pass": 9,
+    "fail": 0
+  },
+  "build": "passed",
+  "qualification": "failed before browser at stale historical manifest carry comparison",
+  "rootCause": "The gate chose tests/fixtures/production-manifest.json, not the actual accepted v3 build. The authoritative accepted ZIP, actual archived HTTP body and all seven fresh current protected artifacts prove byte identity. Eleven original runtime source inputs also match.",
+  "actualAcceptedArchive": {
+    "archiveSha256": "8867eb45b928716daf53ccc7181dc05dc1dd2e0fd01e38e25159ee3cdc0aa9f7",
+    "source": {
+      "sha": "a32f2839bfd30891bbd02f02a948b7de85a70fb0"
+    },
+    "passed": true,
+    "sidecarEqual": true,
+    "worker": {
+      "path": "/assets/ai.worker-BaNRRJSN.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 892780,
+      "sha256": "b6404660c9ef6949b239fdb52ea9044dde02bddd86d0068f5c01635a407ad986",
+      "explicitAnonymousAssetCheck": true,
+      "body": "5199cc0dea4e6b08.body.gz"
+    },
+    "actualBodyBytes": 892780,
+    "actualBodySha256": "b6404660c9ef6949b239fdb52ea9044dde02bddd86d0068f5c01635a407ad986",
+    "protected": [
+      {
+        "path": "assets/ai.worker-BaNRRJSN.js",
+        "bytes": 892780,
+        "sha256": "b6404660c9ef6949b239fdb52ea9044dde02bddd86d0068f5c01635a407ad986"
+      },
+      {
+        "path": "assets/capture.worklet-D57mleKD.mjs",
+        "bytes": 933,
+        "sha256": "2eb2bdb62b1497541cb44d5e687933888c903642c1ee2aa6fdc7001695468148"
+      },
+      {
+        "path": "assets/ort-wasm-simd-threaded.jsep-B0T3yYHD.wasm",
+        "bytes": 21596019,
+        "sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39"
+      },
+      {
+        "path": "wasm/ort-wasm-simd-threaded.jsep.mjs",
+        "bytes": 44484,
+        "sha256": "08fb86ec433c78bfb032c5d84a68b8e8e5a8d81268fa39e24314179a5767a5b9"
+      },
+      {
+        "path": "wasm/ort-wasm-simd-threaded.jsep.wasm",
+        "bytes": 21596019,
+        "sha256": "c46655e8a94afc45338d4cb2b840475f88e5012d524509916e505079c00bfa39"
+      },
+      {
+        "path": "wasm/ort-wasm-simd-threaded.mjs",
+        "bytes": 20856,
+        "sha256": "43c25054b6b9ac000f786c65545ff83a45f871e0e310e8c2f4d48a363bb66db4"
+      },
+      {
+        "path": "wasm/ort-wasm-simd-threaded.wasm",
+        "bytes": 11133407,
+        "sha256": "f061472c6e77d6d50d079aacdc0ff9b63fee287ddd2cbf46cf62438d3891de2b"
+      }
+    ],
+    "hasSourceBefore": true
+  },
+  "correction": "Versioned consumer-v2 evidence-source correction; verify archived digest/source/result/body and current protected bodies. Carry unchanged nine callback inputs/TAP/Node24, run nine never-yet-executed native consumer cases. No new ASR/model request or acceptance threshold change.",
+  "cleanup": "Stable source, clean checkout, zero lingering owned executables; 650158091 scratch bytes removed. No browser/preview/model was started.",
+  "local": "Mac remains full; local source/index/refs preserved."
+}

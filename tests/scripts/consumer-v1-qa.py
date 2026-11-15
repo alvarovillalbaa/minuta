@@ -1,6 +1,6 @@
 """Exact-source consumer UI qualification in owned remote scratch only."""
 from pathlib import Path
-import hashlib,json,os,secrets,shutil,signal,subprocess,time,urllib.request
+import hashlib,json,os,secrets,shutil,signal,subprocess,time,urllib.request,gzip,zipfile
 repo=Path.cwd().resolve()
 runner=Path(os.environ["RUNNER_TEMP"]).resolve()
 job=os.environ["GITHUB_RUN_ID"]+"-"+os.environ["GITHUB_RUN_ATTEMPT"]
@@ -87,7 +87,14 @@ try:
     (out/"declared-inputs.json").write_text(json.dumps([row for row in before if row["path"] in names],indent=2)+"\n")
     run("node-version",["node","--version"])
     run("syntax",["npm","run","check"])
-    run("consumer-callbacks",["node","--test","--test-reporter=tap","tests/unit/notebook-ui.test.mjs"])
+    carried=json.loads((repo/"tests/fixtures/consumer-callbacks-accepted-v1.json").read_text())
+    assert (out/"01-node-version.stdout.txt").read_text().strip()==carried["node"]=="v24.22.2"
+    assert carried["tests"]==carried["pass"]==9 and carried["fail"]==carried["skipped"]==0
+    assert hashlib.sha256((repo/carried["originalTap"]).read_bytes()).hexdigest()==carried["stdoutSha256"]
+    for item in carried["inputs"]:
+        source=work/item["path"]
+        assert source.is_file() and source.stat().st_size==item["bytes"] and hashlib.sha256(source.read_bytes()).hexdigest()==item["sha256"],"Changed accepted callback input: "+item["path"]
+    (out/"carried-callbacks.json").write_text(json.dumps(carried,indent=2)+"\n")
     run("dependencies",["npm","ci","--ignore-scripts","--no-audit","--no-fund"],300)
     assert (work/"package-lock.json").read_bytes()==(repo/"package-lock.json").read_bytes(),"App lock changed"
     shutil.copyfile(work/"package-lock.json",out/"app-lock.json")
@@ -95,7 +102,22 @@ try:
     manifest=[{"path":p.relative_to(work/"dist").as_posix(),"bytes":p.stat().st_size,"sha256":hashlib.sha256(p.read_bytes()).hexdigest()} for p in sorted((work/"dist").rglob("*")) if p.is_file()]
     assert 1<=len(manifest)<=32 and sum(row["bytes"] for row in manifest)<80*1024*1024
     (out/"build-manifest.json").write_text(json.dumps(manifest,indent=2)+"\n")
-    prior=json.loads((repo/"tests/fixtures/production-manifest.json").read_text())
+    original=repo/"docs/results/2026/11-14/browser-43581904253/original.zip"
+    assert hashlib.sha256(original.read_bytes()).hexdigest()=="8867eb45b928716daf53ccc7181dc05dc1dd2e0fd01e38e25159ee3cdc0aa9f7"
+    with zipfile.ZipFile(original) as archive:
+        accepted=json.loads(archive.read("browser-result.json"))
+        assert accepted["passed"] and accepted==json.loads((original.parent/"browser-result.json").read_text())
+        assert json.loads(archive.read("source.json"))["sha"]=="a32f2839bfd30891bbd02f02a948b7de85a70fb0"
+        body=gzip.decompress(archive.read("http/5199cc0dea4e6b08.body.gz"))
+        assert len(body)==892780 and hashlib.sha256(body).hexdigest()=="b6404660c9ef6949b239fdb52ea9044dde02bddd86d0068f5c01635a407ad986"
+        prior=json.loads(archive.read("build-manifest.json"))
+        source_before=json.loads(archive.read("source-before.json"))
+        runtime_names={"src/ai.worker.mjs","src/core.mjs","src/wav.mjs","src/extract.mjs","src/recorder.mjs","src/capture.worklet.mjs","src/storage.mjs","package.json","package-lock.json","vite.config.mjs","scripts/prepare-assets.mjs"}
+        bound=[item for item in source_before if item["path"] in runtime_names]
+        assert len(bound)==len(runtime_names)
+        for item in bound:
+            current=repo/item["path"]
+            assert current.stat().st_size==item["bytes"] and hashlib.sha256(current.read_bytes()).hexdigest()==item["sha256"],"Changed accepted runtime source: "+item["path"]
     carried=[]
     for old in prior:
         name=old["path"]
@@ -104,7 +126,7 @@ try:
             assert actual==old,"Changed frozen worker/runtime artifact: "+name
             carried.append(old)
     assert len(carried)==7
-    (out/"carried-runtime.json").write_text(json.dumps({"originalRelease":"a32f2839bfd30891bbd02f02a948b7de85a70fb0","replayedASR":False,"files":carried},indent=2)+"\n")
+    (out/"carried-runtime.json").write_text(json.dumps({"originalRelease":"a32f2839bfd30891bbd02f02a948b7de85a70fb0","replayedASR":False,"archiveSha256":"8867eb45b928716daf53ccc7181dc05dc1dd2e0fd01e38e25159ee3cdc0aa9f7","actualWorkerBodySha256":"b6404660c9ef6949b239fdb52ea9044dde02bddd86d0068f5c01635a407ad986","sourceInputsBound":bound,"files":carried},indent=2)+"\n")
     tools=owned/"tools";tools.mkdir()
     for file in ("package.json","package-lock.json"):shutil.copyfile(repo/"tests/fixtures/tools"/file,tools/file)
     run("browser-tools",["npm","ci","--ignore-scripts","--omit=optional","--no-audit","--no-fund"],180,cwd=tools)
