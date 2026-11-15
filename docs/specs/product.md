@@ -6,6 +6,34 @@ informed by [Granola's official product](https://www.granola.ai/) (rough persona
 notes plus meeting audio), not a quoted specification or a claim of parity.
 Minuta uses an original name and original interface/assets.
 
+The owner's subsequent [GEN-3659 request](https://app.notion.com/p/418a1ee8bd0680c99343ea23eb42d0dd),
+inspected in full, explicitly requests a consumer-oriented Minuta, with Granola,
+Bluedot, Notion AI Notetaker and Plaud as inspiration. The local iteration now
+starts at a personal notebook rather than a sidebar/editor workspace. Original
+warm paper styling, conversation cards, plain-language writing/audio choices
+and readable text are implementation choices; no competitor assets are reused.
+
+## Consumer notebook
+
+- Home contains only actual saved conversations, with title-only accent-folded
+  search, source-text previews, and distinct empty, no-match, loading and recovery
+  states. No example conversations are inserted into storage.
+- Writing and listening entry buttons open the editor; neither requests a
+  microphone, starts a worker nor saves data. Recording remains a separate action.
+- Home/editor navigation preserves the current working copy, including invalid
+  raw edits and pending proposals. A visible resume action identifies unsaved
+  work. A new conversation, saved conversation or import keeps the replacement
+  guard. Returning home does not make an unsaved draft durable.
+- Capture/processing prevents navigation away from its controls. Permission,
+  recording, finishing and audio-ready states are explicit. On narrow layouts,
+  capture is above the notes; writing entry focuses the notes directly.
+- The reviewed summary is called **Lo que me llevo**. Extracts remain labelled
+  as quotes grouped by rules, distinct from transcription and human writing.
+  Model-download consent, raw recovery and separate notes/audio exports remain.
+- The local redesign has syntax, core and controlled callback evidence only.
+  See its [receipt](../results/2026/11-14/consumer-redesign.md). Prior browser and
+  inference results belong to their frozen source, not this changed UI.
+
 The useful first scope is an account-free notebook for explicit recording,
 editable notes/transcript, actual local transcription and reviewable literal
 source excerpts. It deliberately needs no scarce Supabase capacity. No calendar, meeting
@@ -50,6 +78,19 @@ audio and general meeting quality require separate evidence; synthetic fixtures
 cannot establish them. The original Albert speech remains a known failure.
 
 ## Primary references inspected
+
+Consumer interaction references inspected on 14 November 2026:
+
+- [Granola](https://www.granola.ai/): personal notes alongside conversation audio.
+- [Bluedot](https://www.bluedothq.com/): visible capture-to-transcript/notes flow.
+- [Notion AI Meeting Notes](https://www.notion.com/product/ai-meeting-notes):
+  revisiting notes with their related context.
+- [Plaud](https://www.plaud.ai/): deliberate everyday voice capture.
+- [Voicenotes](https://voicenotes.com/): an accessible voice-notebook entry.
+
+These are product references, not claims of accuracy, market ranking or feature
+parity. Minuta does not inherit their cloud, calendar, hardware or integration
+capabilities. The implemented voice/excerpt boundaries below remain authoritative.
 
 - [Transformers.js pipelines](https://huggingface.co/docs/transformers.js/en/pipelines)
 - [Worker tutorial](https://huggingface.co/docs/transformers.js/v3.8.1/en/tutorials/vanilla-js)

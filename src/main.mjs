@@ -6,8 +6,9 @@ import { listMeetings, loadMeeting, saveMeeting, deleteMeeting, rawRecords } fro
 
 const $ = id => document.getElementById(id);
 let meeting = emptyMeeting(), audio = null, audioUrl = null, audioVersion = 0, savedRevision = null, savedStamp = null;
-let currentTab = 'notes', captureBusy = false, captureFinishing = false, saving = false, generation = 0, worker = null, job = null, proposal = null, consent = false, pendingConsent = null, pendingReplace = null;
+let currentTab = 'notes', captureBusy = false, captureStarted = false, captureFinishing = false, saving = false, generation = 0, worker = null, job = null, proposal = null, consent = false, pendingConsent = null, pendingReplace = null;
 let editGeneration = 0, invalidFields = false;
+let libraryRecords = [], libraryGeneration = 0;
 const dialogs = ['consent-dialog', 'proposal-dialog', 'downloads-dialog', 'about-dialog', 'replace-dialog'].map($);
 const stamp = () => inputStamp(meeting, audioVersion);
 const dirty = () => invalidFields || stamp() !== savedStamp;
@@ -19,6 +20,16 @@ function readFields() {
   meeting = validateMeeting({ ...meeting, title: $('meeting-title').value, notes: $('notes').value, transcript: $('transcript').value, summary: $('summary').value, language: $('language').value });
   invalidFields = false;
 }
+const hasContent = () => invalidFields || meeting.notes || meeting.transcript || meeting.summary || audio || meeting.title !== 'Nueva conversación';
+function showEditor(focus = 'meeting-title') {
+  $('home-screen').hidden = true; $('editor-screen').hidden = false; $('skip-link').href = '#meeting-title';
+  refresh(); $(focus).focus({ preventScroll: true }); window.scrollTo(0, 0);
+}
+function showHome() {
+  if (captureBusy || job) { message('Termina la grabación o el proceso antes de volver al cuaderno.', true); return; }
+  $('editor-screen').hidden = true; $('home-screen').hidden = false; $('skip-link').href = '#home-title';
+  refresh(); void refreshLibrary(); $('home-title').focus({ preventScroll: true }); window.scrollTo(0, 0);
+}
 function refresh() {
   $('save-state').textContent = dirty() ? 'Borrador sin guardar' : 'Guardado en este navegador';
   $('character-count').textContent = `${meeting[currentTab].length.toLocaleString('es-ES')} caracteres`;
@@ -29,6 +40,12 @@ function refresh() {
   $('new-meeting').disabled = captureBusy; $('audio-file').disabled = captureBusy; $('notes-file').disabled = captureBusy;
   $('save-meeting').disabled = captureBusy || saving; $('save-copy').disabled = captureBusy || saving;
   $('export-audio').disabled = !audio || captureBusy;
+  for (const id of ['go-home', 'back-home']) $(id).disabled = captureBusy || Boolean(job);
+  $('resume-draft').hidden = !(dirty() && hasContent() || proposal);
+  $('draft-label').textContent = proposal ? 'Tienes un borrador por revisar' : 'Tu borrador sigue abierto · sin guardar';
+  $('draft-title').textContent = $('meeting-title').value;
+  $('capture-state').textContent = captureFinishing ? 'Preparando tu audio…' : captureStarted ? 'Grabando · puedes seguir anotando' : captureBusy ? 'Esperando permiso para grabar…' : audio ? 'Tu audio está listo para escuchar.' : 'Cuando quieras, te escuchas.';
+  $('record').closest('.audio-panel').classList.toggle('is-recording', captureStarted);
 }
 function renderFields() {
   for (const key of ['notes', 'transcript', 'summary']) $(key).value = meeting[key];
@@ -63,6 +80,7 @@ async function replaceDocument(next, media, revision) {
   generation += 1; editGeneration += 1; invalidFields = false; cancelJob(); proposal = null;
   meeting = validateMeeting(next); savedRevision = revision; setAudio(media, media ? `${(media.size / 1024 / 1024).toFixed(1)} MB · guardado localmente` : '');
   savedStamp = revision === null ? null : stamp(); currentTab = 'notes'; tab('notes'); renderFields(); $('downloads-dialog').close();
+  renderLibrary(); showEditor();
   message('Conversación abierta.');
 }
 function requestReplace(action) {
@@ -74,24 +92,45 @@ function requestReplace(action) {
 $('keep-current').addEventListener('click', () => { pendingReplace = null; $('replace-dialog').close(); });
 $('replace-current').addEventListener('click', () => { const action = pendingReplace; pendingReplace = null; $('replace-dialog').close(); if (action) void action(); });
 $('new-meeting').addEventListener('click', () => requestReplace(() => replaceDocument(emptyMeeting(), null, null)));
+$('go-home').addEventListener('click', showHome); $('back-home').addEventListener('click', showHome);
+$('resume-draft').addEventListener('click', () => showEditor(currentTab));
+for (const [id, focus] of [['start-writing', 'notes'], ['start-listening', 'record']]) $(id).addEventListener('click', () => requestReplace(async () => { await replaceDocument(emptyMeeting(), null, null); $(focus).focus(); }));
 
 async function refreshLibrary() {
-  $('meeting-list').replaceChildren(); $('recover-records').hidden = true; message('', false, $('library-message'));
+  const epoch = ++libraryGeneration;
+  $('refresh-library').disabled = true; message('Abriendo tu cuaderno…', false, $('library-message'));
   try {
     const records = await listMeetings();
-    if (!records.length) { const empty = document.createElement('p'); empty.className = 'library-empty'; empty.textContent = 'Tus conversaciones guardadas aparecerán aquí.'; $('meeting-list').append(empty); }
-    for (const record of records) {
+    if (epoch !== libraryGeneration) return;
+    libraryRecords = records; $('recover-records').hidden = true; renderLibrary(); message('', false, $('library-message'));
+  } catch (error) { if (epoch === libraryGeneration) { $('recover-records').hidden = false; message(error.message, true, $('library-message')); } }
+  finally { if (epoch === libraryGeneration) $('refresh-library').disabled = false; }
+}
+function renderLibrary() {
+  $('meeting-list').replaceChildren();
+  const fold = text => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es-ES');
+  const query = fold($('library-search').value.trim()), records = libraryRecords.filter(record => fold(record.title).includes(query));
+  $('library-count').textContent = query ? `${records.length} de ${libraryRecords.length}` : `${libraryRecords.length}`;
+  if (!records.length) {
+    const empty = document.createElement('p'); empty.className = 'library-empty';
+    const title = document.createElement('strong'); title.textContent = query ? 'No encontramos ese título.' : 'Tu próxima conversación empieza aquí.';
+    const hint = document.createElement('span'); hint.textContent = query ? 'Prueba con otras palabras o borra la búsqueda para ver tu cuaderno.' : 'Escribe una nota o abre un audio. Cuando guardes la conversación, tendrás un lugar al que volver.';
+    empty.append(title, hint); $('meeting-list').append(empty);
+  }
+  for (const record of records) {
       const item = document.createElement('div'); item.className = 'meeting-item';
       const open = document.createElement('button'); open.className = 'meeting-open'; open.setAttribute('aria-current', record.id === meeting.id ? 'true' : 'false');
-      const title = document.createElement('strong'); title.textContent = record.title; const date = document.createElement('span'); date.textContent = new Date(record.updatedAt).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' }); open.append(title, date);
+      const title = document.createElement('strong'); title.textContent = record.title;
+      const preview = document.createElement('span'); preview.className = 'meeting-preview'; preview.textContent = (record.summary || record.notes || record.transcript).replace(/\s+/g, ' ').trim().slice(0, 140) || 'Una conversación que quisiste guardar.';
+      const date = document.createElement('span'); date.className = 'meeting-date'; date.textContent = new Date(record.updatedAt).toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' }); open.append(title, preview, date);
       open.addEventListener('click', () => requestReplace(async () => { try { const loaded = await loadMeeting(record.id); await replaceDocument(loaded.meeting, loaded.audio, loaded.meeting.revision); } catch (error) { message(error.message, true); } }));
       const remove = document.createElement('button'); remove.className = 'meeting-delete'; remove.textContent = '×'; remove.setAttribute('aria-label', `Eliminar ${record.title}`); let confirmed = false;
-      remove.addEventListener('click', async () => { if (!confirmed) { confirmed = true; remove.textContent = '¿Eliminar?'; remove.setAttribute('aria-label', `Confirmar eliminar ${record.title}`); return; } remove.disabled = true; try { await deleteMeeting(record.id, record.revision); if (meeting.id === record.id) { savedRevision = null; savedStamp = null; meeting = { ...meeting, id: crypto.randomUUID(), revision: 0 }; refresh(); } await refreshLibrary(); message('Copia guardada eliminada. El borrador abierto se conserva.'); } catch (error) { message(error.message, true); remove.disabled = false; } });
+      remove.addEventListener('click', async () => { if (!confirmed) { confirmed = true; remove.textContent = '¿Eliminar?'; remove.classList.add('confirming'); remove.setAttribute('aria-label', `Confirmar eliminar ${record.title}`); return; } remove.disabled = true; try { await deleteMeeting(record.id, record.revision); if (meeting.id === record.id) { savedRevision = null; savedStamp = null; meeting = { ...meeting, id: crypto.randomUUID(), revision: 0 }; refresh(); } await refreshLibrary(); message('Copia guardada eliminada. El borrador abierto se conserva.'); } catch (error) { message(error.message, true); remove.disabled = false; } });
       item.append(open, remove); $('meeting-list').append(item);
-    }
-  } catch (error) { $('recover-records').hidden = false; message(error.message, true, $('library-message')); }
+  }
 }
 $('refresh-library').addEventListener('click', refreshLibrary);
+$('library-search').addEventListener('input', renderLibrary);
 $('recover-records').addEventListener('click', async () => { try { download(new Blob([await rawRecords()], { type: 'application/json' }), 'minuta-registros-originales-sin-audio.json'); } catch (error) { message(error.message, true); } });
 async function save(copy = false) {
   if (captureBusy || saving) return;
@@ -110,15 +149,15 @@ $('save-meeting').addEventListener('click', () => void save()); $('save-copy').a
 
 const recorder = new Recorder(seconds => { const minutes = Math.floor(seconds / 60), rest = Math.floor(seconds % 60); $('record-time').textContent = `${String(minutes).padStart(2, '0')}:${String(rest).padStart(2, '0')}`; }, text => { if (captureBusy) void finishCapture(text); });
 async function finishCapture(text = '') {
-  if (!captureBusy || captureFinishing) return; captureFinishing = true; $('stop-record').disabled = true;
+  if (!captureBusy || captureFinishing) return; captureFinishing = true; $('stop-record').disabled = true; refresh();
   try { const blob = await recorder.stop(true); if (blob) { setAudio(blob, `${(blob.size / 1024 / 1024).toFixed(1)} MB · WAV capturado aquí`); message(text || 'Audio preparado. Puedes escucharlo, transcribirlo o descargarlo.'); } else message('La grabación era demasiado corta. No ha sustituido el audio anterior.', true); }
   catch (error) { message(error.message, true); }
-  finally { captureBusy = false; captureFinishing = false; $('stop-record').disabled = false; $('stop-record').hidden = true; $('record').hidden = false; refresh(); }
+  finally { captureBusy = false; captureStarted = false; captureFinishing = false; $('stop-record').disabled = false; $('stop-record').hidden = true; $('record').hidden = false; refresh(); }
 }
 $('record').addEventListener('click', async () => {
   if (captureBusy || job) return; captureBusy = true; $('record').hidden = true; $('stop-record').hidden = false; $('record-time').textContent = '00:00'; refresh();
-  try { const started = await recorder.start($('record-kind').value === 'tab' ? 'tab' : 'microphone'); if (!started) { captureBusy = false; $('stop-record').hidden = true; $('record').hidden = false; refresh(); } else message('Grabando. Solo se conservará el audio cuando termines.'); }
-  catch (error) { await recorder.stop(false); captureBusy = false; $('stop-record').hidden = true; $('record').hidden = false; refresh(); message(error.message, true); }
+  try { const started = await recorder.start($('record-kind').value === 'tab' ? 'tab' : 'microphone'); if (!started) { captureBusy = false; $('stop-record').hidden = true; $('record').hidden = false; refresh(); } else { captureStarted = true; refresh(); message('Grabando. Al terminar, pulsa Guardar para conservar el audio en tu cuaderno.'); } }
+  catch (error) { await recorder.stop(false); captureBusy = false; captureStarted = false; $('stop-record').hidden = true; $('record').hidden = false; refresh(); message(error.message, true); }
 });
 $('stop-record').addEventListener('click', () => void finishCapture());
 $('audio-file').addEventListener('change', async event => {

@@ -3,6 +3,14 @@
 A quiet, Spanish-first meeting notebook. Record explicitly, take rough notes,
 transcribe audio on your computer and review source-quoted notes before keeping them.
 
+The local consumer iteration opens on **Mi cuaderno**, with separate writing
+and audio entry points, searchable conversation cards and a resumable working
+draft. Opening a page never starts recording. The editor has no SaaS sidebar;
+**Lo que me llevo** holds the user's reviewed summary. See the
+[iteration receipt](docs/results/2026/11-14/consumer-redesign.md) for actual checks
+and limits. These changes are not yet published; the release link below refers
+to the earlier edition.
+
 [Open Minuta](https://minuta-liard.vercel.app) · [Release evidence](docs/results/2026/11-14/release.md)
 
 Minuta has no account, meeting bot or application backend. Notes and recordings
@@ -23,7 +31,9 @@ The earlier free-form Qwen rewriter was removed after a retained quality failure
 
 ## Use
 
-1. Write a title and rough notes; select Spanish or English.
+1. Open a page from **Mi cuaderno** to write or listen. Write a title and rough
+   notes; select Spanish or English. Return home without discarding the working
+   copy; **Retomar** reopens it. Only **Guardar** persists it across page loads.
 2. Record your microphone, explicitly share tab audio plus microphone, or open
    a PCM 16-bit WAV (mono/stereo, 8–96 kHz, at most 128 MB / 60 minutes).
 3. Transcribe and review the proposed text. Apply it explicitly.

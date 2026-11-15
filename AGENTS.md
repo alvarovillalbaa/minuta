@@ -2,10 +2,18 @@
 
 Last updated: 2026-11-14
 
-- Owner source: personal Notion portfolio's Open Granola heading; its tweet is
-  unreadable. Product details here are delegated judgment, informed by the
-  actual Granola reference, not a quoted owner specification. Publish personal
-  GitHub and static Vercel. No account/backend/paid provider is required.
+- Owner source: GEN-3659, Iterating All My Personal Projects, explicitly asks
+  for a consumer redesign informed by Granola, Bluedot, Notion AI Notetaker and
+  Plaud. This supersedes the earlier Open Granola heading's red-circle scope
+  for this named project. Its old embedded tweet remains unread. No account,
+  application backend or paid provider is required for Minuta.
+- The consumer home and editor share one in-memory working copy. Returning home
+  must not reset it; creating/opening another conversation uses the replacement
+  guard. Home entry buttons do not capture audio. Library search is read-only;
+  keep titles/previews as textContent and ignore superseded async library reads.
+- The new UI is local and unpublished. Its callback checks are not browser,
+  capture, IndexedDB or visual evidence. Preserve earlier frozen qualification
+  protocols/results; they do not qualify the changed interface.
 - Read README.md, docs/specs/product.md and the frozen qualification protocol.
   Preserve user work; use apply_patch. Application data never goes to an API.
 - Runtime transcription is real Transformers.js/ONNX in an owned Web Worker,
