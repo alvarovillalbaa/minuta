@@ -1,0 +1,20 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ ''
+- 'Nora revisará la propuesta el lunes. El precio sigue sin decidir.'
+
+    at file:///home/runner/work/minuta/minuta/tests/e2e/consumer-hosted-v1.mjs:74:9 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: '',
+  expected: 'Nora revisará la propuesta el lunes. El precio sigue sin decidir.',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.2

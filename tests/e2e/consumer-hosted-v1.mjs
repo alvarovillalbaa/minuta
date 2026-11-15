@@ -71,6 +71,7 @@ try{
  await p.waitForFunction(()=>document.querySelector('#save-state').textContent==='Guardado en este navegador'&&document.querySelector('#status').textContent.includes('Conversación guardada'));
  await p.locator('#back-home').tap();await p.reload({waitUntil:'networkidle'});await p.waitForFunction(()=>document.querySelectorAll('.meeting-item').length===1);
  await p.locator('.meeting-open').filter({has:p.getByText(title,{exact:true})}).tap();
+ await p.locator('#editor-screen').waitFor({state:'visible'});
  assert.equal(await p.locator('#notes').inputValue(),notes);await p.locator('#tab-summary').tap();
  const summary=await p.locator('#summary').inputValue();assert.equal(summary,event.text);
  await p.locator('#open-downloads').tap();const waiting=p.waitForEvent('download');await p.locator('#export-json').tap();const download=await waiting;assert.equal(await download.failure(),null);

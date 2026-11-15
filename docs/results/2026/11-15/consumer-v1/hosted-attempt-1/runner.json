@@ -1,0 +1,84 @@
+{
+  "source": "2ad2ceb89debf022a75c92fb0a497382709e0119",
+  "commands": [
+    {
+      "label": "node-version",
+      "argv": [
+        "node",
+        "--version"
+      ],
+      "stdout": "01-node-version.stdout.txt",
+      "stderr": "01-node-version.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 0.101,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "6a0cec2e157365c1a8ac6d1715733b7c3321a7c5565862a701ca71ef00359d04",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "browser-tools",
+      "argv": [
+        "npm",
+        "ci",
+        "--ignore-scripts",
+        "--omit=optional",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "stdout": "02-browser-tools.stdout.txt",
+      "stderr": "02-browser-tools.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 1.703,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "65c731cd02e19c79f6f5a3e84a4dd64a49acd6c47d2ee551d7cc9da191e8c96c",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "chromium",
+      "argv": [
+        "node",
+        "/home/runner/work/_temp/minuta-consumer-43688511984-1/tools/node_modules/playwright/cli.js",
+        "install",
+        "chromium"
+      ],
+      "stdout": "03-chromium.stdout.txt",
+      "stderr": "03-chromium.stderr.txt",
+      "exit": 0,
+      "orphanedGroup": false,
+      "seconds": 5.712,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "f3ecb716c7275d2cc9875e48115c1052631b17bdbd1d973bd28dc733f80810b6",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "hosted-browser",
+      "argv": [
+        "node",
+        "tests/e2e/consumer-hosted-v1.mjs"
+      ],
+      "stdout": "04-hosted-browser.stdout.txt",
+      "stderr": "04-hosted-browser.stderr.txt",
+      "exit": 1,
+      "orphanedGroup": false,
+      "seconds": 6.911,
+      "failure": null,
+      "streamsComplete": true,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderrSha256": "ff902a258a96b7853270fe9a20226fad9a8a22817ef6e4a56ca979cbc132a147"
+    }
+  ],
+  "passed": false,
+  "noLocalServer": true,
+  "error": "RuntimeError: hosted-browser failed; preserve original streams",
+  "sourceStable": true,
+  "gitClean": true,
+  "lingeringOwnedPids": [],
+  "ownedProcessesAbsent": true,
+  "scratchBytes": 984128220,
+  "ownedScratchRemoved": true
+}
