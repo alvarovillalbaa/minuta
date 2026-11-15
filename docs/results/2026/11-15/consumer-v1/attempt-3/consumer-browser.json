@@ -1,0 +1,312 @@
+{
+  "tier": "T2",
+  "source": "61fbc4c677df5d783c30fc049359b5918202c36c",
+  "node": "v24.22.2",
+  "selected": [
+    "N01",
+    "N04",
+    "N05",
+    "N06a",
+    "N06b",
+    "N07",
+    "N08"
+  ],
+  "cases": [
+    {
+      "id": "N01",
+      "description": "Native consumer home, invalid draft continuity, literal search/save and fresh reload",
+      "status": "passed",
+      "stored": [
+        {
+          "id": "fb92a8a7-dbc5-4431-aaf1-9b35a1fee1a0",
+          "revision": 1,
+          "title": "Café <literal> de la semana"
+        }
+      ]
+    },
+    {
+      "id": "N04",
+      "description": "Native WAV chooser/playback, separate byte-exact audio export and refused/cancelled input",
+      "status": "passed",
+      "playback": {
+        "currentTime": 0.220916,
+        "duration": 7.583688,
+        "paused": false
+      },
+      "audio": {
+        "bytes": 246774,
+        "sha256": "696c4221d5c4edffd3691a86d5049af3d21140e0fe33466451469e64560b5314"
+      }
+    },
+    {
+      "id": "N05",
+      "description": "Real excerpt worker survives new home/resume with invalid stale edits and captured-input copy",
+      "status": "passed",
+      "worker": {
+        "method": "source-extract-v1",
+        "units": [
+          {
+            "source": "notes",
+            "start": 0,
+            "end": 25,
+            "text": "Review deliverables only.",
+            "id": "N1",
+            "category": "personal"
+          },
+          {
+            "source": "transcript",
+            "start": 0,
+            "end": 41,
+            "text": "We agreed to send the proposal on Monday,",
+            "id": "T1",
+            "category": "decisions"
+          },
+          {
+            "source": "transcript",
+            "start": 42,
+            "end": 70,
+            "text": "Nora will check the figures,",
+            "id": "T2",
+            "category": "actions"
+          },
+          {
+            "source": "transcript",
+            "start": 71,
+            "end": 106,
+            "text": "then we'll test the mobile version,",
+            "id": "T3",
+            "category": "actions"
+          },
+          {
+            "source": "transcript",
+            "start": 107,
+            "end": 136,
+            "text": "the price is still undecided.",
+            "id": "T4",
+            "category": "pending"
+          }
+        ],
+        "selectedCount": 5,
+        "totalUnits": 5
+      }
+    },
+    {
+      "id": "N06a",
+      "description": "Native 390px home/editor/dialog taps and keyboard with long title",
+      "status": "passed",
+      "home": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390
+      },
+      "editor": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390
+      },
+      "downloads": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390
+      },
+      "about": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390
+      },
+      "replacement": {
+        "innerWidth": 390,
+        "clientWidth": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "id": "N06b",
+      "description": "Native 320px home/editor/dialog taps and keyboard with long title",
+      "status": "passed",
+      "home": {
+        "innerWidth": 320,
+        "clientWidth": 320,
+        "scrollWidth": 320
+      },
+      "editor": {
+        "innerWidth": 320,
+        "clientWidth": 320,
+        "scrollWidth": 320
+      },
+      "downloads": {
+        "innerWidth": 320,
+        "clientWidth": 320,
+        "scrollWidth": 320
+      },
+      "about": {
+        "innerWidth": 320,
+        "clientWidth": 320,
+        "scrollWidth": 320
+      },
+      "replacement": {
+        "innerWidth": 320,
+        "clientWidth": 320,
+        "scrollWidth": 320
+      }
+    },
+    {
+      "id": "N07",
+      "description": "Actual browser-denied microphone leaves current consumer notes and controls usable",
+      "status": "failed",
+      "permission": {
+        "state": "denied"
+      },
+      "error": "page.waitForFunction: Timeout 10000ms exceeded.\n    at /home/runner/work/_temp/minuta-consumer-43686370689-1/source/tests/e2e/consumer-v1.mjs:169:46\n    at async run (/home/runner/work/_temp/minuta-consumer-43686370689-1/source/tests/e2e/consumer-v1.mjs:93:6)\n    at async file:///home/runner/work/_temp/minuta-consumer-43686370689-1/source/tests/e2e/consumer-v1.mjs:167:2",
+      "observed": [
+        {
+          "url": "http://127.0.0.1:4173/",
+          "state": {
+            "home": false,
+            "editor": true,
+            "status": "Grabando. Al terminar, pulsa Guardar para conservar el audio en tu cuaderno.",
+            "library": ""
+          },
+          "errors": [],
+          "unexpected": []
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-yKIlGzW9.js",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-CyvY_z2c.css",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-yKIlGzW9.js",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-CyvY_z2c.css",
+          "bodyBytes": 0
+        }
+      ],
+      "errors": [],
+      "unexpected": []
+    },
+    {
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-yKIlGzW9.js",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-CyvY_z2c.css",
+          "bodyBytes": 0
+        }
+      ],
+      "errors": [],
+      "unexpected": []
+    },
+    {
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-yKIlGzW9.js",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-CyvY_z2c.css",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/ai.worker-BaNRRJSN.js",
+          "bodyBytes": 0
+        }
+      ],
+      "errors": [],
+      "unexpected": []
+    },
+    {
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-yKIlGzW9.js",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-CyvY_z2c.css",
+          "bodyBytes": 0
+        }
+      ],
+      "errors": [],
+      "unexpected": []
+    },
+    {
+      "requests": [
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-yKIlGzW9.js",
+          "bodyBytes": 0
+        },
+        {
+          "method": "GET",
+          "url": "http://127.0.0.1:4173/assets/index-CyvY_z2c.css",
+          "bodyBytes": 0
+        }
+      ],
+      "errors": [],
+      "unexpected": []
+    }
+  ],
+  "passed": false,
+  "browser": "141.0.7390.37",
+  "cleanup": {
+    "contextsClosed": true,
+    "nativePid": 2602,
+    "nativeExitCode": 0,
+    "nativeAbsent": true,
+    "failures": []
+  }
+}

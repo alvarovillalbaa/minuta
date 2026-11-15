@@ -15,7 +15,7 @@ await mkdir(path.join(out,'downloads'),{recursive:true});
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const report={tier:'T2',source:process.env.GITHUB_SHA,node:process.version,selected:[...selected],cases:[],boundaries:[],passed:false};
 const contexts=[],states=[];
-const browserServer=await chromium.launchServer({headless:true,args:['--use-fake-ui-for-media-stream','--use-fake-device-for-media-stream','--use-file-for-fake-audio-capture='+path.resolve('tests/fixtures/speech-v2/english.wav')]});
+const browserServer=await chromium.launchServer({headless:true,args:['--use-fake-device-for-media-stream','--use-file-for-fake-audio-capture='+path.resolve('tests/fixtures/speech-v2/english.wav')]});
 const nativeProcess=browserServer.process(),browser=await chromium.connect(browserServer.wsEndpoint());
 report.browser=browser.version();
 async function context(options={}){

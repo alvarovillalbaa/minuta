@@ -1,0 +1,64 @@
+TAP version 13
+# Subtest: P01 opens a real empty library; writing/listening entry never starts capture or a worker
+ok 1 - P01 opens a real empty library; writing/listening entry never starts capture or a worker
+  ---
+  duration_ms: 42.775943
+  type: 'test'
+  ...
+# Subtest: P02 going home and resuming preserve an unsaved draft; a new conversation still requires replacement
+ok 2 - P02 going home and resuming preserve an unsaved draft; a new conversation still requires replacement
+  ---
+  duration_ms: 5.225221
+  type: 'test'
+  ...
+# Subtest: P03 invalid raw edits survive home navigation, resumption and a rejected replacement
+ok 3 - P03 invalid raw edits survive home navigation, resumption and a rejected replacement
+  ---
+  duration_ms: 2.810503
+  type: 'test'
+  ...
+# Subtest: P04 library search folds accents, has an empty result, and renders untrusted text literally
+ok 4 - P04 library search folds accents, has an empty result, and renders untrusted text literally
+  ---
+  duration_ms: 3.728827
+  type: 'test'
+  ...
+# Subtest: P05 an older library read cannot replace a newer refresh; failed reads expose recovery
+ok 5 - P05 an older library read cannot replace a newer refresh; failed reads expose recovery
+  ---
+  duration_ms: 2.274846
+  type: 'test'
+  ...
+# Subtest: P06 opening a saved conversation uses the editor; delete is confirmed and preserves its working copy
+ok 6 - P06 opening a saved conversation uses the editor; delete is confirmed and preserves its working copy
+  ---
+  duration_ms: 3.185038
+  type: 'test'
+  ...
+# Subtest: P07 permission and recording states keep navigation unavailable; denied capture preserves notes
+ok 7 - P07 permission and recording states keep navigation unavailable; denied capture preserves notes
+  ---
+  duration_ms: 5.931685
+  type: 'test'
+  ...
+# Subtest: P08 failed save keeps a resumable working copy and never promises persistence
+ok 8 - P08 failed save keeps a resumable working copy and never promises persistence
+  ---
+  duration_ms: 2.781149
+  type: 'test'
+  ...
+# Subtest: P09 a pending job stays visible; home navigation preserves its proposal and stale-apply protection
+ok 9 - P09 a pending job stays visible; home navigation preserves its proposal and stale-apply protection
+  ---
+  duration_ms: 4.056951
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 130.79465

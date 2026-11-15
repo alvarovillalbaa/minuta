@@ -1,0 +1,33 @@
+{
+  "run": 43686370689,
+  "job": 132727590833,
+  "source": "61fbc4c677df5d783c30fc049359b5918202c36c",
+  "jobWallSeconds": 44,
+  "passed": [
+    "N01",
+    "N04",
+    "N05",
+    "N06a",
+    "N06b"
+  ],
+  "retainedEarlier": [
+    "N02",
+    "N03"
+  ],
+  "failed": "N07 read permission denied but automatic permission acceptance browser flag still started native fake capture; timed out waiting for denied-capture recovery.",
+  "correction": "Remove --use-fake-ui-for-media-stream, keeping fake device/file. Only N07 and never-run N08 execute. Retain exact current five-case result plus old two-case inverse HTML binding; carry unchanged nine callbacks/runtime/TAP.",
+  "noNewProductMutation": true,
+  "originalScreenshotsInspected": [
+    "editor-writing.png",
+    "home-320.png",
+    "editor-320.png"
+  ],
+  "mediaExport": "Actual n04 native WAV download was verified byte-for-byte identical to the frozen source; its identical existing Git blob is retained under the native download path.",
+  "cleanup": {
+    "contextsClosed": true,
+    "nativePid": 2602,
+    "nativeExitCode": 0,
+    "nativeAbsent": true,
+    "failures": []
+  }
+}

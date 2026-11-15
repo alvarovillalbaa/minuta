@@ -18,7 +18,7 @@ work=owned/"source";work.mkdir()
 env=dict(os.environ)
 env["TMPDIR"]=str(owned/"tmp")
 env.update(npm_config_cache=str(owned/"npm-cache"),PLAYWRIGHT_BROWSERS_PATH=str(owned/"browsers"),MINUTA_URL="http://127.0.0.1:4173",MINUTA_OUTPUT=str(out),MINUTA_EXPECTED_MANIFEST=str(out/"build-manifest.json"),MINUTA_DIST=str(work/"dist"))
-env["MINUTA_CASES"]="N01,N04,N05,N06a,N06b,N07,N08"
+env["MINUTA_CASES"]="N07,N08"
 env["MINUTA_PLAYWRIGHT"]=str(owned/"tools/node_modules/playwright/index.mjs")
 deadline=time.monotonic()+15*60
 receipt={"source":os.environ["GITHUB_SHA"],"commands":[],"passed":False}
@@ -88,7 +88,14 @@ try:
     (out/"declared-inputs.json").write_text(json.dumps([row for row in before if row["path"] in names],indent=2)+"\n")
     run("node-version",["node","--version"])
     run("syntax",["npm","run","check"])
-    run("consumer-callbacks",["node","--test","--test-reporter=tap","tests/unit/notebook-ui.test.mjs"])
+    callbacks=json.loads((repo/"tests/fixtures/consumer-callbacks-accepted-v2.json").read_text())
+    assert (out/"01-node-version.stdout.txt").read_text().strip()==callbacks["node"]=="v24.22.2"
+    assert callbacks["tests"]==callbacks["pass"]==9 and callbacks["fail"]==callbacks["skipped"]==0
+    assert hashlib.sha256((repo/callbacks["originalTap"]).read_bytes()).hexdigest()==callbacks["stdoutSha256"]
+    for item in callbacks["inputs"]:
+        source=work/item["path"]
+        assert source.stat().st_size==item["bytes"] and hashlib.sha256(source.read_bytes()).hexdigest()==item["sha256"],"Changed callback input refuses carry: "+item["path"]
+    (out/"carried-callbacks.json").write_text(json.dumps(callbacks,indent=2)+"\n")
     run("dependencies",["npm","ci","--ignore-scripts","--no-audit","--no-fund"],300)
     assert (work/"package-lock.json").read_bytes()==(repo/"package-lock.json").read_bytes(),"App lock changed"
     shutil.copyfile(work/"package-lock.json",out/"app-lock.json")
@@ -113,6 +120,15 @@ try:
     assert [row["id"] for row in native_report["cases"] if row["status"]=="passed" and row["id"] in native_carry["passedCases"]]==native_carry["passedCases"]==["N02","N03"]
     assert native_report["cleanup"]["nativeAbsent"] and native_report["cleanup"]["nativeExitCode"]==0
     (out/"carried-native.json").write_text(json.dumps(native_carry,indent=2)+"\n")
+    current_carry=json.loads((repo/"tests/fixtures/consumer-native-accepted-v2.json").read_text())
+    assert current_carry["publicBuild"]==manifest,"Changed current public build refuses carry"
+    current_report_file=repo/current_carry["nativeReportPath"]
+    assert hashlib.sha256(current_report_file.read_bytes()).hexdigest()==current_carry["nativeReportSha256"]
+    current_report=json.loads(current_report_file.read_text())
+    assert current_report["node"]==current_carry["node"]=="v24.22.2" and current_report["browser"]==current_carry["browser"]=="141.0.7390.37"
+    assert [row["id"] for row in current_report["cases"] if row["status"]=="passed"]==current_carry["passedCases"]==["N01","N04","N05","N06a","N06b"]
+    assert current_report["cleanup"]["nativeAbsent"] and current_report["cleanup"]["nativeExitCode"]==0
+    (out/"carried-native-current.json").write_text(json.dumps(current_carry,indent=2)+"\n")
     original=repo/"docs/results/2026/11-14/browser-43581904253/original.zip"
     assert hashlib.sha256(original.read_bytes()).hexdigest()=="8867eb45b928716daf53ccc7181dc05dc1dd2e0fd01e38e25159ee3cdc0aa9f7"
     with zipfile.ZipFile(original) as archive:
