@@ -1,5 +1,9 @@
 # Minuta
 
+<!-- project-family:start -->
+> **Project family:** [Web & Creative Apps](https://github.com/alvarovillalbaa#web-and-creative-apps) · **Area:** Notes
+<!-- project-family:end -->
+
 A quiet, Spanish-first meeting notebook. Record explicitly, take rough notes,
 transcribe audio on your computer and review source-quoted notes before keeping them.
 
